@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"result": {
+		"id": "thetitansneo:harcadium_sword"
+	},
+	"pattern": [
+		"H",
+		"H",
+		"D"
+	],
+	"key": {
+		"H": {
+			"item": "thetitansneo:harcadium"
+		},
+		"D": {
+			"tag": "c:gems/diamond"
+		}
+	}
+}

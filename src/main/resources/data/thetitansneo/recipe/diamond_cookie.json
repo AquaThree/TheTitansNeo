@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"result": {
+		"id": "thetitansneo:diamond_cookie"
+	},
+	"pattern": [
+		"DDD",
+		"DFD",
+		"DDD"
+	],
+	"key": {
+		"D": {
+			"tag": "c:gems/diamond"
+		},
+		"F": {
+			"item": "minecraft:cookie"
+		}
+	}
+}

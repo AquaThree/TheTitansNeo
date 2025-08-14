@@ -1,0 +1,36 @@
+{
+	"parent": "thetitansneo:item/harcadium",
+	"criteria": {
+		"thetitansneo:void": {
+			"conditions": {
+				"items": [
+					{
+						"items": [
+							"thetitansneo:void"
+						]
+					}
+				]
+			},
+			"trigger": "minecraft:inventory_changed"
+		}
+	},
+	"display": {
+		"show_toast": true,
+		"announce_to_chat": true,
+		"icon": {
+			"id": "thetitansneo:void"
+		},
+		"title": {
+			"translate": "advancements.thetitansneo.void.title"
+		},
+		"description": {
+			"translate": "advancements.thetitansneo.void.description"
+		}
+	},
+	"requirements": [
+		[
+			"thetitansneo:void"
+		]
+	],
+	"sends_telemetry_event": true
+}

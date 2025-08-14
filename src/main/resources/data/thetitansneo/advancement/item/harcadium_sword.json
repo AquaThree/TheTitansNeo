@@ -1,0 +1,36 @@
+{
+	"parent": "thetitansneo:item/harcadium",
+	"criteria": {
+		"thetitansneo:harcadium_sword": {
+			"conditions": {
+				"items": [
+					{
+						"items": [
+							"thetitansneo:harcadium_sword"
+						]
+					}
+				]
+			},
+			"trigger": "minecraft:inventory_changed"
+		}
+	},
+	"display": {
+		"show_toast": true,
+		"announce_to_chat": true,
+		"icon": {
+			"id": "thetitansneo:harcadium_sword"
+		},
+		"title": {
+			"translate": "advancements.thetitansneo.harcadium_sword.title"
+		},
+		"description": {
+			"translate": "advancements.thetitansneo.harcadium_sword.description"
+		}
+	},
+	"requirements": [
+		[
+			"thetitansneo:harcadium_sword"
+		]
+	],
+	"sends_telemetry_event": true
+}

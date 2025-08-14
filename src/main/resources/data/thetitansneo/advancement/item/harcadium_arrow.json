@@ -1,0 +1,36 @@
+{
+	"parent": "thetitansneo:item/harcadium_bow",
+	"criteria": {
+		"thetitansneo:harcadium_arrow": {
+			"conditions": {
+				"items": [
+					{
+						"items": [
+							"thetitansneo:harcadium_arrow"
+						]
+					}
+				]
+			},
+			"trigger": "minecraft:inventory_changed"
+		}
+	},
+	"display": {
+		"show_toast": true,
+		"announce_to_chat": true,
+		"icon": {
+			"id": "thetitansneo:harcadium_arrow"
+		},
+		"title": {
+			"translate": "advancements.thetitansneo.harcadium_arrow.title"
+		},
+		"description": {
+			"translate": "advancements.thetitansneo.harcadium_arrow.description"
+		}
+	},
+	"requirements": [
+		[
+			"thetitansneo:harcadium_arrow"
+		]
+	],
+	"sends_telemetry_event": true
+}

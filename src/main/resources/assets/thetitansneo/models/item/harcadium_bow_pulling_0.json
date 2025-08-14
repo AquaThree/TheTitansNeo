@@ -1,0 +1,6 @@
+{
+    "parent": "thetitansneo:item/harcadium_bow",
+    "textures": {
+        "layer0": "thetitansneo:item/harcadium_bow_pulling_0"
+    }
+}

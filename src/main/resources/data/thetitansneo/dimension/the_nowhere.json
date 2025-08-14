@@ -1,0 +1,11 @@
+{
+	"type": "thetitansneo:the_nowhere",
+	"generator": {
+		"type": "thetitansneo:the_nowhere",
+		"biome_source": {
+			"type": "minecraft:fixed",
+			"biome": "thetitansneo:the_nowhere"
+		},
+		"settings": "thetitansneo:the_nowhere"
+	}
+}

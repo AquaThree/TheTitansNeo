@@ -1,0 +1,37 @@
+{
+	"parent": "thetitansneo:root",
+	"criteria": {
+		"thetitansneo:bedrock": {
+			"conditions": {
+				"items": [
+					{
+						"items": [
+							"minecraft:bedrock"
+						]
+					}
+				]
+			},
+			"trigger": "minecraft:inventory_changed"
+		}
+	},
+	"display": {
+		"show_toast": true,
+		"announce_to_chat": true,
+		"frame": "challenge",
+		"icon": {
+			"id": "minecraft:bedrock"
+		},
+		"title": {
+			"translate": "advancements.thetitansneo.bedrock.title"
+		},
+		"description": {
+			"translate": "advancements.thetitansneo.bedrock.description"
+		}
+	},
+	"requirements": [
+		[
+			"thetitansneo:bedrock"
+		]
+	],
+	"sends_telemetry_event": true
+}

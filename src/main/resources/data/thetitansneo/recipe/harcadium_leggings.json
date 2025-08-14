@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"result": {
+		"id": "thetitansneo:harcadium_leggings"
+	},
+	"pattern": [
+		"HHH",
+		"H H",
+		"H H"
+	],
+	"key": {
+		"H": {
+			"item": "thetitansneo:harcadium"
+		}
+	}
+}

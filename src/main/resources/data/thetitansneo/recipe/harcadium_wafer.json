@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"result": {
+		"id": "thetitansneo:harcadium_wafer"
+	},
+	"pattern": [
+		"HHH",
+		"HHH",
+		"HHH"
+	],
+	"key": {
+		"H": {
+			"item": "thetitansneo:harcadium_waflet"
+		}
+	}
+}

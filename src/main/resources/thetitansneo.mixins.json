@@ -1,0 +1,19 @@
+{
+	"required": true,
+	"package": "net.byAqua3.thetitansneo.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"refmap": "mixins.thetitansneo.refmap.json",
+	"mixins": [
+		"MixinItemRenderer",
+		"MixinEntityRenderDispatcher",
+		"MixinRangedAttribute",
+		"MixinChunkGenerator",
+		"MixinLivingEntity",
+		"MixinEntityType"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"minVersion": "0.8",
+	"target": "@env(DEFAULT)"
+}

@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"result": {
+		"id": "thetitansneo:adminium_leggings"
+	},
+	"pattern": [
+		"BHB",
+		"B B",
+		"B B"
+	],
+	"key": {
+		"B": {
+			"item": "thetitansneo:bedrock_compact"
+		},
+		"H": {
+			"item": "thetitansneo:harcadium_block"
+		}
+	}
+}

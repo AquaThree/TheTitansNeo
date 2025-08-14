@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"result": {
+		"id": "thetitansneo:tin_leggings"
+	},
+	"pattern": [
+		"TTT",
+		"T T",
+		"T T"
+	],
+	"key": {
+		"T": {
+			"item": "thetitansneo:tin_ingot"
+		}
+	}
+}

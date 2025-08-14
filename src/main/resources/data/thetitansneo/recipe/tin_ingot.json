@@ -1,0 +1,11 @@
+{
+	"type": "minecraft:smelting",
+	"cookingtime": 200,
+	"experience": 2.0,
+	"ingredient": {
+		"item": "thetitansneo:tin_ore"
+	},
+	"result": {
+		"id": "thetitansneo:tin_ingot"
+	}
+}

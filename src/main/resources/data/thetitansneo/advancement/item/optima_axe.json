@@ -1,0 +1,37 @@
+{
+	"parent": "thetitansneo:entity/kill_executor_dragon",
+	"criteria": {
+		"thetitansneo:optima_axe": {
+			"conditions": {
+				"items": [
+					{
+						"items": [
+							"thetitansneo:optima_axe"
+						]
+					}
+				]
+			},
+			"trigger": "minecraft:inventory_changed"
+		}
+	},
+	"display": {
+		"show_toast": true,
+		"announce_to_chat": true,
+		"frame": "challenge",
+		"icon": {
+			"id": "thetitansneo:optima_axe"
+		},
+		"title": {
+			"translate": "advancements.thetitansneo.optima_axe.title"
+		},
+		"description": {
+			"translate": "advancements.thetitansneo.optima_axe.description"
+		}
+	},
+	"requirements": [
+		[
+			"thetitansneo:optima_axe"
+		]
+	],
+	"sends_telemetry_event": true
+}

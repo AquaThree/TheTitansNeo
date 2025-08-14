@@ -1,0 +1,37 @@
+{
+	"parent": "thetitansneo:item/rng_relinquisher",
+	"criteria": {
+		"thetitansneo:kill_executor_dragon": {
+			"conditions": {
+				"items": [
+					{
+						"items": [
+							"thetitansneo:optima_axe"
+						]
+					}
+				]
+			},
+			"trigger": "minecraft:inventory_changed"
+		}
+	},
+	"display": {
+		"show_toast": true,
+		"announce_to_chat": true,
+		"frame": "challenge",
+		"icon": {
+			"id": "minecraft:barrier"
+		},
+		"title": {
+			"translate": "advancements.thetitansneo.kill_executor_dragon.title"
+		},
+		"description": {
+			"translate": "advancements.thetitansneo.kill_executor_dragon.description"
+		}
+	},
+	"requirements": [
+		[
+			"thetitansneo:kill_executor_dragon"
+		]
+	],
+	"sends_telemetry_event": true
+}

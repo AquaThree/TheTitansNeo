@@ -1,0 +1,22 @@
+{
+	"anvil_cost": 8,
+	"description": {
+		"translate": "enchantment.thetitansneo.titan_killer"
+	},
+	"effects": {
+	},
+	"max_level": 10,
+	"max_cost": {
+		"base": 31,
+		"per_level_above_first": 3
+	},
+	"min_cost": {
+		"base": 1,
+		"per_level_above_first": 3
+	},
+	"slots": [
+		"mainhand"
+	],
+	"supported_items": "#thetitansneo:enchantable/wither_turret_and_sword",
+	"weight": 10
+}

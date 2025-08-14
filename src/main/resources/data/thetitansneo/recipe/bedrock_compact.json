@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"result": {
+		"id": "thetitansneo:bedrock_compact"
+	},
+	"pattern": [
+		"BBB",
+		"BBB",
+		"BBB"
+	],
+	"key": {
+		"B": {
+			"item": "minecraft:bedrock"
+		}
+	}
+}

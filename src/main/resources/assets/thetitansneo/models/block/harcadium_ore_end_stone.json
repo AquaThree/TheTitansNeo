@@ -1,0 +1,6 @@
+{
+	"parent": "minecraft:block/cube_all",
+	"textures": {
+		"all": "thetitansneo:block/harcadium_ore_end_stone"
+	}
+}

@@ -1,0 +1,9 @@
+{
+	"replace": false,
+	"values": [
+		"thetitansneo:harcadium_ore",
+		"thetitansneo:harcadium_ore_end_stone",
+		"thetitansneo:harcadium_ore_obsidian",
+		"thetitansneo:harcadium_block"
+	]
+}

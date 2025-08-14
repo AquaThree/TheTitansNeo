@@ -1,0 +1,36 @@
+{
+	"parent": "thetitansneo:item/wither_turret",
+	"criteria": {
+		"thetitansneo:wither_turret_ground": {
+			"conditions": {
+				"items": [
+					{
+						"items": [
+							"thetitansneo:wither_turret_ground"
+						]
+					}
+				]
+			},
+			"trigger": "minecraft:inventory_changed"
+		}
+	},
+	"display": {
+		"show_toast": true,
+		"announce_to_chat": true,
+		"icon": {
+			"id": "thetitansneo:wither_turret_ground"
+		},
+		"title": {
+			"translate": "advancements.thetitansneo.wither_turret_ground.title"
+		},
+		"description": {
+			"translate": "advancements.thetitansneo.wither_turret_ground.description"
+		}
+	},
+	"requirements": [
+		[
+			"thetitansneo:wither_turret_ground"
+		]
+	],
+	"sends_telemetry_event": true
+}

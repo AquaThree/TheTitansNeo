@@ -1,0 +1,27 @@
+{
+	"criteria": {
+		"thetitansneo:root": {
+			"trigger": "thetitansneo:root"
+		}
+	},
+	"display": {
+		"show_toast": false,
+		"announce_to_chat": false,
+		"background": "thetitansneo:textures/block/bedrock_compact.png",
+		"icon": {
+			"id": "thetitansneo:growth_serum"
+		},
+		"title": {
+			"translate": "advancements.thetitansneo.root.title"
+		},
+		"description": {
+			"translate": "advancements.thetitansneo.root.description"
+		}
+	},
+	"requirements": [
+		[
+			"thetitansneo:root"
+		]
+	],
+	"sends_telemetry_event": true
+}

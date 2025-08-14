@@ -1,0 +1,76 @@
+{
+	"parent": "thetitansneo:item/growth_serum",
+	"criteria": {
+		"thetitansneo:kill_spider_jockey_titan_from_spider_titan": {
+			"conditions": {
+				"entity": [
+					{
+						"condition": "minecraft:entity_properties",
+						"entity": "this",
+						"predicate": {
+							"type": "thetitansneo:spider_titan",
+							"passenger": {
+								"entity": [
+									{
+										"condition": "minecraft:entity_properties",
+										"entity": "this",
+										"predicate": {
+											"type": "thetitansneo:skeleton_titan"
+										}
+									}
+								]
+							}
+						}
+					}
+				]
+			},
+			"trigger": "thetitansneo:titan_death"
+		},
+		"thetitansneo:kill_spider_jockey_titan_from_skeleton_titan": {
+			"conditions": {
+				"entity": [
+					{
+						"condition": "minecraft:entity_properties",
+						"entity": "this",
+						"predicate": {
+							"type": "thetitansneo:skeleton_titan",
+							"vehicle": {
+								"entity": [
+									{
+										"condition": "minecraft:entity_properties",
+										"entity": "this",
+										"predicate": {
+											"type": "thetitansneo:spider_titan"
+										}
+									}
+								]
+							}
+						}
+					}
+				]
+			},
+			"trigger": "thetitansneo:titan_death"
+		}
+	},
+	"display": {
+		"show_toast": true,
+		"announce_to_chat": true,
+		"frame": "challenge",
+		"icon": {
+			"id": "thetitansneo:spawn_egg_spider_jockey_titan"
+		},
+		"title": {
+			"translate": "advancements.thetitansneo.kill_spider_jockey_titan.title"
+		},
+		"description": {
+			"translate": "advancements.thetitansneo.kill_spider_jockey_titan.description"
+		}
+	},
+	"requirements": [
+		[
+			"thetitansneo:kill_spider_jockey_titan_from_spider_titan",
+			"thetitansneo:kill_spider_jockey_titan_from_skeleton_titan"
+		]
+	],
+	"sends_telemetry_event": true
+}

@@ -1,0 +1,30 @@
+{
+	"parent": "thetitansneo:item/growth_serum",
+	"criteria": {
+		"thetitansneo:rng_relinquisher": {
+			"conditions": {
+				"to": "thetitansneo:the_nowhere"
+			},
+			"trigger": "minecraft:changed_dimension"
+		}
+	},
+	"display": {
+		"show_toast": true,
+		"announce_to_chat": true,
+		"icon": {
+			"id": "thetitansneo:rng_relinquisher"
+		},
+		"title": {
+			"translate": "advancements.thetitansneo.rng_relinquisher.title"
+		},
+		"description": {
+			"translate": "advancements.thetitansneo.rng_relinquisher.description"
+		}
+	},
+	"requirements": [
+		[
+			"thetitansneo:rng_relinquisher"
+		]
+	],
+	"sends_telemetry_event": true
+}

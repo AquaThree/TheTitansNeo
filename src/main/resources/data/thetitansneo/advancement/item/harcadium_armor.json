@@ -1,0 +1,59 @@
+{
+	"parent": "thetitansneo:item/harcadium",
+	"criteria": {
+		"thetitansneo:harcadium_armor": {
+			"conditions": {
+				"player": [
+					{
+						"condition": "minecraft:entity_properties",
+						"entity": "this",
+						"predicate": {
+							"equipment": {
+								"head": {
+									"items": [
+										"thetitansneo:harcadium_helmet"
+									]
+								},
+								"chest": {
+									"items": [
+										"thetitansneo:harcadium_chestplate"
+									]
+								},
+								"legs": {
+									"items": [
+										"thetitansneo:harcadium_leggings"
+									]
+								},
+								"feet": {
+									"items": [
+										"thetitansneo:harcadium_boots"
+									]
+								}
+							}
+						}
+					}
+				]
+			},
+			"trigger": "minecraft:inventory_changed"
+		}
+	},
+	"display": {
+		"show_toast": true,
+		"announce_to_chat": true,
+		"icon": {
+			"id": "thetitansneo:harcadium_chestplate"
+		},
+		"title": {
+			"translate": "advancements.thetitansneo.harcadium_armor.title"
+		},
+		"description": {
+			"translate": "advancements.thetitansneo.harcadium_armor.description"
+		}
+	},
+	"requirements": [
+		[
+			"thetitansneo:harcadium_armor"
+		]
+	],
+	"sends_telemetry_event": true
+}

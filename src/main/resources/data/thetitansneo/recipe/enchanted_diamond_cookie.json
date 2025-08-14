@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"result": {
+		"id": "thetitansneo:enchanted_diamond_cookie"
+	},
+	"pattern": [
+		"DDD",
+		"DFD",
+		"DDD"
+	],
+	"key": {
+		"D": {
+			"tag": "c:storage_blocks/diamond"
+		},
+		"F": {
+			"item": "thetitansneo:diamond_cookie"
+		}
+	}
+}

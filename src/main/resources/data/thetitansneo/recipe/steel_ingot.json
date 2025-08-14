@@ -1,0 +1,20 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"result": {
+		"id": "thetitansneo:steel_ingot"
+	},
+	"ingredients": [
+		{
+			"item": "thetitansneo:chromium_ingot"
+		},
+		{
+			"item": "thetitansneo:magnesium_ingot"
+		},
+		{
+			"tag": "c:ingots/iron"
+		},
+		{
+			"tag": "minecraft:coals"
+		}
+	]
+}

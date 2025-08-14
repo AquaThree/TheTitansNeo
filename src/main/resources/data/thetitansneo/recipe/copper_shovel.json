@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"result": {
+		"id": "thetitansneo:copper_shovel"
+	},
+	"pattern": [
+		"C",
+		"S",
+		"S"
+	],
+	"key": {
+		"C": {
+			"item": "thetitansneo:copper_ingot"
+		},
+		"S": {
+			"tag": "c:rods/wooden"
+		}
+	}
+}

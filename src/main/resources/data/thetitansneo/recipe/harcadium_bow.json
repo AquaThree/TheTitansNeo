@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"result": {
+		"id": "thetitansneo:harcadium_bow"
+	},
+	"pattern": [
+		" HD",
+		"H D",
+		" HD"
+	],
+	"key": {
+		"H": {
+			"item": "thetitansneo:harcadium"
+		},
+		"D": {
+			"item": "thetitansneo:diamond_string"
+		}
+	}
+}

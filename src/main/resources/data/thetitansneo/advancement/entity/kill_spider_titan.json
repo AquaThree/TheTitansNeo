@@ -1,0 +1,39 @@
+{
+	"parent": "thetitansneo:item/growth_serum",
+	"criteria": {
+		"thetitansneo:kill_spider_titan": {
+			"conditions": {
+				"entity": [
+					{
+						"condition": "minecraft:entity_properties",
+						"entity": "this",
+						"predicate": {
+							"type": "thetitansneo:spider_titan"
+						}
+					}
+				]
+			},
+			"trigger": "thetitansneo:titan_death"
+		}
+	},
+	"display": {
+		"show_toast": true,
+		"announce_to_chat": true,
+		"frame": "challenge",
+		"icon": {
+			"id": "thetitansneo:spawn_egg_spider_titan"
+		},
+		"title": {
+			"translate": "advancements.thetitansneo.kill_spider_titan.title"
+		},
+		"description": {
+			"translate": "advancements.thetitansneo.kill_spider_titan.description"
+		}
+	},
+	"requirements": [
+		[
+			"thetitansneo:kill_spider_titan"
+		]
+	],
+	"sends_telemetry_event": true
+}

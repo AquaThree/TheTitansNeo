@@ -1,0 +1,17 @@
+{
+	"type": "thetitansneo:add_spawns",
+	"biomes": [
+		"minecraft:plains",
+		"minecraft:savanna",
+		"minecraft:desert"
+	],
+	"category": "creature",
+	"spawners": [
+		{
+			"type": "minecraft:iron_golem",
+			"weight": 1,
+			"minCount": 1,
+			"maxCount": 1
+		}
+	]
+}
