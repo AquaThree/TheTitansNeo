@@ -2,6 +2,7 @@ package net.byAqua3.thetitansneo.feature;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import com.mojang.serialization.Codec;
 
@@ -23,6 +24,7 @@ import net.byAqua3.thetitansneo.entity.titan.EntityZombieTitan;
 import net.byAqua3.thetitansneo.loader.TheTitansNeoConfigs;
 import net.byAqua3.thetitansneo.loader.TheTitansNeoDimensions;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerChunkCache;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
@@ -41,7 +43,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConf
 import net.minecraft.world.phys.AABB;
 
 public class FeatureTitanSpawn extends Feature<NoneFeatureConfiguration> {
-	
+
 	private List<BlockPos> spawnedPos = new ArrayList<>();
 
 	public FeatureTitanSpawn(Codec<NoneFeatureConfiguration> codec) {
@@ -56,8 +58,8 @@ public class FeatureTitanSpawn extends Feature<NoneFeatureConfiguration> {
 	}
 
 	public boolean isTitanSpawned(WorldGenLevel level, Entity entity, double range) {
-		for(BlockPos blockPos : this.spawnedPos) {
-			if(this.distanceToPos(blockPos, entity.blockPosition()) < range) {
+		for (BlockPos blockPos : this.spawnedPos) {
+			if (this.distanceToPos(blockPos, entity.blockPosition()) < range) {
 				return true;
 			}
 		}
@@ -126,31 +128,38 @@ public class FeatureTitanSpawn extends Feature<NoneFeatureConfiguration> {
 	}
 
 	public EntityTitan generateTitan(WorldGenLevel level, RandomSource random, EntityTitan titan, int x, int y, int z, boolean spawnPosProtect, boolean canSpawnLiquid) {
-		BlockPos blockPos = new BlockPos(x, y, z);
-		BlockState blockState = level.getBlockState(blockPos);
-		BlockPos belowPos = blockPos.below();
-		BlockState belowState = level.getBlockState(belowPos);
-		Block belowBlock = belowState.getBlock();
+		ServerChunkCache serverChunkCache = level.getLevel().getChunkSource();
+		
+		if (Thread.currentThread() != serverChunkCache.mainThread) {
+			return CompletableFuture.<EntityTitan>supplyAsync(() -> this.generateTitan(level, random, titan, x, y, z, spawnPosProtect, canSpawnLiquid), serverChunkCache.mainThreadProcessor).join();
+		} else {
+			BlockPos blockPos = new BlockPos(x, y, z);
+			BlockState blockState = level.getBlockState(blockPos);
+			BlockPos belowPos = blockPos.below();
+			BlockState belowState = level.getBlockState(belowPos);
+			Block belowBlock = belowState.getBlock();
 
-		if (spawnPosProtect && TheTitansNeoConfigs.playerSpawnPosProtect.get() && this.distanceToPos(blockPos, level.getLevel().getSharedSpawnPos()) <= TheTitansNeoConfigs.playerSpawnPosDistance.get()) {
-			return null;
-		}
+			if (spawnPosProtect && TheTitansNeoConfigs.playerSpawnPosProtect.get() && this.distanceToPos(blockPos, level.getLevel().getSharedSpawnPos()) <= TheTitansNeoConfigs.playerSpawnPosDistance.get()) {
+				return null;
+			}
 
-		if (!canSpawnLiquid && belowBlock instanceof LiquidBlock) {
-			return null;
-		}
+			if (!canSpawnLiquid && belowBlock instanceof LiquidBlock) {
+				return null;
+			}
 
-		if (blockState.isAir()) {
-			titan.setPos(x + 0.5D, y, z + 0.5D);
-			titan.setYRot(random.nextFloat() * 360.0F);
-			if (!this.isTitanSpawned(level.getLevel(), titan, 512.0D)) {
-				titan.finalizeSpawn(level.getLevel(), level.getCurrentDifficultyAt(titan.blockPosition()), MobSpawnType.STRUCTURE, null);
-				titan.setTitanHealth(titan.getMaxHealth());
-				this.destroyBlocksInAABB(level, titan.getBoundingBox());
-				level.getLevel().addFreshEntity(titan);
-				this.setTitanSpawned(level, titan);
-				TheTitansNeo.LOGGER.info("Found a succesfully spawned {} at {}, {}, {}.", titan.getName().getString(), Mth.floor(titan.getX()), Mth.floor(titan.getY()), Mth.floor(titan.getZ()));
-				return titan;
+			if (blockState.isAir()) {
+				titan.setPos(x + 0.5D, y, z + 0.5D);
+				titan.setYRot(random.nextFloat() * 360.0F);
+				if (!this.isTitanSpawned(level.getLevel(), titan, 512.0D)) {
+					titan.finalizeSpawn(level.getLevel(), level.getCurrentDifficultyAt(titan.blockPosition()), MobSpawnType.STRUCTURE, null);
+					titan.setTitanHealth(titan.getMaxHealth());
+					this.destroyBlocksInAABB(level, titan.getBoundingBox());
+					level.getLevel().addFreshEntity(titan);
+
+					this.setTitanSpawned(level, titan);
+					TheTitansNeo.LOGGER.info("Found a succesfully spawned {} at {}, {}, {}.", titan.getName().getString(), Mth.floor(titan.getX()), Mth.floor(titan.getY()), Mth.floor(titan.getZ()));
+					return titan;
+				}
 			}
 		}
 		return null;

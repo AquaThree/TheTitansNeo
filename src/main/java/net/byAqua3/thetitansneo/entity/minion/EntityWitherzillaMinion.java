@@ -40,7 +40,7 @@ public class EntityWitherzillaMinion extends WitherBoss implements IMinion {
 	}
 
 	public EntityWitherzillaMinion(Level level) {
-		this(null, level);
+		this(TheTitansNeoEntities.WITHERZILLA_MINION.get(), level);
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {

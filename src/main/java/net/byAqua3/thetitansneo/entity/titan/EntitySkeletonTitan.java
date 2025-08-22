@@ -165,7 +165,7 @@ public class EntitySkeletonTitan extends EntityTitan implements IEntityMultiPart
 
 	@Override
 	public int getBossBarTextOffset() {
-		return 10;
+		return 7;
 	}
 
 	@Override

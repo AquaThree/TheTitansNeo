@@ -304,7 +304,7 @@ public class RenderTitanSpawnEgg implements IItemRenderer {
 				break;
 			case GUI:
 				poseStack.pushPose();
-				poseStack.scale(0.7F, 0.65F, 0.65F);
+				poseStack.scale(0.7F, 0.7F, 0.7F);
 				poseStack.mulPose(Axis.XP.rotationDegrees(180.0F));
 				poseStack.mulPose(Axis.YP.rotationDegrees(45.0F));
 				poseStack.mulPose(Axis.XP.rotationDegrees(20.0F));
@@ -384,11 +384,11 @@ public class RenderTitanSpawnEgg implements IItemRenderer {
 				break;
 			case GUI:
 				poseStack.pushPose();
-				poseStack.scale(1.4F, 1.3F, 1.3F);
+				poseStack.scale(1.4F, 1.4F, 1.4F);
 				poseStack.mulPose(Axis.XP.rotationDegrees(180.0F));
 				poseStack.mulPose(Axis.YP.rotationDegrees(45.0F));
-				poseStack.mulPose(Axis.XP.rotationDegrees(20.0F));
-				poseStack.mulPose(Axis.ZP.rotationDegrees(20.0F));
+				poseStack.mulPose(Axis.XP.rotationDegrees(21.5F));
+				poseStack.mulPose(Axis.ZP.rotationDegrees(21.5F));
 				poseStack.translate(0.48F, -0.59F, 0.0F);
 				Lighting.setupForFlatItems();
 				this.model.renderToBuffer(poseStack, vertexConsumer, packedLight, packedOverlay);

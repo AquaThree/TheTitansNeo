@@ -81,6 +81,9 @@ public class ItemAdminiumArmor extends ArmorItem {
 
 		if (entity instanceof Player) {
 			Player player = (Player) entity;
+			
+			stack.setDamageValue(stack.getDamageValue() - 10);
+			
 			if (this.getEquipmentSlot() == EquipmentSlot.HEAD && slotId == 39) {
 				player.playSound(TheTitansNeoSounds.HARCACADIUM_HUM.get(), 5.0F, 0.5F);
 				player.removeEffect(MobEffects.BLINDNESS);

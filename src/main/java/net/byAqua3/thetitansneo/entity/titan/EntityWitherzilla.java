@@ -434,7 +434,7 @@ public class EntityWitherzilla extends EntityTitan implements RangedAttackMob, I
 	@Override
 	public void setTitanDeltaMovement(Vec3 deltaMovement) {
 	}
-	
+
 	@Override
 	public void destroyBlocksInAABB(AABB aabb) {
 		this.destroyBlocksInAABBGriefingBypass(aabb);
@@ -667,7 +667,6 @@ public class EntityWitherzilla extends EntityTitan implements RangedAttackMob, I
 
 		this.refreshDimensions();
 		this.refreshAttributes();
-		this.addChunk(this.level().getChunkAt(this.blockPosition()));
 
 		if (this.isInOmegaForm()) {
 			if (!this.level().isClientSide()) {
@@ -699,20 +698,25 @@ public class EntityWitherzilla extends EntityTitan implements RangedAttackMob, I
 				this.setPos(0.0D, 200.0D, 0.0D);
 			}
 
-			List<Entity> entities = this.level().getEntities(this, this.getBoundingBox().inflate(20000.0D, 20000.0D, 20000.0D));
-			for (Entity entity : entities) {
-				if (entity != null && entity.isAlive() && entity instanceof EntityWitherTurret) {
-					EntityWitherTurret witherTurret = (EntityWitherTurret) entity;
-					if (!witherTurret.isPlayerCreated()) {
-						this.setPos(0.0D, 200.0D, 0.0D);
-						this.setYRot(0.0F);
-						this.yHeadRot = 0.0F;
-						this.yBodyRot = 0.0F;
-						this.setTarget(null);
-						for (int i = 0; i < 3; i++) {
-							this.setAlternativeTarget(i, 0);
+			List<EntityWitherTurret> entities = this.level().getEntitiesOfClass(EntityWitherTurret.class, this.getBoundingBox().inflate(20000.0D, 20000.0D, 20000.0D));
+			if (!entities.isEmpty()) {
+				for (EntityWitherTurret entity : entities) {
+					if (entity != null && entity.isAlive()) {
+						if (!entity.isPlayerCreated()) {
+							this.setPos(0.0D, 200.0D, 0.0D);
+							this.setYRot(0.0F);
+							this.yHeadRot = 0.0F;
+							this.yBodyRot = 0.0F;
+							this.setTarget(null);
+							for (int i = 0; i < 3; i++) {
+								this.setAlternativeTarget(i, 0);
+							}
 						}
 					}
+				}
+			} else {
+				if (this.getY() > 100.0D) {
+					this.setPos(this.getX(), this.getY() - 1.0D, this.getZ());
 				}
 			}
 		}

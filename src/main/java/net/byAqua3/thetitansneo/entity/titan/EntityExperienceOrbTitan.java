@@ -101,6 +101,10 @@ public class EntityExperienceOrbTitan extends Entity {
 	@Override
 	protected void doWaterSplashEffect() {
 	}
+	
+	@Override
+	public void updateFluidHeightAndDoFluidPushing() {
+	}
 
 	@Override
 	public boolean causeFallDamage(float fallDistance, float multiplier, DamageSource damageSource) {

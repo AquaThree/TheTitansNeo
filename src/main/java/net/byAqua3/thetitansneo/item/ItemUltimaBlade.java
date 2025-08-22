@@ -62,6 +62,11 @@ public class ItemUltimaBlade extends SwordItem {
 	}
 
 	@Override
+	public boolean isFoil(ItemStack stack) {
+		return false;
+	}
+
+	@Override
 	public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
 		super.appendHoverText(stack, context, tooltip, flag);
 		tooltip.add(Component.translatable("item.thetitansneo.ultima_blade.info1").withStyle(ChatFormatting.BOLD).withStyle(ChatFormatting.DARK_AQUA));

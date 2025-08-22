@@ -78,12 +78,12 @@ public class RenderWitherzillaSpawnEgg implements IItemRenderer {
 			break;
 		case GUI:
 			poseStack.pushPose();
-			poseStack.scale(2.1F, 1.95F, 1.95F);
+			poseStack.scale(2.0F, 2.0F, 2.0F);
 			poseStack.mulPose(Axis.XP.rotationDegrees(180.0F));
 			poseStack.mulPose(Axis.YP.rotationDegrees(45.0F));
-			poseStack.mulPose(Axis.XP.rotationDegrees(20.0F));
-			poseStack.mulPose(Axis.ZP.rotationDegrees(20.0F));
-			poseStack.translate(0.32F, -0.40F, 0.0F);
+			poseStack.mulPose(Axis.XP.rotationDegrees(21.5F));
+			poseStack.mulPose(Axis.ZP.rotationDegrees(21.5F));
+			poseStack.translate(0.325F, -0.41F, 0.0F);
 			Lighting.setupForFlatItems();
 			this.model.renderToBuffer(poseStack, vertexConsumer, packedLight, packedOverlay);
 			RenderSystem.disableDepthTest();

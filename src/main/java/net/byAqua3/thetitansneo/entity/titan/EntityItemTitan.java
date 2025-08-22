@@ -73,6 +73,10 @@ public class EntityItemTitan extends ItemEntity {
 	public boolean hurt(DamageSource damageSource, float amount) {
 		return false;
 	}
+	
+	@Override
+	public void updateFluidHeightAndDoFluidPushing() {
+	}
 
 	@Override
 	public void playerTouch(Player player) {

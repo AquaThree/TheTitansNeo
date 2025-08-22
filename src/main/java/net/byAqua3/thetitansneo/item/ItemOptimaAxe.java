@@ -61,6 +61,11 @@ public class ItemOptimaAxe extends SwordItem {
 	public int getDamage(ItemStack stack) {
 		return 0;
 	}
+	
+	@Override
+	public boolean isFoil(ItemStack stack) {
+		return false;
+	}
 
 	@Override
 	public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag flag) {

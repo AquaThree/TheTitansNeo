@@ -8,122 +8,122 @@ import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.common.ModConfigSpec.ConfigValue;
 
 public class TheTitansNeoConfigs {
-	
+
 	public static ModConfigSpec modConfigSpec;
-	
+
 	public static ConfigValue<Integer> titanBossBarRange;
 	public static ConfigValue<Boolean> titanBossBarAnimated;
-	
+
 	public static ConfigValue<Integer> titanPartBoxRed;
 	public static ConfigValue<Integer> titanPartBoxGreen;
 	public static ConfigValue<Integer> titanPartBoxBlue;
 	public static ConfigValue<Boolean> titanSwordOldModel;
 	public static ConfigValue<Boolean> playerHealthBar;
-	
+
 	public static ConfigValue<Boolean> ultimaBladeShowParticles;
 	public static ConfigValue<Boolean> optimaAxeShowParticles;
-	
+
 	public static ConfigValue<Boolean> voidArmorRadiationPlayer;
-	
+
 	public static ConfigValue<Boolean> adminiumArmorRadiationPlayer;
 	public static ConfigValue<Boolean> adminiumArmorExplode;
 	public static ConfigValue<Boolean> adminiumArmorGravity;
-	
+
 	public static ConfigValue<Boolean> creeperTitanExplodeAsync;
 	public static ConfigValue<Integer> creeperTitanExplodeRange;
 	public static ConfigValue<Integer> chargedCreeperTitanExplodeRange;
-	
+
 	public static ConfigValue<Double> omegafishSubdueRate;
 	public static ConfigValue<Double> caveSpiderTitanSubdueRate;
-	
+
 	public static ConfigValue<Boolean> playerSpawnPosProtect;
 	public static ConfigValue<Double> playerSpawnPosDistance;
 	public static ConfigValue<Boolean> titanSpawnNetherTop;
-	
+
 	public static ConfigValue<Integer> protoBallMinionSpawnCap;
 	public static ConfigValue<Integer> protoBallPriestSpawnCap;
 	public static ConfigValue<Integer> protoBallZealotSpawnCap;
 	public static ConfigValue<Integer> protoBallBishopSpawnCap;
-	
+
 	public static ConfigValue<Integer> omegafishMinionSpawnCap;
 	public static ConfigValue<Integer> omegafishPriestSpawnCap;
 	public static ConfigValue<Integer> omegafishZealotSpawnCap;
 	public static ConfigValue<Integer> omegafishBishopSpawnCap;
 	public static ConfigValue<Integer> omegafishTemplarSpawnCap;
 	public static ConfigValue<Integer> omegafishSpecialSpawnCap;
-	
+
 	public static ConfigValue<Integer> zombieTitanMinionSpawnCap;
 	public static ConfigValue<Integer> zombieTitanPriestSpawnCap;
 	public static ConfigValue<Integer> zombieTitanZealotSpawnCap;
 	public static ConfigValue<Integer> zombieTitanBishopSpawnCap;
 	public static ConfigValue<Integer> zombieTitanTemplarSpawnCap;
 	public static ConfigValue<Integer> zombieTitanSpecialSpawnCap;
-	
+
 	public static ConfigValue<Integer> skeletonTitanMinionSpawnCap;
 	public static ConfigValue<Integer> skeletonTitanPriestSpawnCap;
 	public static ConfigValue<Integer> skeletonTitanZealotSpawnCap;
 	public static ConfigValue<Integer> skeletonTitanBishopSpawnCap;
 	public static ConfigValue<Integer> skeletonTitanTemplarSpawnCap;
-	
+
 	public static ConfigValue<Integer> witherSkeletonTitanMinionSpawnCap;
 	public static ConfigValue<Integer> witherSkeletonTitanPriestSpawnCap;
 	public static ConfigValue<Integer> witherSkeletonTitanZealotSpawnCap;
 	public static ConfigValue<Integer> witherSkeletonTitanBishopSpawnCap;
 	public static ConfigValue<Integer> witherSkeletonTitanTemplarSpawnCap;
 	public static ConfigValue<Integer> witherSkeletonTitanSpecialSpawnCap;
-	
+
 	public static ConfigValue<Integer> creeperTitanMinionSpawnCap;
 	public static ConfigValue<Integer> creeperTitanPriestSpawnCap;
 	public static ConfigValue<Integer> creeperTitanZealotSpawnCap;
 	public static ConfigValue<Integer> creeperTitanBishopSpawnCap;
 	public static ConfigValue<Integer> creeperTitanTemplarSpawnCap;
-	
+
 	public static ConfigValue<Integer> spiderTitanMinionSpawnCap;
 	public static ConfigValue<Integer> spiderTitanPriestSpawnCap;
 	public static ConfigValue<Integer> spiderTitanZealotSpawnCap;
 	public static ConfigValue<Integer> spiderTitanBishopSpawnCap;
 	public static ConfigValue<Integer> spiderTitanTemplarSpawnCap;
-	
+
 	public static ConfigValue<Integer> caveSpiderTitanMinionSpawnCap;
 	public static ConfigValue<Integer> caveSpiderTitanPriestSpawnCap;
 	public static ConfigValue<Integer> caveSpiderTitanZealotSpawnCap;
 	public static ConfigValue<Integer> caveSpiderTitanBishopSpawnCap;
 	public static ConfigValue<Integer> caveSpiderTitanTemplarSpawnCap;
-	
+
 	public static ConfigValue<Integer> pigZombieTitanMinionSpawnCap;
 	public static ConfigValue<Integer> pigZombieTitanPriestSpawnCap;
 	public static ConfigValue<Integer> pigZombieTitanZealotSpawnCap;
 	public static ConfigValue<Integer> pigZombieTitanBishopSpawnCap;
 	public static ConfigValue<Integer> pigZombieTitanTemplarSpawnCap;
 	public static ConfigValue<Integer> pigZombieTitanSpecialSpawnCap;
-	
+
 	public static ConfigValue<Integer> blazeTitanMinionSpawnCap;
 	public static ConfigValue<Integer> blazeTitanPriestSpawnCap;
 	public static ConfigValue<Integer> blazeTitanZealotSpawnCap;
 	public static ConfigValue<Integer> blazeTitanBishopSpawnCap;
 	public static ConfigValue<Integer> blazeTitanTemplarSpawnCap;
-	
+
 	public static ConfigValue<Integer> enderColossusMinionSpawnCap;
 	public static ConfigValue<Integer> enderColossusPriestSpawnCap;
 	public static ConfigValue<Integer> enderColossusZealotSpawnCap;
 	public static ConfigValue<Integer> enderColossusBishopSpawnCap;
 	public static ConfigValue<Integer> enderColossusTemplarSpawnCap;
 	public static ConfigValue<Integer> enderColossusSpecialSpawnCap;
-	
+
 	public static ConfigValue<Integer> ghastTitanMinionSpawnCap;
 	public static ConfigValue<Integer> ghastTitanPriestSpawnCap;
 	public static ConfigValue<Integer> ghastTitanZealotSpawnCap;
 	public static ConfigValue<Integer> ghastTitanBishopSpawnCap;
 	public static ConfigValue<Integer> ghastTitanTemplarSpawnCap;
-	
+
 	public static ConfigValue<Integer> witherzillaMinionSpawnCap;
-	
+
 	public static ConfigValue<Double> minionSpawnrate;
 	public static ConfigValue<Double> priestSpawnrate;
 	public static ConfigValue<Double> zealotSpawnrate;
 	public static ConfigValue<Double> bishopSpawnrate;
 	public static ConfigValue<Double> templarSpawnrate;
-	
+
 	public static ConfigValue<Double> slimeTitanSpawnRate;
 	public static ConfigValue<Double> magmaCubeTitanSpawnRate;
 	public static ConfigValue<Double> omegafishSpawnRate;
@@ -138,7 +138,7 @@ public class TheTitansNeoConfigs {
 	public static ConfigValue<Double> blazeTitanSpawnRate;
 	public static ConfigValue<Double> enderColossusSpawnRate;
 	public static ConfigValue<Double> ghastTitanSpawnRate;
-	
+
 	public static ConfigValue<Double> bishopSummonLoyalistSpawnRate;
 	public static ConfigValue<Double> bishopSummonPriestSpawnRate;
 	public static ConfigValue<Double> templarSummonLoyalistSpawnRate;
@@ -155,7 +155,7 @@ public class TheTitansNeoConfigs {
 	public static ConfigValue<Double> zombieTitanSummonSpecialMinionSpawnRate;
 	public static ConfigValue<Double> pigZombieTitanSummonSpecialMinionSpawnRate;
 	public static ConfigValue<Double> enderColossusSummonSpecialMinionSpawnRate;
-	
+
 	public static void registerConfigs() {
 		ModConfigSpec.Builder builder = new ModConfigSpec.Builder();
 		builder.comment("General settings").push("general");
@@ -192,7 +192,7 @@ public class TheTitansNeoConfigs {
 		builder.pop();
 		builder.push("entity");
 		builder.push("omegafish");
-		omegafishSubdueRate = builder.comment("OmegafishSubdueRate").defineInRange("omegafishSubdueRate", 0.01F, 0.0F, 100.0F);
+		omegafishSubdueRate = builder.comment("OmegafishSubdueRate").defineInRange("omegafishSubdueRate", 0.01D, 0.0D, 100.0D);
 		builder.pop();
 		builder.push("creeperTitan");
 		creeperTitanExplodeAsync = builder.comment("CreeperTitanExplodeAsync").define("creeperTitanExplodeAsync", false);
@@ -200,38 +200,38 @@ public class TheTitansNeoConfigs {
 		chargedCreeperTitanExplodeRange = builder.comment("ChargedCreeperTitanExplodeRange").defineInRange("chargedCreeperTitanExplodeRange", 256, 0, 1024);
 		builder.pop();
 		builder.push("caveSpiderTitan");
-		caveSpiderTitanSubdueRate = builder.comment("CaveSpiderTitanSubdueRate").defineInRange("caveSpiderTitanSubdueRate", 0.01F, 0.0F, 100.0F);
+		caveSpiderTitanSubdueRate = builder.comment("CaveSpiderTitanSubdueRate").defineInRange("caveSpiderTitanSubdueRate", 0.01D, 0.0D, 100.0D);
 		builder.pop();
 		builder.pop();
 		builder.push("spawn");
 		builder.push("spawnProtect");
 		playerSpawnPosProtect = builder.comment("PlayerSpawnPosProtect").define("playerSpawnPosProtect", true);
-		playerSpawnPosDistance = builder.comment("PlayerSpawnPosDistance").defineInRange("playerSpawnPosDistance", 1024.0F, 0.0F, 2048.0F);
+		playerSpawnPosDistance = builder.comment("PlayerSpawnPosDistance").defineInRange("playerSpawnPosDistance", 1024.0D, 0.0D, 2048.0D);
 		titanSpawnNetherTop = builder.comment("TitanSpawnNetherTop").define("titanSpawnNetherTop", true);
 		builder.pop();
 		builder.push("spawnRate");
 		builder.push("minion");
-		minionSpawnrate = builder.comment("MinionSpawnrate").defineInRange("minionSpawnrate", 100.0F, 0.0F, 100.0F);
-		priestSpawnrate = builder.comment("PriestSpawnrate").defineInRange("priestSpawnrate", 25.0F, 0.0F, 100.0F);
-		zealotSpawnrate = builder.comment("ZealotSpawnrate").defineInRange("zealotSpawnrate", 12.5F, 0.0F, 100.0F);
-		bishopSpawnrate = builder.comment("BishopSpawnrate").defineInRange("bishopSpawnrate", 5.0F, 0.0F, 100.0F);
-		templarSpawnrate = builder.comment("TemplarSpawnrate").defineInRange("templarSpawnrate", 1.25F, 0.0F, 100.0F);
+		minionSpawnrate = builder.comment("MinionSpawnrate").defineInRange("minionSpawnrate", 100.0D, 0.0D, 100.0D);
+		priestSpawnrate = builder.comment("PriestSpawnrate").defineInRange("priestSpawnrate", 25.0D, 0.0D, 100.0D);
+		zealotSpawnrate = builder.comment("ZealotSpawnrate").defineInRange("zealotSpawnrate", 12.5D, 0.0D, 100.0D);
+		bishopSpawnrate = builder.comment("BishopSpawnrate").defineInRange("bishopSpawnrate", 5.0D, 0.0D, 100.0D);
+		templarSpawnrate = builder.comment("TemplarSpawnrate").defineInRange("templarSpawnrate", 1.25D, 0.0D, 100.0D);
 		builder.pop();
 		builder.push("titan");
-		slimeTitanSpawnRate = builder.comment("SlimeTitanSpawnRate").defineInRange("slimeTitanSpawnRate", 0.1F, 0.0F, 100.0F);
-		magmaCubeTitanSpawnRate = builder.comment("MagmaCubeTitanSpawnRate").defineInRange("magmaCubeTitanSpawnRate", 0.05F, 0.0F, 100.0F);
-		omegafishSpawnRate = builder.comment("OmegafishSpawnRate").defineInRange("omegafishSpawnRate", 0.08F, 0.0F, 100.0F);
-		zombieTitanSpawnRate = builder.comment("ZombieTitanSpawnRate").defineInRange("zombieTitanSpawnRate", 0.05F, 0.0F, 100.0F);
-		skeletonTitanSpawnRate = builder.comment("SkeletonTitanSpawnRate").defineInRange("skeletonTitanSpawnRate", 0.05F, 0.0F, 100.0F);
-		witherSkeletonTitanSpawnRate = builder.comment("WitherSkeletonTitanSpawnRate").defineInRange("witherSkeletonTitanSpawnRate", 0.025F, 0.0F, 100.0F);
-		creeperTitanSpawnRate = builder.comment("CreeperTitanSpawnRate").defineInRange("creeperTitanSpawnRate", 0.05F, 0.0F, 100.0F);
-		spiderTitanSpawnRate = builder.comment("SpiderTitanSpawnRate").defineInRange("spiderTitanSpawnRate", 0.08F, 0.0F, 100.0F);
-		caveSpiderTitanSpawnRate = builder.comment("CaveSpiderTitanSpawnRate").defineInRange("caveSpiderTitanSpawnRate", 0.08F, 0.0F, 100.0F);
-		spiderJockeyTitanSpawnRate = builder.comment("SpiderJockeyTitanSpawnRate").defineInRange("spiderJockeyTitanSpawnRate", 0.0125F, 0.0F, 100.0F);
-		pigZombieTitanSpawnRate = builder.comment("PigZombieTitanSpawnRate").defineInRange("pigZombieTitanSpawnRate", 0.05F, 0.0F, 100.0F);
-		blazeTitanSpawnRate = builder.comment("BlazeTitanSpawnRate").defineInRange("blazeTitanSpawnRate", 0.025F, 0.0F, 100.0F);
-		enderColossusSpawnRate = builder.comment("EnderColossusSpawnRate").defineInRange("enderColossusSpawnRate", 0.002F, 0.0F, 100.0F);
-		ghastTitanSpawnRate = builder.comment("GhastTitanSpawnRate").defineInRange("ghastTitanSpawnRate", 0.0125F, 0.0F, 100.0F);
+		slimeTitanSpawnRate = builder.comment("SlimeTitanSpawnRate").defineInRange("slimeTitanSpawnRate", 0.1D, 0.0D, 100.0D);
+		magmaCubeTitanSpawnRate = builder.comment("MagmaCubeTitanSpawnRate").defineInRange("magmaCubeTitanSpawnRate", 0.05D, 0.0D, 100.0D);
+		omegafishSpawnRate = builder.comment("OmegafishSpawnRate").defineInRange("omegafishSpawnRate", 0.08D, 0.0D, 100.0D);
+		zombieTitanSpawnRate = builder.comment("ZombieTitanSpawnRate").defineInRange("zombieTitanSpawnRate", 0.05D, 0.0D, 100.0D);
+		skeletonTitanSpawnRate = builder.comment("SkeletonTitanSpawnRate").defineInRange("skeletonTitanSpawnRate", 0.05D, 0.0D, 100.0D);
+		witherSkeletonTitanSpawnRate = builder.comment("WitherSkeletonTitanSpawnRate").defineInRange("witherSkeletonTitanSpawnRate", 0.025D, 0.0D, 100.0D);
+		creeperTitanSpawnRate = builder.comment("CreeperTitanSpawnRate").defineInRange("creeperTitanSpawnRate", 0.05D, 0.0D, 100.0D);
+		spiderTitanSpawnRate = builder.comment("SpiderTitanSpawnRate").defineInRange("spiderTitanSpawnRate", 0.08D, 0.0D, 100.0D);
+		caveSpiderTitanSpawnRate = builder.comment("CaveSpiderTitanSpawnRate").defineInRange("caveSpiderTitanSpawnRate", 0.08D, 0.0D, 100.0D);
+		spiderJockeyTitanSpawnRate = builder.comment("SpiderJockeyTitanSpawnRate").defineInRange("spiderJockeyTitanSpawnRate", 0.0125D, 0.0D, 100.0D);
+		pigZombieTitanSpawnRate = builder.comment("PigZombieTitanSpawnRate").defineInRange("pigZombieTitanSpawnRate", 0.05D, 0.0D, 100.0D);
+		blazeTitanSpawnRate = builder.comment("BlazeTitanSpawnRate").defineInRange("blazeTitanSpawnRate", 0.025D, 0.0D, 100.0D);
+		enderColossusSpawnRate = builder.comment("EnderColossusSpawnRate").defineInRange("enderColossusSpawnRate", 0.002D, 0.0D, 100.0D);
+		ghastTitanSpawnRate = builder.comment("GhastTitanSpawnRate").defineInRange("ghastTitanSpawnRate", 0.0125D, 0.0D, 100.0D);
 		builder.pop();
 		builder.pop();
 		builder.push("spawnCap");
@@ -329,36 +329,36 @@ public class TheTitansNeoConfigs {
 		builder.push("summon");
 		builder.push("summonRate");
 		builder.push("bishop");
-		bishopSummonLoyalistSpawnRate = builder.comment("BishopSummonLoyalistSpawnRate").defineInRange("bishopSummonLoyalistSpawnRate", 0.167F, 0.0F, 100.0F);
-		bishopSummonPriestSpawnRate = builder.comment("BishopSummonPriestSpawnRate").defineInRange("bishopSummonPriestSpawnRate", 0.083F, 0.0F, 100.0F);
+		bishopSummonLoyalistSpawnRate = builder.comment("BishopSummonLoyalistSpawnRate").defineInRange("bishopSummonLoyalistSpawnRate", 0.167D, 0.0D, 100.0D);
+		bishopSummonPriestSpawnRate = builder.comment("BishopSummonPriestSpawnRate").defineInRange("bishopSummonPriestSpawnRate", 0.083D, 0.0D, 100.0D);
 		builder.pop();
 		builder.push("templar");
-		templarSummonLoyalistSpawnRate = builder.comment("TemplarSummonLoyalistSpawnRate").defineInRange("templarSummonLoyalistSpawnRate", 0.167F, 0.0F, 100.0F);
-		templarSummonPriestSpawnRate = builder.comment("TemplarSummonPriestSpawnRate").defineInRange("templarSummonPriestSpawnRate", 0.083F, 0.0F, 100.0F);
-		templarSummonZealotSpawnRate = builder.comment("TemplarSummonZealotSpawnRate").defineInRange("templarSummonZealotSpawnRate", 0.042F, 0.0F, 100.0F);
+		templarSummonLoyalistSpawnRate = builder.comment("TemplarSummonLoyalistSpawnRate").defineInRange("templarSummonLoyalistSpawnRate", 0.167D, 0.0D, 100.0D);
+		templarSummonPriestSpawnRate = builder.comment("TemplarSummonPriestSpawnRate").defineInRange("templarSummonPriestSpawnRate", 0.083D, 0.0D, 100.0D);
+		templarSummonZealotSpawnRate = builder.comment("TemplarSummonZealotSpawnRate").defineInRange("templarSummonZealotSpawnRate", 0.042D, 0.0D, 100.0D);
 		builder.pop();
 		builder.push("snowGolemTitan");
-		snowGolemTitanSummonMinionSpawnRate = builder.comment("SnowGolemTitanSummonMinionSpawnRate").defineInRange("snowGolemTitanSummonMinionSpawnRate", 5.0F, 0.0F, 100.0F);
+		snowGolemTitanSummonMinionSpawnRate = builder.comment("SnowGolemTitanSummonMinionSpawnRate").defineInRange("snowGolemTitanSummonMinionSpawnRate", 5.0D, 0.0D, 100.0D);
 		builder.pop();
 		builder.push("ironGolemTitan");
-		ironGolemTitanSummonMinionSpawnRate = builder.comment("IronGolemTitanSummonMinionSpawnRate").defineInRange("ironGolemTitanSummonMinionSpawnRate", 5.0F, 0.0F, 100.0F);
+		ironGolemTitanSummonMinionSpawnRate = builder.comment("IronGolemTitanSummonMinionSpawnRate").defineInRange("ironGolemTitanSummonMinionSpawnRate", 5.0D, 0.0D, 100.0D);
 		builder.pop();
 		builder.push("zombieTitan");
-		zombieTitanSummonSpecialMinionSpawnRate = builder.comment("ZombieTitanSummonSpecialMinionSpawnRate").defineInRange("zombieTitanSummonSpecialMinionSpawnRate", 0.3125F, 0.0F, 100.0F);
+		zombieTitanSummonSpecialMinionSpawnRate = builder.comment("ZombieTitanSummonSpecialMinionSpawnRate").defineInRange("zombieTitanSummonSpecialMinionSpawnRate", 0.3125D, 0.0D, 100.0D);
 		builder.pop();
 		builder.push("pigZombieTitan");
-		pigZombieTitanSummonSpecialMinionSpawnRate = builder.comment("PigZombieTitanSummonSpecialMinionSpawnRate").defineInRange("pigZombieTitanSummonSpecialMinionSpawnRate", 0.3125F, 0.0F, 100.0F);
+		pigZombieTitanSummonSpecialMinionSpawnRate = builder.comment("PigZombieTitanSummonSpecialMinionSpawnRate").defineInRange("pigZombieTitanSummonSpecialMinionSpawnRate", 0.3125D, 0.0D, 100.0D);
 		builder.pop();
 		builder.push("enderColossus");
-		enderColossusSummonSpecialMinionSpawnRate = builder.comment("EnderColossusSummonSpecialMinionSpawnRate").defineInRange("enderColossusSummonSpecialMinionSpawnRate", 0.3125F, 0.0F, 100.0F);
+		enderColossusSummonSpecialMinionSpawnRate = builder.comment("EnderColossusSummonSpecialMinionSpawnRate").defineInRange("enderColossusSummonSpecialMinionSpawnRate", 0.3125D, 0.0D, 100.0D);
 		builder.pop();
 		builder.push("titan");
-		titanSummonLoyalistSpawnRate = builder.comment("TitanSummonLoyalistSpawnRate").defineInRange("titanSummonLoyalistSpawnRate", 5.0F, 0.0F, 100.0F);
-		titanSummonPriestSpawnRate = builder.comment("TitanSummonPriestSpawnRate").defineInRange("titanSummonPriestSpawnRate", 2.5F, 0.0F, 100.0F);
-		titanSummonZealotSpawnRate = builder.comment("TitanSummonZealotSpawnRate").defineInRange("titanSummonZealotSpawnRate", 1.25F, 0.0F, 100.0F);
-		titanSummonBishopSpawnRate = builder.comment("TitanSummonBishopSpawnRate").defineInRange("titanSummonBishopSpawnRate", 0.625F, 0.0F, 100.0F);
-		titanSummonTemplarSpawnRate = builder.comment("TitanSummonTemplarSpawnRate").defineInRange("titanSummonTemplarSpawnRate", 0.3125F, 0.0F, 100.0F);
-		titanSummonSpecialMinionSpawnRate = builder.comment("TitanSummonSpecialMinionSpawnRate").defineInRange("titanSummonSpecialMinionSpawnRate", 0.3125F, 0.0F, 100.0F);
+		titanSummonLoyalistSpawnRate = builder.comment("TitanSummonLoyalistSpawnRate").defineInRange("titanSummonLoyalistSpawnRate", 5.0D, 0.0D, 100.0D);
+		titanSummonPriestSpawnRate = builder.comment("TitanSummonPriestSpawnRate").defineInRange("titanSummonPriestSpawnRate", 2.5D, 0.0D, 100.0D);
+		titanSummonZealotSpawnRate = builder.comment("TitanSummonZealotSpawnRate").defineInRange("titanSummonZealotSpawnRate", 1.25D, 0.0D, 100.0D);
+		titanSummonBishopSpawnRate = builder.comment("TitanSummonBishopSpawnRate").defineInRange("titanSummonBishopSpawnRate", 0.625D, 0.0D, 100.0D);
+		titanSummonTemplarSpawnRate = builder.comment("TitanSummonTemplarSpawnRate").defineInRange("titanSummonTemplarSpawnRate", 0.3125D, 0.0D, 100.0D);
+		titanSummonSpecialMinionSpawnRate = builder.comment("TitanSummonSpecialMinionSpawnRate").defineInRange("titanSummonSpecialMinionSpawnRate", 0.3125D, 0.0D, 100.0D);
 		builder.pop();
 		builder.pop();
 		builder.pop();
@@ -367,7 +367,7 @@ public class TheTitansNeoConfigs {
 		modConfigSpec = builder.build();
 		ModLoadingContext.get().getActiveContainer().registerConfig(ModConfig.Type.COMMON, modConfigSpec);
 	}
-	
+
 	public static void registerConfigScreen() {
 		ModLoadingContext.get().getActiveContainer().registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
 	}

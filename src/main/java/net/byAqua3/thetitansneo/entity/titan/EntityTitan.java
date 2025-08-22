@@ -77,7 +77,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
@@ -669,11 +668,11 @@ public class EntityTitan extends AmbientCreature implements IAnimatedEntity, IEn
 	public void setTitanDeltaMovement(double x, double y, double z) {
 		this.setTitanDeltaMovement(new Vec3(x, y, z));
 	}
-	
+
 	@Override
 	public void remove(Entity.RemovalReason reason) {
 	}
-	
+
 	public void removeTitan(Entity.RemovalReason reason) {
 		if (this.getTitanHealth() > 0 && this.deathTicks <= 0) {
 			return;
@@ -1009,8 +1008,10 @@ public class EntityTitan extends AmbientCreature implements IAnimatedEntity, IEn
 	}
 
 	protected void onDeath() {
-		this.dropRateItem();
-		this.dropAllItem();
+		if (!this.level().isClientSide() && this.level().getGameRules().getBoolean(GameRules.RULE_DOMOBLOOT)) {
+			this.dropRateItem();
+			this.dropAllItem();
+		}
 
 		if (this.getName().getContents() instanceof TranslatableContents translatableContents) {
 			if (TheTitansNeoMinions.MINIONS.containsKey(translatableContents.getKey())) {
@@ -1300,17 +1301,6 @@ public class EntityTitan extends AmbientCreature implements IAnimatedEntity, IEn
 		}
 	}
 
-	public void addChunk(LevelChunk chunk) {
-		if (!this.level().isClientSide()) {
-			ServerLevel serverLevel = (ServerLevel) this.level();
-
-			for (ServerPlayer player : serverLevel.players()) {
-				player.connection.chunkSender.markChunkPendingToSend(serverLevel.getChunkAt(this.blockPosition()));
-				player.connection.chunkSender.sendNextChunks(player);
-			}
-		}
-	}
-
 	public void removeEntity(Entity entity) {
 		if (entity.getBbHeight() >= 6.0F) {
 			for (int i = 0; i < 1000; i++) {
@@ -1340,9 +1330,17 @@ public class EntityTitan extends AmbientCreature implements IAnimatedEntity, IEn
 					amount = 1.0F;
 				}
 			}
-			double titanResistance = player.getAttribute(TheTitansNeoAttributes.TITAN_RESISTANCE).getBaseValue();
+
+			double titanResistance = player.getAttributeValue(TheTitansNeoAttributes.TITAN_RESISTANCE);
+
 			if (titanResistance > 0.0D) {
-				amount -= Math.max((amount * (titanResistance / 100.0D)), amount);
+				amount -= Math.min((amount * (titanResistance / 100.0D)), amount);
+			}
+
+			for (ItemStack itemStack : player.getArmorSlots()) {
+				if (!itemStack.isEmpty() && itemStack.isDamaged()) {
+					itemStack.setDamageValue(itemStack.getDamageValue() + (int) amount);
+				}
 			}
 		}
 		if (entity instanceof EntityTitan) {
@@ -1368,13 +1366,10 @@ public class EntityTitan extends AmbientCreature implements IAnimatedEntity, IEn
 				entity.die(damageSource);
 			}
 
-			if (entity.getHealth() > 0.0F && health - amount <= 0.0F && entity.getMaxHealth() <= 1.0F) {
+			if ((entity.getHealth() > 0.0F && health - amount <= 0.0F && entity.getMaxHealth() <= 1.0F) || entity.deathTime >= 20) {
 				if (!(entity instanceof Player)) {
 					this.removeEntity(entity);
 				}
-			}
-			if (entity.deathTime >= 20) {
-				this.removeEntity(entity);
 			}
 		}
 	}
