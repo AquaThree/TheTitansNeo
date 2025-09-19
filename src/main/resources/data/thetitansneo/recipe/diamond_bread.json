@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"result": {
+		"id": "thetitansneo:diamond_bread"
+	},
+	"pattern": [
+		"DDD",
+		"DFD",
+		"DDD"
+	],
+	"key": {
+		"D": {
+			"tag": "c:gems/diamond"
+		},
+		"F": {
+			"tag": "c:foods/bread"
+		}
+	}
+}

@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"result": {
+		"id": "thetitansneo:steel_pickaxe"
+	},
+	"pattern": [
+		"SSS",
+		" W ",
+		" W "
+	],
+	"key": {
+		"S": {
+			"item": "thetitansneo:steel_ingot"
+		},
+		"W": {
+			"tag": "c:rods/wooden"
+		}
+	}
+}

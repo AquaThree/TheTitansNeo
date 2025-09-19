@@ -1,0 +1,38 @@
+{
+	"type": "minecraft:chest",
+	"pools": [
+		{
+			"bonus_rolls": 0.0,
+			"conditions": [
+				{
+					"condition": "minecraft:random_chance",
+					"chance": 0.1
+				}
+			],
+			"entries": [
+				{
+					"type": "minecraft:item",
+					"name": "thetitansneo:creepy_wither_doll"
+				}
+			],
+			"rolls": 1.0
+		},
+		{
+			"bonus_rolls": 0.0,
+			"conditions": [
+				{
+					"condition": "minecraft:random_chance",
+					"chance": 0.1
+				}
+			],
+			"entries": [
+				{
+					"type": "minecraft:item",
+					"name": "thetitansneo:rng_relinquisher"
+				}
+			],
+			"rolls": 1.0
+		}
+	],
+	"random_sequence": "thetitansneo:chests/end_city_treasure"
+}

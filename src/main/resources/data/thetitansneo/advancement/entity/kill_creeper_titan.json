@@ -1,0 +1,39 @@
+{
+	"parent": "thetitansneo:item/growth_serum",
+	"criteria": {
+		"thetitansneo:kill_creeper_titan": {
+			"conditions": {
+				"entity": [
+					{
+						"condition": "minecraft:entity_properties",
+						"entity": "this",
+						"predicate": {
+							"type": "thetitansneo:creeper_titan"
+						}
+					}
+				]
+			},
+			"trigger": "thetitansneo:titan_death"
+		}
+	},
+	"display": {
+		"show_toast": true,
+		"announce_to_chat": true,
+		"frame": "challenge",
+		"icon": {
+			"id": "thetitansneo:spawn_egg_creeper_titan"
+		},
+		"title": {
+			"translate": "advancements.thetitansneo.kill_creeper_titan.title"
+		},
+		"description": {
+			"translate": "advancements.thetitansneo.kill_creeper_titan.description"
+		}
+	},
+	"requirements": [
+		[
+			"thetitansneo:kill_creeper_titan"
+		]
+	],
+	"sends_telemetry_event": true
+}

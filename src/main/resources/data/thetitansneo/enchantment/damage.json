@@ -1,0 +1,22 @@
+{
+	"anvil_cost": 8,
+	"description": {
+		"translate": "enchantment.thetitansneo.damage"
+	},
+	"effects": {
+	},
+	"max_level": 5,
+	"max_cost": {
+		"base": 55,
+		"per_level_above_first": 8
+	},
+	"min_cost": {
+		"base": 5,
+		"per_level_above_first": 8
+	},
+	"slots": [
+		"mainhand"
+	],
+	"supported_items": "#thetitansneo:enchantable/wither_turret",
+	"weight": 10
+}

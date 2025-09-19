@@ -1,0 +1,6 @@
+{
+	"type": "neoforge:add_features",
+	"biomes": "thetitansneo:the_void",
+	"features": "thetitansneo:obsidian",
+	"step": "underground_ores"
+}

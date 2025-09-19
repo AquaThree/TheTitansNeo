@@ -1,0 +1,25 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"result": {
+		"id": "thetitansneo:wither_turret_mortar"
+	},
+	"pattern": [
+		" W ",
+		"NBN",
+		" G "
+	],
+	"key": {
+		"W": {
+			"item": "thetitansneo:wither_turret"
+		},
+		"G": {
+			"item": "thetitansneo:wither_turret_ground"
+		},
+		"B": {
+			"item": "minecraft:beacon"
+		},
+		"N": {
+			"tag": "c:nether_stars"
+		}
+	}
+}

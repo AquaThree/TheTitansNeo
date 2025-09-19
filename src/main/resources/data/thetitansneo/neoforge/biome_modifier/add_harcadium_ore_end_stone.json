@@ -1,0 +1,6 @@
+{
+	"type": "neoforge:add_features",
+	"biomes": "#minecraft:is_end",
+	"features": "thetitansneo:harcadium_ore_end_stone",
+	"step": "underground_ores"
+}

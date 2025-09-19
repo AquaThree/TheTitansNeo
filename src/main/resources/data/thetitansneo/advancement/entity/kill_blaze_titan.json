@@ -1,0 +1,39 @@
+{
+	"parent": "thetitansneo:item/growth_serum",
+	"criteria": {
+		"thetitansneo:kill_blaze_titan": {
+			"conditions": {
+				"entity": [
+					{
+						"condition": "minecraft:entity_properties",
+						"entity": "this",
+						"predicate": {
+							"type": "thetitansneo:blaze_titan"
+						}
+					}
+				]
+			},
+			"trigger": "thetitansneo:titan_death"
+		}
+	},
+	"display": {
+		"show_toast": true,
+		"announce_to_chat": true,
+		"frame": "challenge",
+		"icon": {
+			"id": "thetitansneo:spawn_egg_blaze_titan"
+		},
+		"title": {
+			"translate": "advancements.thetitansneo.kill_blaze_titan.title"
+		},
+		"description": {
+			"translate": "advancements.thetitansneo.kill_blaze_titan.description"
+		}
+	},
+	"requirements": [
+		[
+			"thetitansneo:kill_blaze_titan"
+		]
+	],
+	"sends_telemetry_event": true
+}

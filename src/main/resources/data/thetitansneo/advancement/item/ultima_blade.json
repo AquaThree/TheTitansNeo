@@ -1,0 +1,37 @@
+{
+	"parent": "thetitansneo:entity/kill_witherzilla",
+	"criteria": {
+		"thetitansneo:ultima_blade": {
+			"conditions": {
+				"items": [
+					{
+						"items": [
+							"thetitansneo:ultima_blade"
+						]
+					}
+				]
+			},
+			"trigger": "minecraft:inventory_changed"
+		}
+	},
+	"display": {
+		"show_toast": true,
+		"announce_to_chat": true,
+		"frame": "challenge",
+		"icon": {
+			"id": "thetitansneo:ultima_blade"
+		},
+		"title": {
+			"translate": "advancements.thetitansneo.ultima_blade.title"
+		},
+		"description": {
+			"translate": "advancements.thetitansneo.ultima_blade.description"
+		}
+	},
+	"requirements": [
+		[
+			"thetitansneo:ultima_blade"
+		]
+	],
+	"sends_telemetry_event": true
+}

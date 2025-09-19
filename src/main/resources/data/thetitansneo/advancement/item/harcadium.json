@@ -1,0 +1,37 @@
+{
+	"parent": "thetitansneo:root",
+	"criteria": {
+		"thetitansneo:harcadium": {
+			"conditions": {
+				"items": [
+					{
+						"items": [
+							"thetitansneo:harcadium"
+						]
+					}
+				]
+			},
+			"trigger": "minecraft:inventory_changed"
+		}
+	},
+	"display": {
+		"show_toast": true,
+		"announce_to_chat": true,
+		"frame": "challenge",
+		"icon": {
+			"id": "thetitansneo:harcadium"
+		},
+		"title": {
+			"translate": "advancements.thetitansneo.harcadium.title"
+		},
+		"description": {
+			"translate": "advancements.thetitansneo.harcadium.description"
+		}
+	},
+	"requirements": [
+		[
+			"thetitansneo:harcadium"
+		]
+	],
+	"sends_telemetry_event": true
+}

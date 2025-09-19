@@ -1,0 +1,12 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"result": {
+		"id": "thetitansneo:harcadium_waflet",
+		"count": 9
+	},
+	"ingredients": [
+		{
+			"item": "thetitansneo:harcadium_wafer"
+		}
+	]
+}

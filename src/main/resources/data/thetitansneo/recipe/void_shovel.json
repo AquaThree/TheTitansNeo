@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"result": {
+		"id": "thetitansneo:void_shovel"
+	},
+	"pattern": [
+		"V",
+		"H",
+		"H"
+	],
+	"key": {
+		"V": {
+			"item": "thetitansneo:void"
+		},
+		"H": {
+			"item": "thetitansneo:harcadium"
+		}
+	}
+}

@@ -1,0 +1,13 @@
+{
+	"replace": false,
+	"values": [
+		"thetitansneo:zombie_titan_minion",
+		"thetitansneo:wither_skeleton_titan_minion",
+		"thetitansneo:pig_zombie_titan_minion",
+		"thetitansneo:witherzilla_minion",
+		"thetitansneo:wither_minion",
+		"thetitansneo:zombie_titan",
+		"thetitansneo:skeleton_titan",
+		"thetitansneo:pig_zombie_titan"
+	]
+}

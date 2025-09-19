@@ -1,0 +1,39 @@
+{
+	"parent": "thetitansneo:item/growth_serum",
+	"criteria": {
+		"thetitansneo:kill_omegafish": {
+			"conditions": {
+				"entity": [
+					{
+						"condition": "minecraft:entity_properties",
+						"entity": "this",
+						"predicate": {
+							"type": "thetitansneo:omegafish"
+						}
+					}
+				]
+			},
+			"trigger": "thetitansneo:titan_death"
+		}
+	},
+	"display": {
+		"show_toast": true,
+		"announce_to_chat": true,
+		"frame": "challenge",
+		"icon": {
+			"id": "thetitansneo:spawn_egg_omegafish"
+		},
+		"title": {
+			"translate": "advancements.thetitansneo.kill_omegafish.title"
+		},
+		"description": {
+			"translate": "advancements.thetitansneo.kill_omegafish.description"
+		}
+	},
+	"requirements": [
+		[
+			"thetitansneo:kill_omegafish"
+		]
+	],
+	"sends_telemetry_event": true
+}

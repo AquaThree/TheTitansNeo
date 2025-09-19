@@ -1,0 +1,15 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"result": {
+		"id": "thetitansneo:bronze_boots"
+	},
+	"pattern": [
+		"B B",
+		"B B"
+	],
+	"key": {
+		"B": {
+			"item": "thetitansneo:bronze_ingot"
+		}
+	}
+}

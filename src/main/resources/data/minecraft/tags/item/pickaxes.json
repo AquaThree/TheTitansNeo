@@ -1,0 +1,12 @@
+{
+	"replace": false,
+	"values": [
+		"thetitansneo:copper_pickaxe",
+		"thetitansneo:tin_pickaxe",
+		"thetitansneo:bronze_pickaxe",
+		"thetitansneo:steel_pickaxe",
+		"thetitansneo:harcadium_pickaxe",
+		"thetitansneo:void_pickaxe",
+		"thetitansneo:adminium_pickaxe"
+	]
+}

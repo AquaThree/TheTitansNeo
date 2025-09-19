@@ -1,0 +1,12 @@
+{
+	"replace": false,
+	"values": [
+		"thetitansneo:copper_chestplate",
+		"thetitansneo:tin_chestplate",
+		"thetitansneo:bronze_chestplate",
+		"thetitansneo:steel_chestplate",
+		"thetitansneo:harcadium_chestplate",
+		"thetitansneo:void_chestplate",
+		"thetitansneo:adminium_chestplate"
+	]
+}

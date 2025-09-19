@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"result": {
+		"id": "thetitansneo:bronze_chestplate"
+	},
+	"pattern": [
+		"B B",
+		"BBB",
+		"BBB"
+	],
+	"key": {
+		"B": {
+			"item": "thetitansneo:bronze_ingot"
+		}
+	}
+}
