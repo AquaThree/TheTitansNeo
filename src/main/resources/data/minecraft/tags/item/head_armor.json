@@ -1,0 +1,12 @@
+{
+	"replace": false,
+	"values": [
+		"thetitansneo:copper_helmet",
+		"thetitansneo:tin_helmet",
+		"thetitansneo:bronze_helmet",
+		"thetitansneo:steel_helmet",
+		"thetitansneo:harcadium_helmet",
+		"thetitansneo:void_helmet",
+		"thetitansneo:adminium_helmet"
+	]
+}

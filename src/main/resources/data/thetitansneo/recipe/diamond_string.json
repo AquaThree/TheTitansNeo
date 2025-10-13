@@ -1,0 +1,15 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"result": {
+		"id": "thetitansneo:diamond_string",
+		"count": 4
+	},
+	"ingredients": [
+		{
+			"tag": "c:gems/diamond"
+		},
+		{
+			"tag": "c:gems/diamond"
+		}
+	]
+}

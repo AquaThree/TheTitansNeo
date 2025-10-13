@@ -1,0 +1,32 @@
+{
+	"parent": "thetitansneo:item/growth_serum",
+	"criteria": {
+		"thetitansneo:wake_titan": {
+			"conditions": {
+				"entity": [
+				]
+			},
+			"trigger": "thetitansneo:titan_wake"
+		}
+	},
+	"display": {
+		"show_toast": true,
+		"announce_to_chat": true,
+		"frame": "challenge",
+		"icon": {
+			"id": "thetitansneo:growth_serum"
+		},
+		"title": {
+			"translate": "advancements.thetitansneo.wake_titan.title"
+		},
+		"description": {
+			"translate": "advancements.thetitansneo.wake_titan.description"
+		}
+	},
+	"requirements": [
+		[
+			"thetitansneo:wake_titan"
+		]
+	],
+	"sends_telemetry_event": true
+}

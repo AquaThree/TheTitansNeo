@@ -1,0 +1,66 @@
+{
+	"type": "neoforge:add_spawns",
+	"biomes": "#c:is_overworld",
+	"spawners": [
+		{
+			"type": "minecraft:silverfish",
+			"weight": 100,
+			"minCount": 1,
+			"maxCount": 4
+		},
+		{
+			"type": "minecraft:cave_spider",
+			"weight": 100,
+			"minCount": 1,
+			"maxCount": 4
+		},
+		{
+			"type": "thetitansneo:omegafish_minion",
+			"weight": 100,
+			"minCount": 1,
+			"maxCount": 4
+		},
+		{
+			"type": "thetitansneo:zombie_titan_minion",
+			"weight": 100,
+			"minCount": 1,
+			"maxCount": 4
+		},
+		{
+			"type": "thetitansneo:skeleton_titan_minion",
+			"weight": 100,
+			"minCount": 1,
+			"maxCount": 4
+		},
+		{
+			"type": "thetitansneo:creeper_titan_minion",
+			"weight": 100,
+			"minCount": 1,
+			"maxCount": 4
+		},
+		{
+			"type": "thetitansneo:spider_titan_minion",
+			"weight": 100,
+			"minCount": 1,
+			"maxCount": 4
+		},
+		{
+			"type": "thetitansneo:cave_spider_titan_minion",
+			"weight": 100,
+			"minCount": 1,
+			"maxCount": 4
+		},
+		{
+			"type": "thetitansneo:ender_colossus_minion",
+			"weight": 10,
+			"minCount": 1,
+			"maxCount": 4
+		},
+		{
+			"type": "thetitansneo:zombie_titan_giant_minion",
+			"weight": 1,
+			"minCount": 1,
+			"maxCount": 1
+		}
+	]
+}

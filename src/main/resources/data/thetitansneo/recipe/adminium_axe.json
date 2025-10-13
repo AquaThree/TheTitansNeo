@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"result": {
+		"id": "thetitansneo:adminium_axe"
+	},
+	"pattern": [
+		"BB",
+		"BS",
+		" S"
+	],
+	"key": {
+		"B": {
+			"item": "thetitansneo:bedrock_compact"
+		},
+		"S": {
+			"item": "minecraft:bedrock"
+		}
+	}
+}

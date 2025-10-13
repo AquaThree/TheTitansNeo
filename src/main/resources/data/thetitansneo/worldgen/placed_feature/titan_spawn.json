@@ -1,0 +1,8 @@
+{
+  "feature": "thetitansneo:titan_spawn",
+  "placement": [
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

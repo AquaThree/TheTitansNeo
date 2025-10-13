@@ -1,0 +1,59 @@
+{
+	"parent": "thetitansneo:item/void",
+	"criteria": {
+		"thetitansneo:void_armor": {
+			"conditions": {
+				"player": [
+					{
+						"condition": "minecraft:entity_properties",
+						"entity": "this",
+						"predicate": {
+							"equipment": {
+								"head": {
+									"items": [
+										"thetitansneo:void_helmet"
+									]
+								},
+								"chest": {
+									"items": [
+										"thetitansneo:void_chestplate"
+									]
+								},
+								"legs": {
+									"items": [
+										"thetitansneo:void_leggings"
+									]
+								},
+								"feet": {
+									"items": [
+										"thetitansneo:void_boots"
+									]
+								}
+							}
+						}
+					}
+				]
+			},
+			"trigger": "minecraft:inventory_changed"
+		}
+	},
+	"display": {
+		"show_toast": true,
+		"announce_to_chat": true,
+		"icon": {
+			"id": "thetitansneo:void_chestplate"
+		},
+		"title": {
+			"translate": "advancements.thetitansneo.void_armor.title"
+		},
+		"description": {
+			"translate": "advancements.thetitansneo.void_armor.description"
+		}
+	},
+	"requirements": [
+		[
+			"thetitansneo:void_armor"
+		]
+	],
+	"sends_telemetry_event": true
+}

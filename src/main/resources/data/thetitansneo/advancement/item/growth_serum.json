@@ -1,0 +1,36 @@
+{
+	"parent": "thetitansneo:root",
+	"criteria": {
+		"thetitansneo:growth_serum": {
+			"conditions": {
+				"items": [
+					{
+						"items": [
+							"thetitansneo:growth_serum"
+						]
+					}
+				]
+			},
+			"trigger": "minecraft:inventory_changed"
+		}
+	},
+	"display": {
+		"show_toast": true,
+		"announce_to_chat": true,
+		"icon": {
+			"id": "minecraft:chest"
+		},
+		"title": {
+			"translate": "advancements.thetitansneo.growth_serum.title"
+		},
+		"description": {
+			"translate": "advancements.thetitansneo.growth_serum.description"
+		}
+	},
+	"requirements": [
+		[
+			"thetitansneo:growth_serum"
+		]
+	],
+	"sends_telemetry_event": true
+}

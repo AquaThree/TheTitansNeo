@@ -1,0 +1,12 @@
+{
+	"replace": false,
+	"entries": [
+		"thetitansneo:add_abandoned_mineshaft_loot_modifier",
+		"thetitansneo:add_desert_pyramid_loot_modifier",
+		"thetitansneo:add_end_city_loot_modifier",
+		"thetitansneo:add_simple_dungeon_loot_modifier",
+		"thetitansneo:add_stronghold_corridor_loot_modifier",
+		"thetitansneo:add_stronghold_crossing_loot_modifier",
+		"thetitansneo:add_village_weaponsmith_loot_modifier"
+	]
+}

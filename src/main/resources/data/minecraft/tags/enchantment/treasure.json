@@ -1,0 +1,12 @@
+{
+	"replace": false,
+	"values": [
+		"thetitansneo:healing",
+		"thetitansneo:damage",
+		"thetitansneo:shooting_speed",
+		"thetitansneo:explosive_power",
+		"thetitansneo:skull_speed",
+		"thetitansneo:knock_up",
+		"thetitansneo:titan_killer"
+	]
+}

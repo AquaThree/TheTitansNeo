@@ -1,0 +1,20 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"result": {
+		"id": "thetitansneo:pleasant_blade_brew"
+	},
+	"ingredients": [
+		{
+			"item": "minecraft:glass_bottle"
+		},
+		{
+			"item": "thetitansneo:pleasant_blade_leaf"
+		},
+		{
+			"item": "minecraft:fermented_spider_eye"
+		},
+		{
+			"tag": "c:crops/carrot"
+		}
+	]
+}

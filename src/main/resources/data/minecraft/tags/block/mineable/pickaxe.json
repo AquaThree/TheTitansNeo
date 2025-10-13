@@ -1,0 +1,25 @@
+{
+	"replace": false,
+	"values": [
+		"thetitansneo:copper_ore",
+		"thetitansneo:tin_ore",
+		"thetitansneo:chromium_ore",
+		"thetitansneo:magnesium_ore",
+		"thetitansneo:lead_ore",
+		"thetitansneo:silver_ore",
+		"thetitansneo:platinum_ore",
+		"thetitansneo:nether_stone_ore",
+		"thetitansneo:nether_coal_ore",
+		"thetitansneo:nether_gold_ore",
+		"thetitansneo:nether_diamond_ore",
+		"thetitansneo:harcadium_ore",
+		"thetitansneo:harcadium_ore_end_stone",
+		"thetitansneo:harcadium_ore_obsidian",
+		"thetitansneo:harcadium_block",
+		"thetitansneo:void_ore",
+		"thetitansneo:void_ore_end_stone",
+		"thetitansneo:void_ore_obsidian",
+		"thetitansneo:void_block",
+		"thetitansneo:adamantium_ore"
+	]
+}

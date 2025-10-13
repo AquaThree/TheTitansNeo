@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"result": {
+		"id": "thetitansneo:golden_bread"
+	},
+	"pattern": [
+		"GGG",
+		"GFG",
+		"GGG"
+	],
+	"key": {
+		"G": {
+			"tag": "c:ingots/gold"
+		},
+		"F": {
+			"tag": "c:foods/bread"
+		}
+	}
+}

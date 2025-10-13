@@ -1,0 +1,11 @@
+{
+	"type": "minecraft:smelting",
+	"cookingtime": 200,
+	"experience": 10.0,
+	"ingredient": {
+		"item": "thetitansneo:platinum_ore"
+	},
+	"result": {
+		"id": "thetitansneo:platinum_ingot"
+	}
+}

@@ -1,0 +1,15 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"result": {
+		"id": "thetitansneo:void_boots"
+	},
+	"pattern": [
+		"V V",
+		"V V"
+	],
+	"key": {
+		"V": {
+			"item": "thetitansneo:void"
+		}
+	}
+}

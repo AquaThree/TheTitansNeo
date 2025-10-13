@@ -1,0 +1,12 @@
+{
+	"replace": false,
+	"values": [
+		"thetitansneo:copper_shovel",
+		"thetitansneo:tin_shovel",
+		"thetitansneo:bronze_shovel",
+		"thetitansneo:steel_shovel",
+		"thetitansneo:harcadium_shovel",
+		"thetitansneo:void_shovel",
+		"thetitansneo:adminium_shovel"
+	]
+}

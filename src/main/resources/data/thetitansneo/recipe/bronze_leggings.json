@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"result": {
+		"id": "thetitansneo:bronze_leggings"
+	},
+	"pattern": [
+		"BBB",
+		"B B",
+		"B B"
+	],
+	"key": {
+		"B": {
+			"item": "thetitansneo:bronze_ingot"
+		}
+	}
+}

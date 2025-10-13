@@ -1,0 +1,22 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"result": {
+		"id": "thetitansneo:wither_turret"
+	},
+	"pattern": [
+		"W",
+		"O",
+		"B"
+	],
+	"key": {
+		"W": {
+			"item": "minecraft:wither_skeleton_skull"
+		},
+		"O": {
+			"tag": "c:obsidians"
+		},
+		"B": {
+			"item": "thetitansneo:bedrock_compact"
+		}
+	}
+}

@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"result": {
+		"id": "thetitansneo:adminium_shovel"
+	},
+	"pattern": [
+		"B",
+		"S",
+		"S"
+	],
+	"key": {
+		"B": {
+			"item": "thetitansneo:bedrock_compact"
+		},
+		"S": {
+			"item": "minecraft:bedrock"
+		}
+	}
+}

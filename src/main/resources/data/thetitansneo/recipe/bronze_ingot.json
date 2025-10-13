@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"result": {
+		"id": "thetitansneo:bronze_ingot"
+	},
+	"ingredients": [
+		{
+			"item": "thetitansneo:copper_ingot"
+		},
+		{
+			"item": "thetitansneo:tin_ingot"
+		}
+	]
+}

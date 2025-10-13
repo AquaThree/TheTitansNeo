@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"result": {
+		"id": "thetitansneo:enchanted_golden_potato"
+	},
+	"pattern": [
+		"GGG",
+		"GFG",
+		"GGG"
+	],
+	"key": {
+		"G": {
+			"tag": "c:storage_blocks/gold"
+		},
+		"F": {
+			"item": "thetitansneo:golden_potato"
+		}
+	}
+}

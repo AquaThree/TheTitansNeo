@@ -1,0 +1,11 @@
+{
+	"type": "thetitansneo:the_void",
+	"generator": {
+		"type": "thetitansneo:the_void",
+		"biome_source": {
+			"type": "minecraft:fixed",
+			"biome": "thetitansneo:the_void"
+		},
+		"settings": "thetitansneo:the_void"
+	}
+}

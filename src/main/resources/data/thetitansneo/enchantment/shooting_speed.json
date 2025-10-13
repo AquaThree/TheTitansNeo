@@ -1,0 +1,22 @@
+{
+	"anvil_cost": 8,
+	"description": {
+		"translate": "enchantment.thetitansneo.shooting_speed"
+	},
+	"effects": {
+	},
+	"max_level": 3,
+	"max_cost": {
+		"base": 62,
+		"per_level_above_first": 20
+	},
+	"min_cost": {
+		"base": 12,
+		"per_level_above_first": 20
+	},
+	"slots": [
+		"mainhand"
+	],
+	"supported_items": "#thetitansneo:enchantable/wither_turret",
+	"weight": 2
+}

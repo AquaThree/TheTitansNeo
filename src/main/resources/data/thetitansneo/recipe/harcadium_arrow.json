@@ -1,0 +1,23 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"result": {
+		"id": "thetitansneo:harcadium_arrow",
+		"count": 4
+	},
+	"pattern": [
+		"H",
+		"D",
+		"F"
+	],
+	"key": {
+		"H": {
+			"item": "thetitansneo:harcadium"
+		},
+		"D": {
+			"tag": "c:gems/diamond"
+		},
+		"F": {
+			"tag": "c:feathers"
+		}
+	}
+}

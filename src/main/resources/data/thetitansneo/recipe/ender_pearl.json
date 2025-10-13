@@ -1,0 +1,17 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"result": {
+		"id": "minecraft:ender_pearl",
+		"count": 16
+	},
+	"pattern": [
+		"HHH",
+		"H H",
+		"HHH"
+	],
+	"key": {
+		"H": {
+			"item": "thetitansneo:harcadium_waflet"
+		}
+	}
+}

@@ -1,0 +1,30 @@
+{
+	"parent": "thetitansneo:item/growth_serum",
+	"criteria": {
+		"thetitansneo:creepy_wither_doll": {
+			"conditions": {
+				"to": "thetitansneo:the_void"
+			},
+			"trigger": "minecraft:changed_dimension"
+		}
+	},
+	"display": {
+		"show_toast": true,
+		"announce_to_chat": true,
+		"icon": {
+			"id": "thetitansneo:creepy_wither_doll"
+		},
+		"title": {
+			"translate": "advancements.thetitansneo.creepy_wither_doll.title"
+		},
+		"description": {
+			"translate": "advancements.thetitansneo.creepy_wither_doll.description"
+		}
+	},
+	"requirements": [
+		[
+			"thetitansneo:creepy_wither_doll"
+		]
+	],
+	"sends_telemetry_event": true
+}

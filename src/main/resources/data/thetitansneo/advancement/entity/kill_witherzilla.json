@@ -1,0 +1,39 @@
+{
+	"parent": "thetitansneo:item/creepy_wither_doll",
+	"criteria": {
+		"thetitansneo:kill_witherzilla": {
+			"conditions": {
+				"entity": [
+					{
+						"condition": "minecraft:entity_properties",
+						"entity": "this",
+						"predicate": {
+							"type": "thetitansneo:witherzilla"
+						}
+					}
+				]
+			},
+			"trigger": "thetitansneo:titan_death"
+		}
+	},
+	"display": {
+		"show_toast": true,
+		"announce_to_chat": true,
+		"frame": "challenge",
+		"icon": {
+			"id": "thetitansneo:spawn_egg_witherzilla"
+		},
+		"title": {
+			"translate": "advancements.thetitansneo.kill_witherzilla.title"
+		},
+		"description": {
+			"translate": "advancements.thetitansneo.kill_witherzilla.description"
+		}
+	},
+	"requirements": [
+		[
+			"thetitansneo:kill_witherzilla"
+		]
+	],
+	"sends_telemetry_event": true
+}
