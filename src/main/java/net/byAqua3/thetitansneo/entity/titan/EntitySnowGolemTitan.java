@@ -94,7 +94,7 @@ public class EntitySnowGolemTitan extends EntityTitan implements RangedAttackMob
 	@Override
 	protected void registerGoals() {
 		super.registerGoals();
-		this.goalSelector.addGoal(1, new EntityAISnowGolemTitanShoot(this, 20, 512.0F, 64.0F, 1.25F));
+		this.goalSelector.addGoal(1, new EntityAISnowGolemTitanShoot(this, 20, 512.0F, 12.0F, 1.25F));
 		this.targetSelector.addGoal(0, new EntityAINearestTargetTitan<LivingEntity>(this, LivingEntity.class, 0, false, false, TheTitansNeoPredicateTargets.SnowGolemTitan));
 	}
 
