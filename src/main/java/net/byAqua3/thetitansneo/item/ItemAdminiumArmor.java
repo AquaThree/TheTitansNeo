@@ -31,6 +31,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.AbstractGolem;
 import net.minecraft.world.entity.item.FallingBlockEntity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
@@ -75,6 +76,17 @@ public class ItemAdminiumArmor extends ArmorItem {
 			itemAttributeModifiers$builder.add(Attributes.ARMOR, new AttributeModifier(ResourceLocation.withDefaultNamespace("armor." + type.getName()), 100000.0D, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.bySlot(type.getSlot()));
 		}
 		return itemAttributeModifiers$builder.build();
+	}
+
+	@Override
+	public boolean onEntityItemUpdate(ItemStack stack, ItemEntity itemEntity) {
+		itemEntity.setInvulnerable(true);
+		return super.onEntityItemUpdate(stack, itemEntity);
+	}
+
+	@Override
+	public boolean isFoil(ItemStack stack) {
+		return true;
 	}
 
 	@SuppressWarnings("deprecation")
