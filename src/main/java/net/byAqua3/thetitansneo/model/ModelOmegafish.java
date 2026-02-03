@@ -97,10 +97,10 @@ public class ModelOmegafish extends EntityModel<EntityOmegafish> {
 				this.head.yRot = -(Mth.cos(limbSwing * 0.25F) * 0.25F * limbSwingAmount);
 				this.frontBody.yRot = Mth.cos(limbSwing * 0.25F - 0.5F) * 0.25F * limbSwingAmount;
 				this.bodyCenter.yRot = Mth.cos(limbSwing * 0.25F - 1.0F) * 0.25F * limbSwingAmount;
-				this.tail1.yRot = -(headYaw * 3.1415927F / 180.0F / 4.0F) + 0.01F * Mth.cos(ageInTicks * 0.1F - 1.0F) * 3.1415927F + Mth.cos(limbSwing * 0.5F - 1.5F) * 0.25F * limbSwingAmount;
-				this.tail2.yRot = -(headYaw * 3.1415927F / 180.0F / 4.0F) + 0.01F * Mth.cos(ageInTicks * 0.1F - 1.5F) * 3.1415927F + Mth.cos(limbSwing * 0.5F - 2.0F) * 0.25F * limbSwingAmount;
-				this.tail3.yRot = -(headYaw * 3.1415927F / 180.0F / 4.0F) + 0.01F * Mth.cos(ageInTicks * 0.1F - 2.0F) * 3.1415927F + Mth.cos(limbSwing * 0.5F - 2.5F) * 0.25F * limbSwingAmount;
-				this.tailTip.yRot = -(headYaw * 3.1415927F / 180.0F / 4.0F) + 0.01F * Mth.cos(ageInTicks * 0.1F - 2.5F) * 3.1415927F + Mth.cos(limbSwing * 0.5F - 3.0F) * 0.25F * limbSwingAmount;
+				this.tail1.yRot = -(headYaw * Mth.PI / 180.0F / 4.0F) + 0.01F * Mth.cos(ageInTicks * 0.1F - 1.0F) * Mth.PI + Mth.cos(limbSwing * 0.5F - 1.5F) * 0.25F * limbSwingAmount;
+				this.tail2.yRot = -(headYaw * Mth.PI / 180.0F / 4.0F) + 0.01F * Mth.cos(ageInTicks * 0.1F - 1.5F) * Mth.PI + Mth.cos(limbSwing * 0.5F - 2.0F) * 0.25F * limbSwingAmount;
+				this.tail3.yRot = -(headYaw * Mth.PI / 180.0F / 4.0F) + 0.01F * Mth.cos(ageInTicks * 0.1F - 2.0F) * Mth.PI + Mth.cos(limbSwing * 0.5F - 2.5F) * 0.25F * limbSwingAmount;
+				this.tailTip.yRot = -(headYaw * Mth.PI / 180.0F / 4.0F) + 0.01F * Mth.cos(ageInTicks * 0.1F - 2.5F) * Mth.PI + Mth.cos(limbSwing * 0.5F - 3.0F) * 0.25F * limbSwingAmount;
 			}
 			if (!entity.onGround() && !this.riding && entity.getAnimationID() != 2) {
 				this.head.yRot = -(Mth.cos(limbSwing * 0.35F) * 0.5F * limbSwingAmount);
@@ -115,8 +115,8 @@ public class ModelOmegafish extends EntityModel<EntityOmegafish> {
 				this.tail3.xRot += Mth.cos(limbSwing * 0.35F - 2.5F) * 0.1F * limbSwingAmount - 0.25F + entity.walkAnimation.speed(partialTicks) / 4.0F;
 				this.tailTip.xRot += Mth.cos(limbSwing * 0.35F - 3.0F) * 0.1F * limbSwingAmount - 0.25F + entity.walkAnimation.speed(partialTicks) / 4.0F;
 			}
-			float faceYaw = headYaw * 3.1415927F / 180.0F;
-			float facePitch = headPitch * 3.1415927F / 180.0F;
+			float faceYaw = headYaw * Mth.PI / 180.0F;
+			float facePitch = headPitch * Mth.PI / 180.0F;
 			this.head.xRot += facePitch * 0.45F;
 			this.head.yRot += faceYaw * 0.45F;
 			this.frontBody.xRot += facePitch * 0.45F;
