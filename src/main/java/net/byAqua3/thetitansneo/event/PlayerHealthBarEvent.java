@@ -30,10 +30,6 @@ public class PlayerHealthBarEvent {
 		Minecraft mc = Minecraft.getInstance();
 		LocalPlayer player = mc.player;
 
-		if (!TheTitansNeoConfigs.playerHealthBar.get()) {
-			return;
-		}
-
 		if (mc.options.hideGui || !mc.gameMode.canHurtPlayer()) {
 			return;
 		}
@@ -116,7 +112,7 @@ public class PlayerHealthBarEvent {
 		ResourceLocation name = event.getName();
 		Minecraft mc = Minecraft.getInstance();
 
-		if (!TheTitansNeoConfigs.playerHealthBar.get()) {
+		if (!TheTitansNeoConfigs.getBoolean(TheTitansNeoConfigs.playerHealthBar, true)) {
 			return;
 		}
 

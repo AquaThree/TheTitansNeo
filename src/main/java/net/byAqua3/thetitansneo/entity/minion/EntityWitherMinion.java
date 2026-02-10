@@ -128,6 +128,14 @@ public class EntityWitherMinion extends WitherBoss implements IMinion {
 	}
 
 	@Override
+	public boolean canAttack(LivingEntity target) {
+		if (this.getMaster() != null) {
+			return this.getMaster().canAttack(target);
+		}
+		return target.canBeSeenByAnyone() && this.canAttackEntity(target);
+	}
+
+	@Override
 	public boolean canAttackType(EntityType<?> entityType) {
 		return entityType != TheTitansNeoEntities.SKELETON_TITAN.get() && entityType != TheTitansNeoEntities.WITHER_SKELETON_TITAN_MINION.get() && entityType != TheTitansNeoEntities.WITHER_MINION.get();
 	}
@@ -135,14 +143,6 @@ public class EntityWitherMinion extends WitherBoss implements IMinion {
 	@Override
 	public boolean fireImmune() {
 		return true;
-	}
-
-	@Override
-	public boolean canAttack(LivingEntity target) {
-		if (this.getMaster() != null) {
-			return this.getMaster().canAttack(target);
-		}
-		return target.canBeSeenByAnyone();
 	}
 
 	@Override
@@ -168,14 +168,20 @@ public class EntityWitherMinion extends WitherBoss implements IMinion {
 			this.getMaster().retractMinionNumFromType(this.getMinionType());
 		}
 	}
-	
+
 	@Override
 	public void setTarget(@Nullable LivingEntity target) {
 		if (target == this) {
 			return;
 		}
-		if (this.getMaster() != null && !this.getMaster().canAttackEntity(target, true)) {
-			return;
+		if (this.getMaster() != null) {
+			if (!this.getMaster().canAttackEntity(target, true)) {
+				return;
+			}
+		} else {
+			if (!this.canAttackEntity(target, true)) {
+				return;
+			}
 		}
 		super.setTarget(target);
 	}
@@ -198,13 +204,15 @@ public class EntityWitherMinion extends WitherBoss implements IMinion {
 		if (entity instanceof LivingEntity) {
 			LivingEntity livingEntity = (LivingEntity) entity;
 
-			List<Entity> entities = this.level().getEntities(this, this.getBoundingBox().inflate(256.0D, 256.0D, 256.0D));
-			for (Entity entity1 : entities) {
-				if (entity1 instanceof EntityWitherMinion) {
-					EntityWitherMinion witherMinion = (EntityWitherMinion) entity1;
-					witherMinion.setTarget(livingEntity);
+			if (this.canAttack(livingEntity)) {
+				List<Entity> entities = this.level().getEntities(this, this.getBoundingBox().inflate(256.0D, 256.0D, 256.0D));
+				for (Entity minionEntity : entities) {
+					if (minionEntity instanceof EntityWitherMinion) {
+						EntityWitherMinion witherMinion = (EntityWitherMinion) minionEntity;
+						witherMinion.setTarget(livingEntity);
+					}
+					this.setTarget(livingEntity);
 				}
-				this.setTarget(livingEntity);
 			}
 		}
 		return super.hurt(damageSource, amount);

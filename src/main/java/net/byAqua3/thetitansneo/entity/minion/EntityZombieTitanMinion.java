@@ -122,7 +122,7 @@ public class EntityZombieTitanMinion extends Zombie implements RangedAttackMob, 
 		this.goalSelector.addGoal(2, new EntityAIZombieAttack(this, 1.0D, false));
 		this.targetSelector.addGoal(0, new EntityAINearestTargetTitan<LivingEntity>(this, LivingEntity.class, 0, false, false, TheTitansNeoPredicateTargets.ZombieTitan));
 	}
-	
+
 	@Override
 	public int getMinionTypeInt() {
 		return this.getEntityData().get(MINION_TYPE);
@@ -133,7 +133,7 @@ public class EntityZombieTitanMinion extends Zombie implements RangedAttackMob, 
 		this.getEntityData().set(MINION_TYPE, minionType);
 		this.refreshAttributes();
 	}
-	
+
 	@Override
 	public EntityTitan getMaster() {
 		return this.master;
@@ -143,7 +143,7 @@ public class EntityZombieTitanMinion extends Zombie implements RangedAttackMob, 
 	public void setMaster(EntityTitan master) {
 		this.master = master;
 	}
-	
+
 	@Override
 	public LivingEntity getEntityToHeal() {
 		return this.entityToHeal;
@@ -344,9 +344,9 @@ public class EntityZombieTitanMinion extends Zombie implements RangedAttackMob, 
 		if (this.getMaster() != null) {
 			return this.getMaster().canAttack(target);
 		}
-		return target.canBeSeenByAnyone();
+		return target.canBeSeenByAnyone() && this.canAttackEntity(target);
 	}
-	
+
 	@Override
 	public boolean canAttackType(EntityType<?> entityType) {
 		return entityType != TheTitansNeoEntities.ZOMBIE_TITAN.get() && entityType != TheTitansNeoEntities.ZOMBIE_TITAN_MINION.get() && entityType != TheTitansNeoEntities.ZOMBIE_TITAN_GIANT_MINION.get();
@@ -436,14 +436,20 @@ public class EntityZombieTitanMinion extends Zombie implements RangedAttackMob, 
 			this.getMaster().retractMinionNumFromType(this.getMinionType());
 		}
 	}
-	
+
 	@Override
 	public void setTarget(@Nullable LivingEntity target) {
 		if (target == this) {
 			return;
 		}
-		if (this.getMaster() != null && !this.getMaster().canAttackEntity(target, true)) {
-			return;
+		if (this.getMaster() != null) {
+			if (!this.getMaster().canAttackEntity(target, true)) {
+				return;
+			}
+		} else {
+			if (!this.canAttackEntity(target, true)) {
+				return;
+			}
 		}
 		super.setTarget(target);
 	}
@@ -502,15 +508,17 @@ public class EntityZombieTitanMinion extends Zombie implements RangedAttackMob, 
 		if (entity instanceof LivingEntity) {
 			LivingEntity livingEntity = (LivingEntity) entity;
 
-			List<Entity> entities = this.level().getEntities(this, this.getBoundingBox().inflate(32.0D, 32.0D, 32.0D));
-			for (Entity entity1 : entities) {
-				if (entity1 instanceof EntityZombieTitanMinion) {
-					EntityZombieTitanMinion zombieTitanMinion = (EntityZombieTitanMinion) entity1;
-					zombieTitanMinion.setTarget(livingEntity);
-					zombieTitanMinion.randomSoundDelay = this.getRandom().nextInt(40);
+			if (this.canAttack(livingEntity)) {
+				List<Entity> entities = this.level().getEntities(this, this.getBoundingBox().inflate(32.0D, 32.0D, 32.0D));
+				for (Entity minionEntity : entities) {
+					if (minionEntity instanceof EntityZombieTitanMinion) {
+						EntityZombieTitanMinion zombieTitanMinion = (EntityZombieTitanMinion) minionEntity;
+						zombieTitanMinion.setTarget(livingEntity);
+						zombieTitanMinion.randomSoundDelay = this.getRandom().nextInt(40);
+					}
+					this.setTarget(livingEntity);
+					this.randomSoundDelay = this.getRandom().nextInt(40);
 				}
-				this.setTarget(livingEntity);
-				this.randomSoundDelay = this.getRandom().nextInt(40);
 			}
 		}
 		return super.hurt(damageSource, amount);
@@ -916,4 +924,5 @@ public class EntityZombieTitanMinion extends Zombie implements RangedAttackMob, 
 				}
 			}
 		}
-	}}
+	}
+}

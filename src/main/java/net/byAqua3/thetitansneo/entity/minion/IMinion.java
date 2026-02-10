@@ -10,6 +10,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -65,6 +66,36 @@ public interface IMinion {
 
 	public default void setEntityToHeal(LivingEntity entityToHeal) {
 	}
+	
+	public default boolean canAttackEntity(Entity entity, boolean nullable) {
+		if ((!nullable && entity == null) || entity == this) {
+			return false;
+		}
+		if (entity != null && this instanceof LivingEntity) {
+			LivingEntity livingEntity = (LivingEntity) this;
+			
+			if (livingEntity.getPassengers().contains(entity) || livingEntity.getVehicle() == entity) {
+				return false;
+			}
+			if (!TheTitansNeoConfigs.getBoolean(TheTitansNeoConfigs.titanFriendlyFire, true) && this.getMaster() != null && this.getMaster().getClass() == entity.getClass()) {
+				return false;
+			}
+			if (!TheTitansNeoConfigs.getBoolean(TheTitansNeoConfigs.titanAttackCreateMode, true)) {
+				if (entity instanceof Player) {
+					Player player = (Player) entity;
+
+					if (player.isCreative()) {
+						return false;
+					}
+				}
+			}
+		}
+		return true;
+	}
+	
+	public default boolean canAttackEntity(Entity entity) {
+		return this.canAttackEntity(entity, false);
+	}
 
 	public static boolean isDarkEnoughToSpawn(ServerLevelAccessor level, BlockPos pos, RandomSource random) {
 		if (level.getBrightness(LightLayer.BLOCK, pos) <= 7) {
@@ -74,9 +105,15 @@ public interface IMinion {
 	}
 
 	public static boolean checkMinionSpawnRules(EntityType<? extends Mob> entityType, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
+		if(!TheTitansNeoConfigs.getBoolean(TheTitansNeoConfigs.minionCanSpawn, true)) {
+			return false;
+		}
 		return level.getDifficulty() != Difficulty.PEACEFUL && (MobSpawnType.ignoresLightRequirements(spawnType) || isDarkEnoughToSpawn(level, pos, random)) && Mob.checkMobSpawnRules(entityType, level, spawnType, pos, random);
 	}
 
 	public static boolean checkGhastSpawnRules(EntityType<? extends Mob> entityType, LevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
+		if(!TheTitansNeoConfigs.getBoolean(TheTitansNeoConfigs.minionCanSpawn, true)) {
+			return false;
+		}
 		return level.getDifficulty() != Difficulty.PEACEFUL && random.nextInt(20) == 0 && Mob.checkMobSpawnRules(entityType, level, spawnType, pos, random);
 	}}

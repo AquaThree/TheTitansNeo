@@ -27,6 +27,7 @@ import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 
 public class ItemVoidArmor extends ArmorItem {
 
@@ -66,7 +67,7 @@ public class ItemVoidArmor extends ArmorItem {
 
 		if (entity instanceof Player) {
 			Player player = (Player) entity;
-			
+
 			if (this.getEquipmentSlot() == EquipmentSlot.HEAD && slotId == 39) {
 				player.playSound(TheTitansNeoSounds.HARCACADIUM_HUM.get(), 5.0F, 0.5F);
 				player.removeEffect(MobEffects.BLINDNESS);
@@ -91,6 +92,7 @@ public class ItemVoidArmor extends ArmorItem {
 				player.removeEffect(MobEffects.MOVEMENT_SLOWDOWN);
 				player.addEffect(new MobEffectInstance(MobEffects.JUMP, 300, 5));
 				player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 300, 19));
+				player.stuckSpeedMultiplier = Vec3.ZERO;
 			}
 			if (player.getItemBySlot(EquipmentSlot.HEAD).getItem() == TheTitansNeoItems.VOID_HELMET.get() && player.getItemBySlot(EquipmentSlot.CHEST).getItem() == TheTitansNeoItems.VOID_CHESTPLATE.get() && player.getItemBySlot(EquipmentSlot.LEGS).getItem() == TheTitansNeoItems.VOID_LEGGINGS.get() && player.getItemBySlot(EquipmentSlot.FEET).getItem() == TheTitansNeoItems.VOID_BOOTS.get()) {
 				for (int i = 0; i < 4; i++) {
@@ -100,22 +102,27 @@ public class ItemVoidArmor extends ArmorItem {
 				player.addEffect(new MobEffectInstance(MobEffects.SATURATION, 300, 99));
 				player.fallDistance = 0;
 
-				List<Entity> entities = player.level().getEntities(player, player.getBoundingBox().inflate(4.0D, 4.0D, 4.0D));
-				for (Entity radiatedEntity : entities) {
-					if (radiatedEntity != null && radiatedEntity instanceof LivingEntity && !(radiatedEntity instanceof EntityTitan) && !(radiatedEntity instanceof AbstractGolem) && !(radiatedEntity instanceof OwnableEntity) && !(radiatedEntity instanceof Villager)) {
-						LivingEntity livingEntity = (LivingEntity) radiatedEntity;
-						if (!level.isClientSide()) {
-							if (TheTitansNeoConfigs.voidArmorRadiationPlayer.get() && livingEntity instanceof Player) {
-								continue;
+				if (!level.isClientSide()) {
+					if (TheTitansNeoConfigs.getBoolean(TheTitansNeoConfigs.voidArmorRadiation, true)) {
+						List<Entity> entities = player.level().getEntities(player, player.getBoundingBox().inflate(4.0D, 4.0D, 4.0D));
+						for (Entity radiatedEntity : entities) {
+							if (radiatedEntity != null && radiatedEntity instanceof LivingEntity && !(radiatedEntity instanceof EntityTitan) && !(radiatedEntity instanceof AbstractGolem) && !(radiatedEntity instanceof OwnableEntity) && !(radiatedEntity instanceof Villager)) {
+								LivingEntity livingEntity = (LivingEntity) radiatedEntity;
+								if (!level.isClientSide()) {
+									if (TheTitansNeoConfigs.getBoolean(TheTitansNeoConfigs.voidArmorRadiationPlayer, true) && livingEntity instanceof Player) {
+										continue;
+									}
+									livingEntity.hurt(livingEntity.damageSources().fellOutOfWorld(), 4.0F);
+									livingEntity.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 5000, 1));
+									livingEntity.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 5000, 1));
+									livingEntity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 5000, 9));
+									livingEntity.addEffect(new MobEffectInstance(MobEffects.WITHER, 5000, 3));
+								}
 							}
-							livingEntity.hurt(livingEntity.damageSources().fellOutOfWorld(), 4.0F);
-							livingEntity.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 5000, 1));
-							livingEntity.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 5000, 1));
-							livingEntity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 5000, 9));
-							livingEntity.addEffect(new MobEffectInstance(MobEffects.WITHER, 5000, 3));
 						}
 					}
 				}
 			}
 		}
-	}}
+	}
+}

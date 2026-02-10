@@ -34,7 +34,7 @@ public class LayerZombifiedPiglinTitanItemInHand extends RenderLayer<EntityZombi
 
 	@Override
 	public void render(PoseStack poseStack, MultiBufferSource multiBufferSource, int packedLight, EntityZombifiedPiglinTitan entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-		if (TheTitansNeoConfigs.titanWeaponOldModel.get()) {
+		if (TheTitansNeoConfigs.getBoolean(TheTitansNeoConfigs.titanWeaponOldModel, false)) {
 			if (!this.getParentModel().heldItem.visible) {
 				this.getParentModel().heldItem.visible = true;
 			}

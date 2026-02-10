@@ -267,6 +267,5 @@ public class FeatureNowhere extends Feature<NoneFeatureConfiguration> {
 			worldGenLevel.setBlock(new BlockPos(0, k, 0), TheTitansNeoBlocks.ADAMANTIUM_ORE_BLOCK.get().defaultBlockState(), 0, 3);
 			worldGenLevel.setBlock(new BlockPos(0, k + 1, 0), TheTitansNeoBlocks.ADAMANTIUM_ORE_BLOCK.get().defaultBlockState(), 0, 3);
 		}
-
 		return true;
 	}}

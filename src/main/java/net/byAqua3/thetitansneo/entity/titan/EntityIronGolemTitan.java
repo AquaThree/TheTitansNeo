@@ -635,6 +635,6 @@ public class EntityIronGolemTitan extends EntityTitan implements IBossBarDisplay
 				this.level().addFreshEntity(ironGolem);
 			}
 		}
-
+		
 		this.animationTick();
 	}}

@@ -26,7 +26,7 @@ public class PredicateTitanTarget implements Predicate<LivingEntity> {
 		if (entity instanceof EntityEnderColossusCrystal) {
 			return false;
 		}
-		if (!TheTitansNeoConfigs.titanAttackCreateMode.get() && !this.canAttackCreateMode) {
+		if (!TheTitansNeoConfigs.getBoolean(TheTitansNeoConfigs.titanAttackCreateMode, true) && !this.canAttackCreateMode) {
 			if (entity instanceof Player) {
 				Player player = (Player) entity;
 

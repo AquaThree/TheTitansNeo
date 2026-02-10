@@ -4,6 +4,7 @@ import java.util.EnumSet;
 import java.util.function.Predicate;
 import javax.annotation.Nullable;
 
+import net.byAqua3.thetitansneo.entity.titan.EntityTitan;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -57,7 +58,19 @@ public class EntityAINearestTargetTitan<T extends LivingEntity> extends TargetGo
 
 	protected void findTarget() {
 		if (this.targetType != Player.class && this.targetType != ServerPlayer.class) {
-			this.target = this.mob.level().getNearestEntity(this.mob.level().getEntitiesOfClass(this.targetType, this.getTargetSearchArea(this.getFollowDistance())), this.targetConditions, this.mob, this.mob.getX(), this.mob.getEyeY(), this.mob.getZ());
+			T target = this.mob.level().getNearestEntity(this.mob.level().getEntitiesOfClass(this.targetType, this.getTargetSearchArea(this.getFollowDistance())), this.targetConditions, this.mob, this.mob.getX(), this.mob.getEyeY(), this.mob.getZ());
+
+			if (this.mob instanceof EntityTitan) {
+				EntityTitan titan = this.mob.level().getNearestEntity(this.mob.level().getEntitiesOfClass(EntityTitan.class, this.getTargetSearchArea(this.getFollowDistance())), this.targetConditions, this.mob, this.mob.getX(), this.mob.getEyeY(), this.mob.getZ());
+
+				if (titan != null) {
+					this.target = titan;
+				} else {
+					this.target = target;
+				}
+			} else {
+				this.target = target;
+			}
 		} else {
 			this.target = this.mob.level().getNearestPlayer(this.targetConditions, this.mob, this.mob.getX(), this.mob.getEyeY(), this.mob.getZ());
 		}

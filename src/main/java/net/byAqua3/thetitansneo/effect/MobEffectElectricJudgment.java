@@ -23,7 +23,7 @@ public class MobEffectElectricJudgment extends MobEffect {
 	public boolean applyEffectTick(LivingEntity entity, int amplifier) {
 		entity.setRemainingFireTicks(20);
 		entity.hurt(entity.damageSources().lightningBolt(), 5.0F * (amplifier + 1));
-		if (!(TheTitansNeoConfigs.electricJudgmentIfStorm.get() && !entity.level().isRaining())) {
+		if (!(TheTitansNeoConfigs.getBoolean(TheTitansNeoConfigs.electricJudgmentIfStorm, true) && !entity.level().isRaining())) {
 			LightningBolt lightningBolt = new LightningBolt(EntityType.LIGHTNING_BOLT, entity.level());
 			lightningBolt.setPos(entity.getX() - 0.5D, entity.getY(), entity.getZ() - 0.5D);
 			if (!entity.level().isClientSide()) {

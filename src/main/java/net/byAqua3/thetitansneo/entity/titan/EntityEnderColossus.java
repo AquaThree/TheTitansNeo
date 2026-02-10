@@ -1297,7 +1297,7 @@ public class EntityEnderColossus extends EntityTitan implements IEntityMultiPart
 			}
 			this.level().addParticle(this.getParticles(), this.getX() + (this.getRandom().nextDouble() - 0.5D) * this.getBbWidth() * 3.0D, this.getY() + this.getRandom().nextDouble() * this.getBbHeight(), this.getZ() + (this.getRandom().nextDouble() - 0.5D) * this.getBbWidth() * 3.0D, 0.0D, 0.25D, 0.0D);
 		}
-
+		
 		this.animationTick();
 	}
 }

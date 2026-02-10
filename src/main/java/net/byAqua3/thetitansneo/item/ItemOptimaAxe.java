@@ -81,7 +81,7 @@ public class ItemOptimaAxe extends SwordItem {
 		if (entity instanceof Player) {
 			Player player = (Player) entity;
 
-			if (TheTitansNeoConfigs.optimaAxeShowParticles.get()) {
+			if (TheTitansNeoConfigs.getBoolean(TheTitansNeoConfigs.optimaAxeShowParticles, true)) {
 				for (int i = 0; i < 3; i++) {
 					level.addParticle(ParticleTypes.PORTAL, player.getX() + (level.random.nextDouble() - 0.5D) * player.getBbWidth(), player.getY() + level.random.nextDouble() * player.getBbHeight(), player.getZ() + (level.random.nextDouble() - 0.5D) * player.getBbWidth(), (level.random.nextDouble() - 0.5D) * 2.0D, 1.0D, (level.random.nextDouble() - 0.5D) * 2.0D);
 					level.addParticle(ParticleTypes.LARGE_SMOKE, player.getX() + (level.random.nextDouble() - 0.5D) * player.getBbWidth(), player.getY() + level.random.nextDouble() * player.getBbHeight(), player.getZ() + (level.random.nextDouble() - 0.5D) * player.getBbWidth(), (level.random.nextDouble() - 0.5D) * 2.0D, 1.0D, (level.random.nextDouble() - 0.5D) * 2.0D);

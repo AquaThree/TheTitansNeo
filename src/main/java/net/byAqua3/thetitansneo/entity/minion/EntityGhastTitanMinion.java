@@ -342,7 +342,7 @@ public class EntityGhastTitanMinion extends Ghast implements RangedAttackMob, IM
 		if (this.getMaster() != null) {
 			return this.getMaster().canAttack(target);
 		}
-		return target.canBeSeenByAnyone();
+		return target.canBeSeenByAnyone() && this.canAttackEntity(target);
 	}
 
 	@Override
@@ -437,8 +437,14 @@ public class EntityGhastTitanMinion extends Ghast implements RangedAttackMob, IM
 		if (target == this) {
 			return;
 		}
-		if (this.getMaster() != null && !this.getMaster().canAttackEntity(target, true)) {
-			return;
+		if (this.getMaster() != null) {
+			if (!this.getMaster().canAttackEntity(target, true)) {
+				return;
+			}
+		} else {
+			if (!this.canAttackEntity(target, true)) {
+				return;
+			}
 		}
 		super.setTarget(target);
 	}
@@ -476,7 +482,10 @@ public class EntityGhastTitanMinion extends Ghast implements RangedAttackMob, IM
 		}
 		if (entity instanceof LivingEntity) {
 			LivingEntity livingEntity = (LivingEntity) entity;
-			this.setTarget(livingEntity);
+
+			if (this.canAttack(livingEntity)) {
+				this.setTarget(livingEntity);
+			}
 		}
 		return super.hurt(damageSource, amount);
 	}

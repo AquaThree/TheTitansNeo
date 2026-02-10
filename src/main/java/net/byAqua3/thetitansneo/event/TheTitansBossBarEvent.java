@@ -75,9 +75,9 @@ public class TheTitansBossBarEvent {
 						guiGraphics.pose().pushPose();
 
 						RenderSystem.enableBlend();
-
+						
 						guiGraphics.blit(bossBar, x, y, 0, 0, width, height);
-						if (TheTitansNeoConfigs.titanBossBarAnimated.get() && animatedWidth > 0) {
+						if (TheTitansNeoConfigs.getBoolean(TheTitansNeoConfigs.titanBossBarAnimated, true) && animatedWidth > 0) {
 							guiGraphics.blit(bossBar, x, y, 0, (height + vOffset) * 2, animatedWidth, height + vHeight);
 						}
 						if (healthWidth > 0) {

@@ -6,6 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class AnimationSkeletonTitanAttack3 extends AIAnimation {
+	
 	private EntitySkeletonTitan entity;
 
 	public AnimationSkeletonTitanAttack3(EntitySkeletonTitan entity) {

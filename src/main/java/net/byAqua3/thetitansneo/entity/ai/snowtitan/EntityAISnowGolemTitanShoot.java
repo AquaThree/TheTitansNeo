@@ -9,6 +9,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
 
 public class EntityAISnowGolemTitanShoot extends Goal {
+	
 	private EntitySnowGolemTitan entity;
 	@Nullable
 	private LivingEntity target;

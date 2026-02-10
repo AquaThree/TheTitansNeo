@@ -4,6 +4,7 @@ import net.byAqua3.thetitansneo.animation.AIAnimation;
 import net.byAqua3.thetitansneo.entity.titan.EntitySkeletonTitan;
 
 public class AnimationSkeletonTitanRangedAttack1 extends AIAnimation {
+	
 	private EntitySkeletonTitan entity;
 
 	public AnimationSkeletonTitanRangedAttack1(EntitySkeletonTitan entity) {

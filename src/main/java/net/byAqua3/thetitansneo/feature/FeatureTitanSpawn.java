@@ -108,7 +108,7 @@ public class FeatureTitanSpawn extends Feature<NoneFeatureConfiguration> {
 	}
 
 	public int getNetherSurface(WorldGenLevel level, int x, int z) {
-		if (TheTitansNeoConfigs.titanSpawnNetherTop.get()) {
+		if (TheTitansNeoConfigs.getBoolean(TheTitansNeoConfigs.titanSpawnNetherTop, true)) {
 			return level.getHeight(Heightmap.Types.WORLD_SURFACE, x, z);
 		}
 		return this.getSurface(level, x, z);
@@ -144,44 +144,36 @@ public class FeatureTitanSpawn extends Feature<NoneFeatureConfiguration> {
 		}
 	}
 
-	public EntityTitan generateTitan(WorldGenLevel level, RandomSource random, EntityTitan titan, int x, int y, int z, boolean spawnPosProtect, boolean canSpawnLiquid, boolean mainThread) {
-		if (!level.getLevel().getServer().isSameThread() && mainThread) {
-			return level.getLevel().getServer().submit(() -> this.generateTitan(level, random, titan, x, y, z, spawnPosProtect, canSpawnLiquid, mainThread)).join();
-		} else {
-			BlockPos blockPos = new BlockPos(x, y, z);
-			BlockState blockState = level.getBlockState(blockPos);
-			BlockPos belowPos = blockPos.below();
-			BlockState belowState = level.getBlockState(belowPos);
-			Block belowBlock = belowState.getBlock();
+	public EntityTitan generateTitan(WorldGenLevel level, RandomSource random, EntityTitan titan, int x, int y, int z, boolean spawnPosProtect, boolean canSpawnLiquid) {
+		BlockPos blockPos = new BlockPos(x, y, z);
+		BlockState blockState = level.getBlockState(blockPos);
+		BlockPos belowPos = blockPos.below();
+		BlockState belowState = level.getBlockState(belowPos);
+		Block belowBlock = belowState.getBlock();
 
-			if (spawnPosProtect && TheTitansNeoConfigs.playerSpawnPosProtect.get() && this.distanceToPos(blockPos, level.getLevel().getSharedSpawnPos()) <= TheTitansNeoConfigs.playerSpawnPosDistance.get()) {
-				return null;
-			}
+		if (spawnPosProtect && TheTitansNeoConfigs.playerSpawnPosProtect.get() && this.distanceToPos(blockPos, level.getLevel().getSharedSpawnPos()) <= TheTitansNeoConfigs.playerSpawnPosDistance.get()) {
+			return null;
+		}
 
-			if (!canSpawnLiquid && belowBlock instanceof LiquidBlock) {
-				return null;
-			}
+		if (!canSpawnLiquid && belowBlock instanceof LiquidBlock) {
+			return null;
+		}
 
-			if (blockState.isAir()) {
-				titan.setPos(x + 0.5D, y, z + 0.5D);
-				titan.setYRot(random.nextFloat() * 360.0F);
-				if (!this.isTitanSpawned(level.getLevel(), titan, TheTitansNeoConfigs.titanSpawnIntervalDistance.get())) {
-					titan.finalizeSpawn(level.getLevel(), level.getCurrentDifficultyAt(titan.blockPosition()), MobSpawnType.STRUCTURE, null);
-					titan.setTitanHealth(titan.getMaxHealth());
-					this.destroyBlocksInAABB(level, titan.getBoundingBox());
-					level.getLevel().addFreshEntity(titan);
+		if (blockState.isAir()) {
+			titan.setPos(x + 0.5D, y, z + 0.5D);
+			titan.setYRot(random.nextFloat() * 360.0F);
+			if (!this.isTitanSpawned(level.getLevel(), titan, TheTitansNeoConfigs.titanSpawnIntervalDistance.get())) {
+				titan.finalizeSpawn(level.getLevel(), level.getCurrentDifficultyAt(titan.blockPosition()), MobSpawnType.STRUCTURE, null);
+				titan.setTitanHealth(titan.getMaxHealth());
+				this.destroyBlocksInAABB(level, titan.getBoundingBox());
+				level.addFreshEntity(titan);
 
-					this.setTitanSpawned(level, titan);
-					TheTitansNeo.LOGGER.info("Found a succesfully spawned {} at {}, {}, {}.", titan.getName().getString(), Mth.floor(titan.getX()), Mth.floor(titan.getY()), Mth.floor(titan.getZ()));
-					return titan;
-				}
+				this.setTitanSpawned(level, titan);
+				TheTitansNeo.LOGGER.info("Found a succesfully spawned {} at {}, {}, {}.", titan.getName().getString(), Mth.floor(titan.getX()), Mth.floor(titan.getY()), Mth.floor(titan.getZ()));
+				return titan;
 			}
 		}
 		return null;
-	}
-
-	public EntityTitan generateTitan(WorldGenLevel level, RandomSource random, EntityTitan titan, int x, int y, int z, boolean spawnPosProtect, boolean canSpawnLiquid) {
-		return this.generateTitan(level, random, titan, x, y, z, spawnPosProtect, canSpawnLiquid, true);
 	}
 
 	public void generateWeb(WorldGenLevel level, int x, int y, int z) {
@@ -216,11 +208,15 @@ public class FeatureTitanSpawn extends Feature<NoneFeatureConfiguration> {
 		WorldGenLevel worldGenLevel = context.level();
 		RandomSource randomSource = context.random();
 		BlockPos blockPos = context.origin();
+		
+		if (worldGenLevel.getLevel().dimension() != TheTitansNeoDimensions.THE_VOID && !TheTitansNeoConfigs.getBoolean(TheTitansNeoConfigs.titanCanSpawn, true)) {
+			return false;
+		}
 
 		float randomRate = randomSource.nextFloat() * 100.0F;
 		if (worldGenLevel.getLevel().dimension() == TheTitansNeoDimensions.THE_VOID) {
 			if (blockPos.getX() == 0 && blockPos.getZ() == 0) {
-				this.generateTitan(worldGenLevel, randomSource, new EntityWitherzilla(worldGenLevel.getLevel()), 0, 200, 0, false, true, false);
+				this.generateTitan(worldGenLevel, randomSource, new EntityWitherzilla(worldGenLevel.getLevel()), 0, 200, 0, false, true);
 			}
 		} else if (worldGenLevel.getLevel().dimension() == TheTitansNeoDimensions.THE_NOWHERE) {
 			randomRate = randomSource.nextFloat() * 100.0F;

@@ -16,6 +16,7 @@ import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 
 public class ItemHarcadiumArmor extends ArmorItem {
 
@@ -75,6 +76,7 @@ public class ItemHarcadiumArmor extends ArmorItem {
 				player.removeEffect(MobEffects.MOVEMENT_SLOWDOWN);
 				player.addEffect(new MobEffectInstance(MobEffects.JUMP, 300, 3));
 				player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 300, 3));
+				player.stuckSpeedMultiplier = Vec3.ZERO;
 			}
 		}
 	}}

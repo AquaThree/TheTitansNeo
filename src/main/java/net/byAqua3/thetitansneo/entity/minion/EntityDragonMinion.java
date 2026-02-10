@@ -114,7 +114,7 @@ public class EntityDragonMinion extends EnderDragon implements IMinion {
 		if (this.getMaster() != null) {
 			return this.getMaster().canAttack(target);
 		}
-		return target.canBeSeenByAnyone();
+		return target.canBeSeenByAnyone() && this.canAttackEntity(target);
 	}
 
 	@Override
@@ -150,14 +150,20 @@ public class EntityDragonMinion extends EnderDragon implements IMinion {
 			this.getMaster().retractMinionNumFromType(this.getMinionType());
 		}
 	}
-	
+
 	@Override
 	public void setTarget(@Nullable LivingEntity target) {
 		if (target == this) {
 			return;
 		}
-		if (this.getMaster() != null && !this.getMaster().canAttackEntity(target, true)) {
-			return;
+		if (this.getMaster() != null) {
+			if (!this.getMaster().canAttackEntity(target, true)) {
+				return;
+			}
+		} else {
+			if (!this.canAttackEntity(target, true)) {
+				return;
+			}
 		}
 		super.setTarget(target);
 	}
@@ -175,13 +181,15 @@ public class EntityDragonMinion extends EnderDragon implements IMinion {
 		if (entity instanceof LivingEntity) {
 			LivingEntity livingEntity = (LivingEntity) entity;
 
-			List<Entity> entities = this.level().getEntities(this, this.getBoundingBox().inflate(256.0D, 256.0D, 256.0D));
-			for (Entity entity1 : entities) {
-				if (entity1 instanceof EntityDragonMinion) {
-					EntityDragonMinion dragonMinion = (EntityDragonMinion) entity1;
-					dragonMinion.setTarget(livingEntity);
+			if (this.canAttack(livingEntity)) {
+				List<Entity> entities = this.level().getEntities(this, this.getBoundingBox().inflate(256.0D, 256.0D, 256.0D));
+				for (Entity minionEntity : entities) {
+					if (minionEntity instanceof EntityDragonMinion) {
+						EntityDragonMinion dragonMinion = (EntityDragonMinion) minionEntity;
+						dragonMinion.setTarget(livingEntity);
+					}
+					this.setTarget(livingEntity);
 				}
-				this.setTarget(livingEntity);
 			}
 		}
 		return super.hurt(damageSource, amount);

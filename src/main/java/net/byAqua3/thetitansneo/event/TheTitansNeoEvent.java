@@ -67,7 +67,7 @@ public class TheTitansNeoEvent {
 					ServerLevel serverLevel = (ServerLevel) level;
 					serverLevel.setWeatherParameters(0, ServerLevel.THUNDER_DURATION.sample(serverLevel.getRandom()), true, true);
 				}
-				
+
 				if (level.random.nextInt(60) == 0) {
 					for (Entity entity : entities) {
 						if (entity != null && entity instanceof LivingEntity) {

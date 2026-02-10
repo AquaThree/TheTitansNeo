@@ -185,7 +185,7 @@ public class EntityZombieTitanGiantMinion extends Giant implements IMinion {
 		if (this.getMaster() != null) {
 			return this.getMaster().canAttack(target);
 		}
-		return target.canBeSeenByAnyone();
+		return target.canBeSeenByAnyone() && this.canAttackEntity(target);
 	}
 
 	@Override
@@ -249,14 +249,20 @@ public class EntityZombieTitanGiantMinion extends Giant implements IMinion {
 			this.getMaster().retractMinionNumFromType(this.getMinionType());
 		}
 	}
-	
+
 	@Override
 	public void setTarget(@Nullable LivingEntity target) {
 		if (target == this) {
 			return;
 		}
-		if (this.getMaster() != null && !this.getMaster().canAttackEntity(target, true)) {
-			return;
+		if (this.getMaster() != null) {
+			if (!this.getMaster().canAttackEntity(target, true)) {
+				return;
+			}
+		} else {
+			if (!this.canAttackEntity(target, true)) {
+				return;
+			}
 		}
 		super.setTarget(target);
 	}
@@ -344,18 +350,20 @@ public class EntityZombieTitanGiantMinion extends Giant implements IMinion {
 		if (entity instanceof LivingEntity) {
 			LivingEntity livingEntity = (LivingEntity) entity;
 
-			this.setTarget(livingEntity);
-			this.setYRot(this.yHeadRot);
-			this.setYBodyRot(this.yHeadRot);
-			this.push(0.0D, 1.25D, 0.0D);
-			this.setPos(this.getX(), this.getY() + 1.5499999523162842D, this.getZ());
-			double d1 = this.getTarget().getX() - this.getX();
-			double d2 = this.getTarget().getZ() - this.getZ();
-			float d = (float) Math.atan2(d2, d1);
-			this.lookAt(this.getTarget(), 10.0F, this.getHeadRotSpeed());
-			d1 = Math.sqrt(d1 * d1 + d2 * d2);
-			if (this.distanceToSqr(this.getTarget()) > ((10.0F + this.getTarget().getBbWidth() / 2.0F) * (10.0F + this.getTarget().getBbWidth() / 2.0F)) + 45.0D) {
-				this.push(d1 * 0.05D * Math.cos(d), 0.0D, d1 * 0.05D * Math.sin(d));
+			if (this.canAttack(livingEntity)) {
+				this.setTarget(livingEntity);
+				this.setYRot(this.yHeadRot);
+				this.setYBodyRot(this.yHeadRot);
+				this.push(0.0D, 1.25D, 0.0D);
+				this.setPos(this.getX(), this.getY() + 1.5499999523162842D, this.getZ());
+				double d1 = this.getTarget().getX() - this.getX();
+				double d2 = this.getTarget().getZ() - this.getZ();
+				float d = (float) Math.atan2(d2, d1);
+				this.lookAt(this.getTarget(), 10.0F, this.getHeadRotSpeed());
+				d1 = Math.sqrt(d1 * d1 + d2 * d2);
+				if (this.distanceToSqr(this.getTarget()) > ((10.0F + this.getTarget().getBbWidth() / 2.0F) * (10.0F + this.getTarget().getBbWidth() / 2.0F)) + 45.0D) {
+					this.push(d1 * 0.05D * Math.cos(d), 0.0D, d1 * 0.05D * Math.sin(d));
+				}
 			}
 		}
 		return super.hurt(damageSource, amount);
@@ -516,4 +524,5 @@ public class EntityZombieTitanGiantMinion extends Giant implements IMinion {
 			}
 			return (var3 > var5) ? 1 : ((var3 < var5) ? -1 : 0);
 		}
-	}}
+	}
+}

@@ -121,7 +121,7 @@ public class EntitySpiderTitanMinion extends Spider implements RangedAttackMob, 
 		this.goalSelector.addGoal(4, new EntityAISpiderAttack(this));
 		this.targetSelector.addGoal(0, new EntityAINearestTargetTitan<LivingEntity>(this, LivingEntity.class, 0, false, false, TheTitansNeoPredicateTargets.SpiderTitan));
 	}
-	
+
 	@Override
 	public int getMinionTypeInt() {
 		return this.getEntityData().get(MINION_TYPE);
@@ -132,7 +132,7 @@ public class EntitySpiderTitanMinion extends Spider implements RangedAttackMob, 
 		this.getEntityData().set(MINION_TYPE, minionType);
 		this.refreshAttributes();
 	}
-	
+
 	@Override
 	public EntityTitan getMaster() {
 		return this.master;
@@ -335,7 +335,7 @@ public class EntitySpiderTitanMinion extends Spider implements RangedAttackMob, 
 		if (this.getMaster() != null) {
 			return this.getMaster().canAttack(target);
 		}
-		return target.canBeSeenByAnyone();
+		return target.canBeSeenByAnyone() && this.canAttackEntity(target);
 	}
 
 	@Override
@@ -414,14 +414,20 @@ public class EntitySpiderTitanMinion extends Spider implements RangedAttackMob, 
 			this.getMaster().retractMinionNumFromType(this.getMinionType());
 		}
 	}
-	
+
 	@Override
 	public void setTarget(@Nullable LivingEntity target) {
 		if (target == this) {
 			return;
 		}
-		if (this.getMaster() != null && !this.getMaster().canAttackEntity(target, true)) {
-			return;
+		if (this.getMaster() != null) {
+			if (!this.getMaster().canAttackEntity(target, true)) {
+				return;
+			}
+		} else {
+			if (!this.canAttackEntity(target, true)) {
+				return;
+			}
 		}
 		super.setTarget(target);
 	}
@@ -480,15 +486,17 @@ public class EntitySpiderTitanMinion extends Spider implements RangedAttackMob, 
 		if (entity instanceof LivingEntity) {
 			LivingEntity livingEntity = (LivingEntity) entity;
 
-			List<Entity> entities = this.level().getEntities(this, this.getBoundingBox().inflate(32.0D, 32.0D, 32.0D));
-			for (Entity entity1 : entities) {
-				if (entity1 instanceof EntitySpiderTitanMinion) {
-					EntitySpiderTitanMinion spiderTitanMinion = (EntitySpiderTitanMinion) entity1;
-					spiderTitanMinion.setTarget(livingEntity);
-					spiderTitanMinion.randomSoundDelay = this.getRandom().nextInt(40);
+			if (this.canAttack(livingEntity)) {
+				List<Entity> entities = this.level().getEntities(this, this.getBoundingBox().inflate(32.0D, 32.0D, 32.0D));
+				for (Entity minionEntity : entities) {
+					if (minionEntity instanceof EntitySpiderTitanMinion) {
+						EntitySpiderTitanMinion spiderTitanMinion = (EntitySpiderTitanMinion) minionEntity;
+						spiderTitanMinion.setTarget(livingEntity);
+						spiderTitanMinion.randomSoundDelay = this.getRandom().nextInt(40);
+					}
+					this.setTarget(livingEntity);
+					this.randomSoundDelay = this.getRandom().nextInt(40);
 				}
-				this.setTarget(livingEntity);
-				this.randomSoundDelay = this.getRandom().nextInt(40);
 			}
 		}
 		return super.hurt(damageSource, amount);
@@ -893,4 +901,5 @@ public class EntitySpiderTitanMinion extends Spider implements RangedAttackMob, 
 				}
 			}
 		}
-	}}
+	}
+}

@@ -1297,6 +1297,5 @@ public class EntitySkeletonTitan extends EntityTitan implements IEntityMultiPart
 			this.attackTimer = 0;
 		}
 
-		this.meleeTitan = true;
 		this.animationTick();
 	}}

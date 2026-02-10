@@ -331,7 +331,7 @@ public class EntityZombifiedPiglinTitanMinion extends ZombifiedPiglin implements
 		if (this.getMaster() != null) {
 			return this.getMaster().canAttack(target);
 		}
-		return target.canBeSeenByAnyone();
+		return target.canBeSeenByAnyone() && this.canAttackEntity(target);
 	}
 
 	@Override
@@ -420,14 +420,20 @@ public class EntityZombifiedPiglinTitanMinion extends ZombifiedPiglin implements
 			this.getMaster().retractMinionNumFromType(this.getMinionType());
 		}
 	}
-	
+
 	@Override
 	public void setTarget(@Nullable LivingEntity target) {
 		if (target == this) {
 			return;
 		}
-		if (this.getMaster() != null && !this.getMaster().canAttackEntity(target, true)) {
-			return;
+		if (this.getMaster() != null) {
+			if (!this.getMaster().canAttackEntity(target, true)) {
+				return;
+			}
+		} else {
+			if (!this.canAttackEntity(target, true)) {
+				return;
+			}
 		}
 		super.setTarget(target);
 	}
@@ -486,15 +492,17 @@ public class EntityZombifiedPiglinTitanMinion extends ZombifiedPiglin implements
 		if (entity instanceof LivingEntity) {
 			LivingEntity livingEntity = (LivingEntity) entity;
 
-			List<Entity> entities = this.level().getEntities(this, this.getBoundingBox().inflate(32.0D, 32.0D, 32.0D));
-			for (Entity entity1 : entities) {
-				if (entity1 instanceof EntityZombifiedPiglinTitanMinion) {
-					EntityZombifiedPiglinTitanMinion zombifiedPiglinTitanMinion = (EntityZombifiedPiglinTitanMinion) entity1;
-					zombifiedPiglinTitanMinion.setTarget(livingEntity);
-					zombifiedPiglinTitanMinion.randomSoundDelay = this.getRandom().nextInt(40);
+			if (this.canAttack(livingEntity)) {
+				List<Entity> entities = this.level().getEntities(this, this.getBoundingBox().inflate(32.0D, 32.0D, 32.0D));
+				for (Entity minionEntity : entities) {
+					if (minionEntity instanceof EntityZombifiedPiglinTitanMinion) {
+						EntityZombifiedPiglinTitanMinion zombifiedPiglinTitanMinion = (EntityZombifiedPiglinTitanMinion) minionEntity;
+						zombifiedPiglinTitanMinion.setTarget(livingEntity);
+						zombifiedPiglinTitanMinion.randomSoundDelay = this.getRandom().nextInt(40);
+					}
+					this.setTarget(livingEntity);
+					this.randomSoundDelay = this.getRandom().nextInt(40);
 				}
-				this.setTarget(livingEntity);
-				this.randomSoundDelay = this.getRandom().nextInt(40);
 			}
 		}
 		return super.hurt(damageSource, amount);
@@ -892,4 +900,5 @@ public class EntityZombifiedPiglinTitanMinion extends ZombifiedPiglin implements
 				}
 			}
 		}
-	}}
+	}
+}

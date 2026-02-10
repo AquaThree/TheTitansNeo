@@ -34,7 +34,7 @@ public class LayerSkeletonTitanItemInHand extends RenderLayer<EntitySkeletonTita
 
 	@Override
 	public void render(PoseStack poseStack, MultiBufferSource multiBufferSource, int packedLight, EntitySkeletonTitan entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-		if (TheTitansNeoConfigs.titanWeaponOldModel.get()) {
+		if (TheTitansNeoConfigs.getBoolean(TheTitansNeoConfigs.titanWeaponOldModel, false)) {
 			if (entity.getSkeletonType() == 1) {
 				if (!this.getParentModel().heldItem2.visible) {
 					this.getParentModel().heldItem2.visible = true;

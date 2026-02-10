@@ -967,6 +967,5 @@ public class EntitySpiderTitan extends EntityTitan implements IEntityMultiPartTi
 			AnimationUtils.sendPacket(this, 8);
 		}
 
-		this.meleeTitan = true;
 		this.animationTick();
 	}}

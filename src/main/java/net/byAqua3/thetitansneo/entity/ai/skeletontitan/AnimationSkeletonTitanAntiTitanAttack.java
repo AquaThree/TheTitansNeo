@@ -5,6 +5,7 @@ import net.byAqua3.thetitansneo.entity.titan.EntitySkeletonTitan;
 import net.byAqua3.thetitansneo.util.AnimationUtils;
 
 public class AnimationSkeletonTitanAntiTitanAttack extends AIAnimation {
+	
 	private EntitySkeletonTitan entity;
 
 	public AnimationSkeletonTitanAntiTitanAttack(EntitySkeletonTitan entity) {

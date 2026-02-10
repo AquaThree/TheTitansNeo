@@ -128,6 +128,14 @@ public class EntityWitherzillaMinion extends WitherBoss implements IMinion {
 	}
 
 	@Override
+	public boolean canAttack(LivingEntity target) {
+		if (this.getMaster() != null) {
+			return this.getMaster().canAttack(target);
+		}
+		return target.canBeSeenByAnyone() && this.canAttackEntity(target);
+	}
+
+	@Override
 	public boolean canAttackType(EntityType<?> entityType) {
 		return entityType != TheTitansNeoEntities.WITHERZILLA.get() && entityType != TheTitansNeoEntities.WITHER_SKELETON_TITAN_MINION.get() && entityType != TheTitansNeoEntities.WITHER_TURRET.get() && entityType != TheTitansNeoEntities.WITHER_TURRET_GROUND.get() && entityType != TheTitansNeoEntities.WITHER_TURRET_MORTAR.get();
 	}
@@ -135,14 +143,6 @@ public class EntityWitherzillaMinion extends WitherBoss implements IMinion {
 	@Override
 	public boolean fireImmune() {
 		return true;
-	}
-
-	@Override
-	public boolean canAttack(LivingEntity target) {
-		if (this.getMaster() != null) {
-			return this.getMaster().canAttack(target);
-		}
-		return target.canBeSeenByAnyone();
 	}
 
 	@Override
@@ -168,14 +168,20 @@ public class EntityWitherzillaMinion extends WitherBoss implements IMinion {
 			this.getMaster().retractMinionNumFromType(this.getMinionType());
 		}
 	}
-	
+
 	@Override
 	public void setTarget(@Nullable LivingEntity target) {
 		if (target == this) {
 			return;
 		}
-		if (this.getMaster() != null && !this.getMaster().canAttackEntity(target, true)) {
-			return;
+		if (this.getMaster() != null) {
+			if (!this.getMaster().canAttackEntity(target, true)) {
+				return;
+			}
+		} else {
+			if (!this.canAttackEntity(target, true)) {
+				return;
+			}
 		}
 		super.setTarget(target);
 	}
@@ -193,18 +199,20 @@ public class EntityWitherzillaMinion extends WitherBoss implements IMinion {
 		if (entity instanceof LivingEntity) {
 			LivingEntity livingEntity = (LivingEntity) entity;
 
-			List<Entity> entities = this.level().getEntities(this, this.getBoundingBox().inflate(32.0D, 32.0D, 32.0D));
-			for (Entity entity1 : entities) {
-				if (entity1 instanceof EntityWitherzillaMinion) {
-					EntityWitherzillaMinion witherzillaMinion = (EntityWitherzillaMinion) entity1;
-					witherzillaMinion.setTarget(livingEntity);
-					for (int i = 0; i < 3; i++) {
-						witherzillaMinion.setAlternativeTarget(i, livingEntity.getId());
+			if (this.canAttack(livingEntity)) {
+				List<Entity> entities = this.level().getEntities(this, this.getBoundingBox().inflate(32.0D, 32.0D, 32.0D));
+				for (Entity minionEntity : entities) {
+					if (minionEntity instanceof EntityWitherzillaMinion) {
+						EntityWitherzillaMinion witherzillaMinion = (EntityWitherzillaMinion) minionEntity;
+						witherzillaMinion.setTarget(livingEntity);
+						for (int i = 0; i < 3; i++) {
+							witherzillaMinion.setAlternativeTarget(i, livingEntity.getId());
+						}
 					}
-				}
-				this.setTarget(livingEntity);
-				for (int i = 0; i < 3; i++) {
-					this.setAlternativeTarget(i, livingEntity.getId());
+					this.setTarget(livingEntity);
+					for (int i = 0; i < 3; i++) {
+						this.setAlternativeTarget(i, livingEntity.getId());
+					}
 				}
 			}
 		}

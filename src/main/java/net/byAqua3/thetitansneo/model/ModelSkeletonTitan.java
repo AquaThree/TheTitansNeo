@@ -98,12 +98,12 @@ public class ModelSkeletonTitan extends EntityModel<EntitySkeletonTitan> {
 		if (entity.getSkeletonType() == 1) {
 			this.isWither = true;
 			this.heldItem.visible = false;
-			if (TheTitansNeoConfigs.titanWeaponOldModel.get()) {
+			if (TheTitansNeoConfigs.getBoolean(TheTitansNeoConfigs.titanWeaponOldModel, false)) {
 				this.heldItem2.visible = true;
 			}
 		} else {
 			this.isWither = false;
-			if (TheTitansNeoConfigs.titanWeaponOldModel.get()) {
+			if (TheTitansNeoConfigs.getBoolean(TheTitansNeoConfigs.titanWeaponOldModel, false)) {
 				this.heldItem.visible = true;
 			}
 			this.heldItem2.visible = false;

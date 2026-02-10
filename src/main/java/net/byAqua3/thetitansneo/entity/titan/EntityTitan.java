@@ -110,7 +110,6 @@ public class EntityTitan extends AmbientCreature implements IAnimatedEntity, IEn
 
 	public boolean shouldParticlesBeUpward;
 	public boolean isRejuvinating;
-	public boolean meleeTitan;
 
 	public int footID;
 	public int nextStepDistanceTitan;
@@ -276,7 +275,7 @@ public class EntityTitan extends AmbientCreature implements IAnimatedEntity, IEn
 
 	@Override
 	public boolean canAttack(LivingEntity target) {
-		return this.canAttackEntity(target) && target.canBeSeenByAnyone();
+		return target.canBeSeenByAnyone() && this.canAttackEntity(target);
 	}
 
 	@Override
@@ -298,7 +297,7 @@ public class EntityTitan extends AmbientCreature implements IAnimatedEntity, IEn
 			if (this.getPassengers().contains(entity) || this.getVehicle() == entity) {
 				return false;
 			}
-			if (!TheTitansNeoConfigs.titanFriendlyFire.get() && this.getClass() == entity.getClass()) {
+			if (!TheTitansNeoConfigs.getBoolean(TheTitansNeoConfigs.titanFriendlyFire, true) && this.getClass() == entity.getClass()) {
 				return false;
 			}
 		}
@@ -314,7 +313,7 @@ public class EntityTitan extends AmbientCreature implements IAnimatedEntity, IEn
 	}
 
 	public boolean shouldMove() {
-		return (this.getTarget() != null && this.distanceToSqr(this.getTarget()) > this.getMeleeRange() + (this.meleeTitan ? 0.0D : 10000.0D));
+		return (this.getTarget() != null && this.distanceToSqr(this.getTarget()) > this.getMeleeRange() + (this.canAttack() ? 0.0D : 10000.0D));
 	}
 
 	public double getMeleeRange() {
@@ -569,6 +568,12 @@ public class EntityTitan extends AmbientCreature implements IAnimatedEntity, IEn
 	@Override
 	public int getMaxSpawnClusterSize() {
 		return 1;
+	}
+
+	@Override
+	public float maxUpStep() {
+		float stepHeight = (float) this.getAttributeValue(Attributes.STEP_HEIGHT);
+		return Math.max(stepHeight, this.getFootStepModifer());
 	}
 
 	@Override
@@ -1416,7 +1421,11 @@ public class EntityTitan extends AmbientCreature implements IAnimatedEntity, IEn
 
 			if (titanResistance > 0.0D) {
 				double titanResistanceValue = Math.min(titanResistance, 100.0D) / 100.0D;
-				amount *= (float) (1.0D - titanResistanceValue);
+				float newAmount = amount * (float) (1.0D - titanResistanceValue);
+
+				if (newAmount > 100.0F) {
+					amount = newAmount;
+				}
 			}
 
 			for (ItemStack itemStack : player.getArmorSlots()) {
@@ -1433,23 +1442,31 @@ public class EntityTitan extends AmbientCreature implements IAnimatedEntity, IEn
 			}
 		} else {
 			float health = entity.getHealth();
-			entity.hurt(damageSource, amount);
-
-			if (entity.getHealth() > Math.max(health - amount, 0.0F)) {
-				entity.setHealth(Math.max(health - amount, 0.0F));
+			float absorptionAmount = entity.getAbsorptionAmount();
+			if (health + absorptionAmount <= 0.0F) {
+				return;
 			}
 
-			if (entity.getHealth() <= 0.0F || health - amount <= 0.0F) {
+			boolean isInvulnerable = false;
+
+			entity.invulnerableTime = 0;
+			if (amount >= 0.0F && !entity.hurt(damageSource, amount)) {
+				entity.setAbsorptionAmount(0.0F);
+				if (entity.invulnerableTime <= 0) {
+					isInvulnerable = true;
+					float afterHealth = Math.max(health - amount, 0.0F);
+					
+					if (entity.getHealth() > afterHealth) {
+						entity.setHealth(afterHealth);
+					}
+				}
+			}
+
+			if ((entity.getHealth() + entity.getAbsorptionAmount() > 0.0F && health + absorptionAmount - amount <= 0.0F && entity.invulnerableTime == 0 && entity.deathTime == 0 && isInvulnerable) || entity.deathTime > 0) {
 				if (!(entity instanceof Player)) {
 					entity.getAttribute(Attributes.MAX_HEALTH).setBaseValue(0.0D);
-				}
-				entity.setAbsorptionAmount(0.0F);
-				entity.setHealth(0.0F);
-				entity.die(damageSource);
-			}
-
-			if ((entity.getHealth() > 0.0F && health - amount <= 0.0F && entity.getMaxHealth() <= 1.0F) || entity.deathTime >= 20) {
-				if (!(entity instanceof Player)) {
+					entity.setAbsorptionAmount(0.0F);
+					entity.setHealth(0.0F);
 					this.removeEntity(entity);
 				}
 			}

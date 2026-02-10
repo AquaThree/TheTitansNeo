@@ -293,7 +293,7 @@ public class EntityCreeperTitan extends EntityTitan implements IEntityMultiPartT
 		double d1 = this.getCharged() ? TheTitansNeoConfigs.chargedCreeperTitanExplodeRange.get() : TheTitansNeoConfigs.creeperTitanExplodeRange.get();
 		double d2 = d1 * 8.0D;
 
-		if (TheTitansNeoConfigs.creeperTitanExplodeAsync.get()) {
+		if (TheTitansNeoConfigs.getBoolean(TheTitansNeoConfigs.creeperTitanExplodeAsync, false)) {
 			this.destroyBlocksInAABBGriefingBypassAsync(this.getBoundingBox().inflate(d1, d1, d1));
 		} else {
 			this.destroyBlocksInAABBGriefingBypass(this.getBoundingBox().inflate(d1, d1, d1));
@@ -357,7 +357,7 @@ public class EntityCreeperTitan extends EntityTitan implements IEntityMultiPartT
 			}
 		}
 	}
-	
+
 	@Override
 	public boolean canAttack() {
 		return true;
@@ -412,7 +412,7 @@ public class EntityCreeperTitan extends EntityTitan implements IEntityMultiPartT
 	public int getTemplarCap() {
 		return TheTitansNeoConfigs.creeperTitanTemplarSpawnCap.get();
 	}
-	
+
 	@Override
 	public boolean canSpawnMinion() {
 		boolean flag = this.getInvulTime() > 1 && this.tickCount % 20 == 0;
@@ -1105,7 +1105,7 @@ public class EntityCreeperTitan extends EntityTitan implements IEntityMultiPartT
 				}
 			}
 		}
-
+		
 		this.animationTick();
 	}
 }

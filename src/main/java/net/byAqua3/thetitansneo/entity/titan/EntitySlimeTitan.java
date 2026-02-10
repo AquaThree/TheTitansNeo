@@ -470,7 +470,7 @@ public class EntitySlimeTitan extends EntityTitan implements IBossBarDisplay {
 		this.refreshDimensions();
 		this.yBodyRot = this.getYRot();
 		this.destroyBlocksInAABB(this.getBoundingBox().move(this.getDeltaMovement().x, (this.getDeltaMovement().y > 0.0D) ? this.getDeltaMovement().y : 0.0D, this.getDeltaMovement().z));
-
+		
 		this.squishFactor += (this.squishAmount - this.squishFactor) * 0.5F;
 		this.prevSquishFactor = this.squishFactor;
 		if (this.onGround() && !this.wasOnGround) {

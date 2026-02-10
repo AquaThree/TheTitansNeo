@@ -180,7 +180,7 @@ public class RenderTitanSpawnEgg implements IItemRenderer {
 			}
 		}
 
-		if (TheTitansNeoConfigs.titanWeaponOldModel.get()) {
+		if (TheTitansNeoConfigs.getBoolean(TheTitansNeoConfigs.titanWeaponOldModel, false)) {
 			if (!this.model.item.visible) {
 				this.model.item.visible = true;
 			}

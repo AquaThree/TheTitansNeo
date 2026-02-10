@@ -45,6 +45,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.phys.Vec3;
 
 public class ItemAdminiumArmor extends ArmorItem {
 
@@ -123,6 +124,7 @@ public class ItemAdminiumArmor extends ArmorItem {
 				player.removeEffect(MobEffects.MOVEMENT_SLOWDOWN);
 				player.addEffect(new MobEffectInstance(MobEffects.JUMP, 300, 19));
 				player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 300, 39));
+				player.stuckSpeedMultiplier = Vec3.ZERO;
 			}
 			if (player.getItemBySlot(EquipmentSlot.HEAD).getItem() == TheTitansNeoItems.ADMINIUM_HELMET.get() && player.getItemBySlot(EquipmentSlot.CHEST).getItem() == TheTitansNeoItems.ADMINIUM_CHESTPLATE.get() && player.getItemBySlot(EquipmentSlot.LEGS).getItem() == TheTitansNeoItems.ADMINIUM_LEGGINGS.get() && player.getItemBySlot(EquipmentSlot.FEET).getItem() == TheTitansNeoItems.ADMINIUM_BOOTS.get()) {
 				for (int i = 0; i < 2; i++) {
@@ -146,24 +148,24 @@ public class ItemAdminiumArmor extends ArmorItem {
 				if (player.getHealth() < player.getMaxHealth()) {
 					player.addEffect(new MobEffectInstance(MobEffects.HEAL, 300, 2));
 				}
-				List<Entity> entities = player.level().getEntities(player, player.getBoundingBox().inflate(10.0D, 10.0D, 10.0D));
-				for (Entity radiatedEntity : entities) {
-					if (radiatedEntity != null && radiatedEntity.isAlive() && entity.tickCount % 10 == 0 && radiatedEntity instanceof LivingEntity && !(radiatedEntity instanceof EntityTitan) && !(radiatedEntity instanceof AbstractGolem) && !(radiatedEntity instanceof OwnableEntity) && !(radiatedEntity instanceof Villager)) {
-						LivingEntity livingEntity = (LivingEntity) radiatedEntity;
-						if (!level.isClientSide()) {
-							if (TheTitansNeoConfigs.adminiumArmorRadiationPlayer.get() && livingEntity instanceof Player) {
-								continue;
+				if (!level.isClientSide()) {
+					if (TheTitansNeoConfigs.getBoolean(TheTitansNeoConfigs.adminiumArmorRadiation, true)) {
+						List<Entity> entities = player.level().getEntities(player, player.getBoundingBox().inflate(10.0D, 10.0D, 10.0D));
+						for (Entity radiatedEntity : entities) {
+							if (radiatedEntity != null && radiatedEntity.isAlive() && entity.tickCount % 10 == 0 && radiatedEntity instanceof LivingEntity && !(radiatedEntity instanceof EntityTitan) && !(radiatedEntity instanceof AbstractGolem) && !(radiatedEntity instanceof OwnableEntity) && !(radiatedEntity instanceof Villager)) {
+								LivingEntity livingEntity = (LivingEntity) radiatedEntity;
+								if (TheTitansNeoConfigs.getBoolean(TheTitansNeoConfigs.adminiumArmorRadiationPlayer, true) && livingEntity instanceof Player) {
+									continue;
+								}
+								Holder<DamageType> damageType = entity.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(TheTitansNeoDamageTypes.RADIATION);
+								livingEntity.hurt(new DamageSource(damageType), 10.0F);
+								livingEntity.invulnerableTime = 0;
+								livingEntity.addEffect(new MobEffectInstance(TheTitansNeoMobEffects.RADIATION, 5000, 1));
 							}
-							Holder<DamageType> damageType = entity.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(TheTitansNeoDamageTypes.RADIATION);
-							livingEntity.hurt(new DamageSource(damageType), 10.0F);
-							livingEntity.invulnerableTime = 0;
-							livingEntity.addEffect(new MobEffectInstance(TheTitansNeoMobEffects.RADIATION, 5000, 1));
 						}
 					}
-				}
-				if (!level.isClientSide()) {
-					if (TheTitansNeoConfigs.adminiumArmorExplode.get()) {
-						entities = player.level().getEntities(player, player.getBoundingBox().inflate(32.0D, 8.0D, 32.0D));
+					if (TheTitansNeoConfigs.getBoolean(TheTitansNeoConfigs.adminiumArmorExplode, true)) {
+						List<Entity> entities = player.level().getEntities(player, player.getBoundingBox().inflate(32.0D, 8.0D, 32.0D));
 						BlockPos blockPos = player.blockPosition().below();
 						BlockState blockState = level.getBlockState(blockPos);
 						// Block block = blockState.getBlock();
@@ -238,8 +240,8 @@ public class ItemAdminiumArmor extends ArmorItem {
 							}
 						}
 					}
-					if (TheTitansNeoConfigs.adminiumArmorGravity.get()) {
-						entities = player.level().getEntities(player, player.getBoundingBox().inflate(48.0D, 48.0D, 48.0D));
+					if (TheTitansNeoConfigs.getBoolean(TheTitansNeoConfigs.adminiumArmorGravity, true)) {
+						List<Entity> entities = player.level().getEntities(player, player.getBoundingBox().inflate(48.0D, 48.0D, 48.0D));
 						for (Entity attractedEntity : entities) {
 							if (attractedEntity != null && !(attractedEntity instanceof EntityTitan) && !(attractedEntity instanceof EntityItemTitan) && !(attractedEntity instanceof EntityHarcadiumArrow)) {
 								double d0 = (player.getX() - attractedEntity.getX()) / 48.0D;

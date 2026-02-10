@@ -137,6 +137,14 @@ public class EntityGhastGuardMinion extends Ghast implements IMinion {
 	}
 
 	@Override
+	public boolean canAttack(LivingEntity target) {
+		if (this.getMaster() != null) {
+			return this.getMaster().canAttack(target);
+		}
+		return target.canBeSeenByAnyone() && this.canAttackEntity(target);
+	}
+
+	@Override
 	public boolean canAttackType(EntityType<?> entityType) {
 		return entityType != TheTitansNeoEntities.ZOMBIFIED_PIGLIN_TITAN.get() && entityType != TheTitansNeoEntities.ZOMBIFIED_PIGLIN_TITAN_MINION.get() && entityType != TheTitansNeoEntities.GHAST_GUARD_MINION.get();
 	}
@@ -174,14 +182,20 @@ public class EntityGhastGuardMinion extends Ghast implements IMinion {
 			this.getMaster().retractMinionNumFromType(this.getMinionType());
 		}
 	}
-	
+
 	@Override
 	public void setTarget(@Nullable LivingEntity target) {
 		if (target == this) {
 			return;
 		}
-		if (this.getMaster() != null && !this.getMaster().canAttackEntity(target, true)) {
-			return;
+		if (this.getMaster() != null) {
+			if (!this.getMaster().canAttackEntity(target, true)) {
+				return;
+			}
+		} else {
+			if (!this.canAttackEntity(target, true)) {
+				return;
+			}
 		}
 		super.setTarget(target);
 	}
@@ -198,7 +212,10 @@ public class EntityGhastGuardMinion extends Ghast implements IMinion {
 		}
 		if (entity instanceof LivingEntity) {
 			LivingEntity livingEntity = (LivingEntity) entity;
-			this.setTarget(livingEntity);
+
+			if (this.canAttack(livingEntity)) {
+				this.setTarget(livingEntity);
+			}
 		}
 		return super.hurt(damageSource, amount);
 	}
@@ -282,4 +299,5 @@ public class EntityGhastGuardMinion extends Ghast implements IMinion {
 				this.level().addFreshEntity(drop);
 			}
 		}
-	}}
+	}
+}

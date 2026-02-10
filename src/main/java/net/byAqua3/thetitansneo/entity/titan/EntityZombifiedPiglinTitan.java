@@ -1141,6 +1141,5 @@ public class EntityZombifiedPiglinTitan extends EntityTitan implements IEntityMu
 				this.jumpAtEntity(this.getTarget());
 			}
 		}
-
 		this.animationTick();
 	}}

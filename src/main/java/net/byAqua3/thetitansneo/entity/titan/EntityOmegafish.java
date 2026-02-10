@@ -1143,8 +1143,7 @@ public class EntityOmegafish extends EntityTitan implements IEntityMultiPartTita
 		if (this.isStunned || this.deathTicks > 0) {
 			this.setDeltaMovement(0.0D, this.getDeltaMovement().y, 0.0D);
 		}
-
-		this.meleeTitan = true;
+		
 		this.animationTick();
 
 		if (!this.getPassengers().isEmpty() && this.getFirstPassenger() instanceof Player) {
