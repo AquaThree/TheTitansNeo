@@ -3,12 +3,16 @@ package net.byAqua3.thetitansneo.event;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.common.collect.ImmutableList;
+
 import net.byAqua3.thetitansneo.damage.DamageSourceTitanAttack;
 import net.byAqua3.thetitansneo.entity.EntityColorLightningBolt;
 import net.byAqua3.thetitansneo.entity.projectile.IEntityProjectileTitan;
 import net.byAqua3.thetitansneo.entity.titan.EntityEnderColossus;
 import net.byAqua3.thetitansneo.entity.titan.EntityTitan;
+import net.byAqua3.thetitansneo.loader.TheTitansNeoAttributes;
 import net.byAqua3.thetitansneo.loader.TheTitansNeoEnchantments;
+import net.byAqua3.thetitansneo.loader.TheTitansNeoItemTags;
 import net.byAqua3.thetitansneo.loader.TheTitansNeoItems;
 import net.byAqua3.thetitansneo.loader.TheTitansNeoMobEffects;
 import net.byAqua3.thetitansneo.loader.TheTitansNeoTriggers;
@@ -18,6 +22,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -33,6 +38,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerHeartTypeEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
@@ -40,6 +46,21 @@ import net.neoforged.neoforge.event.level.ExplosionKnockbackEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 
 public class TheTitansNeoEvent {
+	
+	@SubscribeEvent
+	public void onEntityJoinWorld(EntityJoinLevelEvent event) {
+		Entity entity = event.getEntity();
+
+		if (entity instanceof ItemEntity) {
+			ItemEntity itemEntity = (ItemEntity) entity;
+			ItemStack itemStack = itemEntity.getItem();
+			List<TagKey<Item>> tags = itemStack.getTags().toList();
+
+			if (tags.contains(TheTitansNeoItemTags.IMMORTAL)) {
+				itemEntity.setInvulnerable(true);
+			}
+		}
+	}
 
 	@SubscribeEvent
 	public void onLivingTick(EntityTickEvent.Post event) {
@@ -56,28 +77,26 @@ public class TheTitansNeoEvent {
 			if (ItemUtils.hasItem(player.getInventory(), TheTitansNeoItems.ULTIMA_BLADE.get()) && ItemUtils.hasItem(player.getInventory(), TheTitansNeoItems.OPTIMA_AXE.get())) {
 				boolean flag = true;
 
-				List<Entity> entities = level.getEntities(player, player.getBoundingBox().inflate(200.0D, 200.0D, 200.0D));
-				for (Entity entity : entities) {
-					if (entity != null && entity.isAlive() && entity instanceof EntityEnderColossus) {
-						flag = false;
-					}
-				}
+				if (!player.level().isClientSide()) {
+					ServerLevel serverLevel = (ServerLevel) player.level();
 
-				if (flag && !level.isClientSide()) {
-					ServerLevel serverLevel = (ServerLevel) level;
-					serverLevel.setWeatherParameters(0, ServerLevel.THUNDER_DURATION.sample(serverLevel.getRandom()), true, true);
-				}
-
-				if (level.random.nextInt(60) == 0) {
+					ImmutableList<Entity> entities = ImmutableList.copyOf(serverLevel.getAllEntities());
 					for (Entity entity : entities) {
-						if (entity != null && entity instanceof LivingEntity) {
-							if (entity.isAlive()) {
+						if (entity != null && entity.isAlive() && entity instanceof EntityEnderColossus) {
+							flag = false;
+						}
+					}
+
+					if (flag) {
+						serverLevel.setWeatherParameters(0, ServerLevel.THUNDER_DURATION.sample(serverLevel.getRandom()), true, true);
+					}
+
+					if (level.random.nextInt(60) == 0) {
+						for (Entity entity : entities) {
+							if (entity != null && entity != player && entity.isAlive() && entity instanceof LivingEntity) {
 								EntityColorLightningBolt colorLightningBolt = new EntityColorLightningBolt(level, level.getRandom().nextFloat(), level.getRandom().nextFloat(), level.getRandom().nextFloat());
 								colorLightningBolt.setPos(entity.getX(), entity.getY() + entity.getBbHeight(), entity.getZ());
-
-								if (!level.isClientSide()) {
-									level.addFreshEntity(colorLightningBolt);
-								}
+								level.addFreshEntity(colorLightningBolt);
 							}
 						}
 					}
@@ -95,6 +114,7 @@ public class TheTitansNeoEvent {
 		if (entity instanceof Player) {
 			Player player = (Player) entity;
 			ItemStack itemStack = player.getMainHandItem();
+			
 			if (!itemStack.isEmpty()) {
 				int a = EnchantmentHelper.getItemEnchantmentLevel(player.level().registryAccess().holderOrThrow(TheTitansNeoEnchantments.KNOCK_UP), itemStack);
 				if (a > 0) {
@@ -166,7 +186,15 @@ public class TheTitansNeoEvent {
 
 		if (entity instanceof IEntityProjectileTitan) {
 			IEntityProjectileTitan projectileTitan = (IEntityProjectileTitan) entity;
+			
 			if (!projectileTitan.canExplosionKnockback()) {
+				event.setKnockbackVelocity(new Vec3(0.0D, 0.0D, 0.0D));
+			}
+		} else if (entity instanceof Player) {
+			Player player = (Player) entity;
+			
+			double titanResistance = player.getAttributeValue(TheTitansNeoAttributes.TITAN_RESISTANCE);
+			if (titanResistance > 0.0D) {
 				event.setKnockbackVelocity(new Vec3(0.0D, 0.0D, 0.0D));
 			}
 		}

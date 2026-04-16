@@ -8,7 +8,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.ItemStack;
@@ -22,12 +21,6 @@ public class ItemAdminiumHoe extends HoeItem {
 
 	public ItemAdminiumHoe(Properties properties) {
 		super(TheTitansNeoTiers.ADMINIUM, properties.attributes(ItemAdminiumSword.createAttributes(1000000000.0F, Float.MAX_VALUE)));
-	}
-	
-	@Override
-	public boolean onEntityItemUpdate(ItemStack stack, ItemEntity itemEntity) {
-		itemEntity.setInvulnerable(true);
-		return super.onEntityItemUpdate(stack, itemEntity);
 	}
 	
 	@Override

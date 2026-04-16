@@ -2,11 +2,11 @@ package net.byAqua3.thetitansneo.feature;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
 
 import com.mojang.serialization.Codec;
 
 import net.byAqua3.thetitansneo.TheTitansNeo;
+import net.byAqua3.thetitansneo.data.SavedDataSpawnedPos;
 import net.byAqua3.thetitansneo.entity.titan.EntityBlazeTitan;
 import net.byAqua3.thetitansneo.entity.titan.EntityCaveSpiderTitan;
 import net.byAqua3.thetitansneo.entity.titan.EntityCreeperTitan;
@@ -24,7 +24,6 @@ import net.byAqua3.thetitansneo.entity.titan.EntityZombieTitan;
 import net.byAqua3.thetitansneo.loader.TheTitansNeoConfigs;
 import net.byAqua3.thetitansneo.loader.TheTitansNeoDimensions;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
@@ -40,11 +39,12 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
+import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraft.world.phys.AABB;
 
 public class FeatureTitanSpawn extends Feature<NoneFeatureConfiguration> {
 
-	private ConcurrentHashMap<ResourceKey<Level>, List<BlockPos>> spawnedPos = new ConcurrentHashMap<>();
+	public static final SavedData.Factory<SavedDataSpawnedPos> FACTORY = new SavedData.Factory<>(SavedDataSpawnedPos::new, SavedDataSpawnedPos::load, null);
 
 	public FeatureTitanSpawn(Codec<NoneFeatureConfiguration> codec) {
 		super(codec);
@@ -57,20 +57,10 @@ public class FeatureTitanSpawn extends Feature<NoneFeatureConfiguration> {
 		return Mth.sqrt(x * x + y * y + z * z);
 	}
 
-	public List<BlockPos> getSpawnedPos(ResourceKey<Level> dimension) {
-		if (!this.spawnedPos.containsKey(dimension)) {
-			this.spawnedPos.put(dimension, new ArrayList<>());
-		}
-		return this.spawnedPos.get(dimension);
-	}
-
 	public boolean isTitanSpawned(WorldGenLevel level, Entity entity, double range) {
-		ResourceKey<Level> dimension = level.getLevel().dimension();
+		SavedDataSpawnedPos savedData = level.getLevel().getDataStorage().computeIfAbsent(FACTORY, "titan_spawned_pos");
 
-		if (!this.spawnedPos.containsKey(dimension)) {
-			return false;
-		}
-		for (BlockPos blockPos : this.getSpawnedPos(dimension)) {
+		for (BlockPos blockPos : savedData.getSpawnedPos()) {
 			if (this.distanceToPos(blockPos, entity.blockPosition()) < range) {
 				return true;
 			}
@@ -79,13 +69,15 @@ public class FeatureTitanSpawn extends Feature<NoneFeatureConfiguration> {
 	}
 
 	public void setTitanSpawned(WorldGenLevel level, Entity entity) {
-		ResourceKey<Level> dimension = level.getLevel().dimension();
+		SavedDataSpawnedPos savedData = level.getLevel().getDataStorage().computeIfAbsent(FACTORY, "titan_spawned_pos");
 
-		this.getSpawnedPos(dimension).add(entity.blockPosition().immutable());
-
-		if (this.getSpawnedPos(dimension).size() >= 100) {
-			this.spawnedPos.put(dimension, new ArrayList<>(this.getSpawnedPos(dimension).subList(this.getSpawnedPos(dimension).size() - 80, this.getSpawnedPos(dimension).size())));
+		savedData.getSpawnedPos().add(entity.blockPosition().immutable());
+		if (savedData.getSpawnedPos().size() >= 100) {
+			List<BlockPos> newList = new ArrayList<>(savedData.getSpawnedPos().subList(savedData.getSpawnedPos().size() - 80, savedData.getSpawnedPos().size()));
+			savedData.getSpawnedPos().clear();
+			savedData.getSpawnedPos().addAll(newList);
 		}
+		savedData.setDirty();
 	}
 
 	public boolean hasTitan(WorldGenLevel level, Entity entity, double range) {
@@ -208,7 +200,7 @@ public class FeatureTitanSpawn extends Feature<NoneFeatureConfiguration> {
 		WorldGenLevel worldGenLevel = context.level();
 		RandomSource randomSource = context.random();
 		BlockPos blockPos = context.origin();
-		
+
 		if (worldGenLevel.getLevel().dimension() != TheTitansNeoDimensions.THE_VOID && !TheTitansNeoConfigs.getBoolean(TheTitansNeoConfigs.titanCanSpawn, true)) {
 			return false;
 		}

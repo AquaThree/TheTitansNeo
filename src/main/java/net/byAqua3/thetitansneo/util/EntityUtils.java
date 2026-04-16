@@ -12,7 +12,7 @@ public class EntityUtils {
 
 	public static List<Entity> getEntities(List<Entity> exclude, Player player, double inflateX, double inflateY, double inflateZ, double moveX, double moveY, double moveZ) {
 		List<Entity> entities = new ArrayList<>();
-		for (Entity entity : player.level().getEntities(player, player.getBoundingBox().inflate(20000.0D, 20000.0D, 20000.0D))) {
+		for (Entity entity : player.level().getEntities(player, player.getBoundingBox().inflate(1024.0D, 1024.0D, 1024.0D))) {
 			AABB aabb = entity.getBoundingBox();
 			double d1 = Mth.clamp(player.getX() + moveX, aabb.minX, aabb.maxX);
 			double d2 = Mth.clamp(player.getY() + moveY, aabb.minY, aabb.maxY);

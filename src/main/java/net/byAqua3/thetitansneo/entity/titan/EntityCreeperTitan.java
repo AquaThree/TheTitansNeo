@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import javax.annotation.Nullable;
 
+import com.google.common.collect.ImmutableList;
+
 import net.byAqua3.thetitansneo.TheTitansNeo;
 import net.byAqua3.thetitansneo.entity.EntityColorLightningBolt;
 import net.byAqua3.thetitansneo.entity.EntityWitherTurret;
@@ -961,16 +963,19 @@ public class EntityCreeperTitan extends EntityTitan implements IEntityMultiPartT
 		if (this.getCharged()) {
 			boolean flag = true;
 
-			List<Entity> entities = this.level().getEntities(this, this.getBoundingBox().inflate(20000.0D, 20000.0D, 20000.0D));
-			for (Entity entity : entities) {
-				if (entity != null && entity.isAlive() && entity instanceof EntityEnderColossus) {
-					flag = false;
-				}
-			}
-
-			if (flag && !this.level().isClientSide()) {
+			if (!this.level().isClientSide()) {
 				ServerLevel serverLevel = (ServerLevel) this.level();
-				serverLevel.setWeatherParameters(0, ServerLevel.THUNDER_DURATION.sample(serverLevel.getRandom()), true, true);
+
+				ImmutableList<Entity> entities = ImmutableList.copyOf(serverLevel.getAllEntities());
+				for (Entity entity : entities) {
+					if (entity != null && entity.isAlive() && entity instanceof EntityEnderColossus) {
+						flag = false;
+					}
+				}
+
+				if (flag) {
+					serverLevel.setWeatherParameters(0, ServerLevel.THUNDER_DURATION.sample(serverLevel.getRandom()), true, true);
+				}
 			}
 
 			if (this.getRandom().nextInt(20) == 0) {
@@ -1105,7 +1110,7 @@ public class EntityCreeperTitan extends EntityTitan implements IEntityMultiPartT
 				}
 			}
 		}
-		
+
 		this.animationTick();
 	}
 }

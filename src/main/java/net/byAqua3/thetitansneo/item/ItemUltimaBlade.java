@@ -52,12 +52,6 @@ public class ItemUltimaBlade extends SwordItem {
 	}
 
 	@Override
-	public boolean onEntityItemUpdate(ItemStack stack, ItemEntity itemEntity) {
-		itemEntity.setInvulnerable(true);
-		return super.onEntityItemUpdate(stack, itemEntity);
-	}
-
-	@Override
 	public int getDamage(ItemStack stack) {
 		return 0;
 	}
@@ -80,7 +74,7 @@ public class ItemUltimaBlade extends SwordItem {
 		if (entity instanceof Player) {
 			Player player = (Player) entity;
 
-			if (TheTitansNeoConfigs.getBoolean(TheTitansNeoConfigs.ultimaBladeShowParticles, true)) {
+			if (!TheTitansNeoConfigs.getBoolean(TheTitansNeoConfigs.ultimaBladeHiddenParticles, false)) {
 				for (int i = 0; i < 3; i++) {
 					level.addParticle(ParticleTypes.FIREWORK, player.getX() + (level.random.nextDouble() - 0.5D) * player.getBbWidth(), player.getY() + level.random.nextDouble() * player.getBbHeight(), player.getZ() + (level.random.nextDouble() - 0.5D) * player.getBbWidth(), (level.random.nextDouble() - 0.5D) * 2.0D, 1.0D, (level.random.nextDouble() - 0.5D) * 2.0D);
 					level.addParticle(ParticleTypes.POOF, player.getX() + (level.random.nextDouble() - 0.5D) * player.getBbWidth(), player.getY() + level.random.nextDouble() * player.getBbHeight(), player.getZ() + (level.random.nextDouble() - 0.5D) * player.getBbWidth(), (level.random.nextDouble() - 0.5D) * 2.0D, 1.0D, (level.random.nextDouble() - 0.5D) * 2.0D);

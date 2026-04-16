@@ -36,7 +36,7 @@ public class PlayerHealthBarEvent {
 
 		if (player != null) {
 			Gui.HeartType heartType = Gui.HeartType.forPlayer(player);
-			// boolean isHardcore = player.level().getLevelData().isHardcore();
+			boolean isHardcore = player.level().getLevelData().isHardcore();
 
 			int x = guiGraphics.guiWidth() / 2 - 91;
 			int y = guiGraphics.guiHeight() - this.healthBarY - 1;
@@ -89,11 +89,13 @@ public class PlayerHealthBarEvent {
 			if (healthWidth > 0) {
 				int offset = height * 2;
 				if (heartType == Gui.HeartType.FROZEN) {
-					offset = height * 4;
-				} else if (heartType == Gui.HeartType.POISIONED) {
 					offset = height * 5;
-				} else if (heartType == Gui.HeartType.WITHERED) {
+				} else if (heartType == Gui.HeartType.POISIONED) {
 					offset = height * 6;
+				} else if (heartType == Gui.HeartType.WITHERED) {
+					offset = height * 7;
+				} else if (isHardcore) {
+					offset = height * 3;
 				}
 				guiGraphics.blit(healthBar, x, y, 0, offset, healthWidth, height);
 			}
@@ -124,4 +126,5 @@ public class PlayerHealthBarEvent {
 		} else if (name == VanillaGuiLayers.AIR_LEVEL) {
 			mc.gui.rightHeight += 1;
 		}
-	}}
+	}
+}

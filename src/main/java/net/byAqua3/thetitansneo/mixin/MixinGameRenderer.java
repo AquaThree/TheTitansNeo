@@ -29,7 +29,7 @@ public class MixinGameRenderer {
 			Vec3 start = player.getEyePosition(partialTicks);
 			Vec3 end = start.add(viewVector.scale(reachDistance));
 
-			for (Entity entity : player.level().getEntities(player, player.getBoundingBox().inflate(20000.0D, 20000.0D, 20000.0D))) {
+			for (Entity entity : player.level().getEntities(player, player.getBoundingBox().inflate(1024.0D, 1024.0D, 1024.0D))) {
 				if (entity instanceof EntityTitan) {
 					EntityTitan titan = (EntityTitan) entity;
 					if (titan.getBoundingBox().intersects(start, end)) {

@@ -83,8 +83,7 @@ public class TheTitansNeoClientEvent {
 		LocalPlayer player = mc.player;
 
 		if (player.level().dimension() == TheTitansNeoDimensions.THE_VOID) {
-			List<Entity> entities = player.level().getEntities(player, player.getBoundingBox().inflate(20000.0D, 20000.0D, 20000.0D));
-
+			List<Entity> entities = player.level().getEntities(player, player.getBoundingBox().inflate(1024.0D, 1024.0D, 1024.0D));
 			for (Entity entity : entities) {
 				if (entity instanceof EntityWitherzilla) {
 					EntityWitherzilla witherzilla = (EntityWitherzilla) entity;

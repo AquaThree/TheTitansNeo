@@ -5,13 +5,16 @@
 	"refmap": "mixins.thetitansneo.refmap.json",
 	"mixins": [
 		"MixinItemRenderer",
+		"MixinItemStack",
 		"MixinEntityRenderDispatcher",
 		"MixinRangedAttribute",
 		"MixinChunkGenerator",
 		"MixinLivingEntity",
 		"MixinEntityType",
 		"MixinEntityDataAccessor",
-		"MixinGameRenderer"
+		"MixinGameRenderer",
+		"MixinLevelRenderer",
+		"MixinWorldOpenFlows"
 	],
 	"injectors": {
 		"defaultRequire": 1

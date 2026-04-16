@@ -2,10 +2,10 @@ package net.byAqua3.thetitansneo.entity.titan;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.network.syncher.EntityDataSerializers;
-import net.minecraft.core.particles.ColorParticleOption;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.TicketType;
+import net.minecraft.core.particles.ColorParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.neoforged.neoforge.event.EventHooks;
 import net.minecraft.sounds.SoundSource;
@@ -34,6 +34,7 @@ import net.minecraft.world.item.Item;
 import net.byAqua3.thetitansneo.loader.TheTitansNeoBlocks;
 import net.byAqua3.thetitansneo.loader.TheTitansNeoConfigs;
 import net.minecraft.world.item.ItemStack;
+
 import java.util.HashMap;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.core.Direction;
@@ -47,6 +48,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.byAqua3.thetitansneo.TheTitansNeo;
+import net.byAqua3.thetitansneo.damage.DamageSourceTitanAttack;
 import net.byAqua3.thetitansneo.entity.EntityColorLightningBolt;
 import net.byAqua3.thetitansneo.entity.EntityWitherTurret;
 import net.byAqua3.thetitansneo.entity.IBossBarDisplay;
@@ -306,32 +308,37 @@ public class EntityWitherzilla extends EntityTitan implements RangedAttackMob, I
 				Player player = (Player) entity;
 				player.sendSystemMessage(Component.literal(String.valueOf(this.getRandom().nextInt(1234567890))).withStyle(ChatFormatting.OBFUSCATED));
 			}
-			if (entity instanceof LivingEntity && !(entity instanceof EntityTitan)) {
-				LivingEntity livingEntity = (LivingEntity) entity;
-				this.attackEntity(livingEntity, 20.0F);
-				EntityColorLightningBolt colorLightningBolt = new EntityColorLightningBolt(livingEntity.level(), this.getRandom().nextFloat(), this.getRandom().nextFloat(), this.getRandom().nextFloat());
-				colorLightningBolt.setPos(entity.getX(), entity.getY(), entity.getZ());
-				if (!livingEntity.level().isClientSide()) {
-					this.level().addFreshEntity(colorLightningBolt);
-				}
-				if (livingEntity.getBbHeight() >= 6.0F || livingEntity.isInvulnerable()) {
-					livingEntity.setHealth(0.0F);
-					livingEntity.hurt(this.damageSources().fellOutOfWorld(), Float.MAX_VALUE);
-					livingEntity.die(this.damageSources().fellOutOfWorld());
-					livingEntity.discard();
-				}
-				if (livingEntity.getBbHeight() >= 6.0F || this.affectTicks >= 600) {
-					livingEntity.setHealth(0.0F);
-					for (int i = 0; i < 50; ++i) {
-						this.attackEntity(livingEntity, Float.MAX_VALUE);
-					}
-				}
-			}
-			if (entity instanceof EntityTitan titan) {
+			if (entity instanceof EntityTitan) {
+				EntityTitan titan = (EntityTitan) entity;
 				titan.setInvulTime(titan.getInvulTime() - 20);
 				this.attackEntity(titan, 5000.0F);
 			} else {
+				if (entity instanceof LivingEntity) {
+					LivingEntity livingEntity = (LivingEntity) entity;
+					this.attackEntity(livingEntity, 20.0F);
+					if (livingEntity.getBbHeight() >= 6.0F || livingEntity.isInvulnerable()) {
+						livingEntity.setHealth(0.0F);
+						livingEntity.hurt(this.damageSources().fellOutOfWorld(), Float.MAX_VALUE);
+						livingEntity.die(this.damageSources().fellOutOfWorld());
+						livingEntity.discard();
+					}
+					if (livingEntity.getBbHeight() >= 6.0F || this.affectTicks >= 600) {
+						livingEntity.setHealth(0.0F);
+						for (int i = 0; i < 50; ++i) {
+							this.attackEntity(livingEntity, Float.MAX_VALUE);
+						}
+					}
+				} else {
+					DamageSourceTitanAttack damageSource = new DamageSourceTitanAttack(this);
+					entity.hurt(damageSource, 20.0F);
+					entity.discard();
+				}
 				entity.push(0.0D, 0.5D, 0.0D);
+			}
+			EntityColorLightningBolt colorLightningBolt = new EntityColorLightningBolt(this.level(), this.getRandom().nextFloat(), this.getRandom().nextFloat(), this.getRandom().nextFloat());
+			colorLightningBolt.setPos(entity.getX(), entity.getY(), entity.getZ());
+			if (!this.level().isClientSide()) {
+				this.level().addFreshEntity(colorLightningBolt);
 			}
 			entity.invulnerableTime = 1;
 		}
@@ -394,7 +401,7 @@ public class EntityWitherzilla extends EntityTitan implements RangedAttackMob, I
 	public int getMinionCap() {
 		return TheTitansNeoConfigs.witherzillaMinionSpawnCap.get();
 	}
-	
+
 	@Override
 	public boolean canSpawnMinion() {
 		boolean flag = this.getInvulTime() > 1 && this.tickCount % 20 == 0;
@@ -683,12 +690,46 @@ public class EntityWitherzilla extends EntityTitan implements RangedAttackMob, I
 				ServerLevel serverLevel = (ServerLevel) this.level();
 
 				ChunkPos chunkPos = this.chunkPosition();
-				serverLevel.getChunkSource().addRegionTicket(TicketType.PLAYER, chunkPos, 3, chunkPos);
+				serverLevel.getChunkSource().addRegionTicket(TicketType.FORCED, chunkPos, 0, chunkPos);
 
 				if (this.getTarget() != null && this.getTarget() instanceof EntityEnderColossus) {
 					serverLevel.setWeatherParameters(0, 0, false, false);
 				} else {
 					serverLevel.setWeatherParameters(0, 1000000, true, true);
+				}
+
+				ImmutableList<Entity> entities = ImmutableList.copyOf(serverLevel.getAllEntities());
+				for (Entity entity : entities) {
+					if (entity != null && entity != this && entity.isAlive() && !(entity instanceof LightningBolt) && !(entity instanceof WitherSkull) && !(entity instanceof EntityWitherTurret) && !(entity instanceof EntityTitan) && !(entity instanceof Player)) {
+						if (entity instanceof EntityWitherzillaMinion) {
+							if (this.getTarget() != null) {
+								EntityWitherzillaMinion witherzillaMinion = (EntityWitherzillaMinion) entity;
+								witherzillaMinion.setTarget(this.getTarget());
+							}
+						} else {
+							if (this.getInvulTime() > 1) {
+								if (entity instanceof LivingEntity livingEntity) {
+									if (livingEntity instanceof Mob) {
+										Mob mob = (Mob) livingEntity;
+										mob.getNavigation().stop();
+									}
+									livingEntity.setDeltaMovement(livingEntity.getDeltaMovement().x, 0.05D - this.getDeltaMovement().y * 0.2D, livingEntity.getDeltaMovement().z);
+									livingEntity.xxa = (float) this.getRandom().nextGaussian();
+									livingEntity.zza = (float) this.getRandom().nextGaussian();
+									livingEntity.setYRot(livingEntity.getYRot() + (float) this.getRandom().nextGaussian() * 10.0F);
+									livingEntity.yHeadRot = livingEntity.getYRot();
+									livingEntity.yBodyRot = livingEntity.getYRot();
+									livingEntity.invulnerableTime = (int) this.getRandom().nextGaussian() * 20;
+								} else {
+									entity.setDeltaMovement(this.getRandom().nextGaussian() * 0.5D, this.getRandom().nextGaussian() * 0.5D, this.getRandom().nextGaussian() * 0.5D);
+									entity.setYRot(entity.getYRot() + 10.0F);
+									entity.invulnerableTime = (int) this.getRandom().nextGaussian() * 20;
+								}
+							} else {
+								this.doLightningAttackTo(entity);
+							}
+						}
+					}
 				}
 			}
 			if (this.getRandom().nextInt(2) == 0) {
@@ -711,7 +752,7 @@ public class EntityWitherzilla extends EntityTitan implements RangedAttackMob, I
 				this.setPos(0.0D, 200.0D, 0.0D);
 			}
 
-			List<EntityWitherTurret> entities = this.level().getEntitiesOfClass(EntityWitherTurret.class, this.getBoundingBox().inflate(20000.0D, 20000.0D, 20000.0D));
+			List<EntityWitherTurret> entities = this.level().getEntitiesOfClass(EntityWitherTurret.class, this.getBoundingBox().inflate(1024.0D, 1024.0D, 1024.0D));
 			if (!entities.isEmpty()) {
 				for (EntityWitherTurret entity : entities) {
 					if (entity != null && entity.isAlive()) {
@@ -774,34 +815,6 @@ public class EntityWitherzilla extends EntityTitan implements RangedAttackMob, I
 			}
 		}
 
-		if (this.isInOmegaForm()) {
-			List<Entity> entities = this.level().getEntities(this, this.getBoundingBox().inflate(20000.0D, 20000.0D, 20000.0D));
-			for (Entity entity : entities) {
-				if (entity != null && entity.isAlive() && !(entity instanceof LightningBolt) && !(entity instanceof WitherSkull) && !(entity instanceof EntityWitherTurret) && !(entity instanceof EntityTitan) && !(entity instanceof Player)) {
-					if (this.getInvulTime() > 1) {
-						if (entity instanceof LivingEntity livingEntity) {
-							if (livingEntity instanceof Mob) {
-								Mob mob = (Mob) livingEntity;
-								mob.getNavigation().stop();
-							}
-							livingEntity.push(0.0D, 0.05D - this.getDeltaMovement().y * 0.2D, 0.0D);
-							livingEntity.xxa = (float) this.getRandom().nextGaussian();
-							livingEntity.zza = (float) this.getRandom().nextGaussian();
-							livingEntity.setYRot(livingEntity.getYRot() + (float) this.getRandom().nextGaussian() * 10.0F);
-							livingEntity.yHeadRot = livingEntity.getYRot();
-							livingEntity.yBodyRot = livingEntity.getYRot();
-							livingEntity.invulnerableTime = (int) this.getRandom().nextGaussian() * 20;
-						} else {
-							entity.push(this.getRandom().nextGaussian() * 0.5D, this.getRandom().nextGaussian() * 0.5D, this.getRandom().nextGaussian() * 0.5D);
-							entity.setYRot(entity.getYRot() + 10.0F);
-							entity.invulnerableTime = (int) this.getRandom().nextGaussian() * 20;
-						}
-					} else {
-						this.doLightningAttackTo(entity);
-					}
-				}
-			}
-		}
 		if (this.getTarget() != null && (this.affectTicks >= 600 || (this.getTarget().getBbHeight() > 6.0f && !(this.getTarget() instanceof EntityTitan)))) {
 			if (this.getRandom().nextInt(120) == 0) {
 				if (!this.level().isClientSide()) {

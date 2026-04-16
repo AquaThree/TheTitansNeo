@@ -506,6 +506,11 @@ public class EntityTitan extends AmbientCreature implements IAnimatedEntity, IEn
 	}
 
 	@Override
+	public boolean isAlwaysTicking() {
+		return true;
+	}
+
+	@Override
 	public boolean isPersistenceRequired() {
 		return true;
 	}
@@ -1455,10 +1460,13 @@ public class EntityTitan extends AmbientCreature implements IAnimatedEntity, IEn
 				if (entity.invulnerableTime <= 0) {
 					isInvulnerable = true;
 					float afterHealth = Math.max(health - amount, 0.0F);
-					
+
 					if (entity.getHealth() > afterHealth) {
 						entity.setHealth(afterHealth);
 					}
+				}
+				if (entity.getHealth() <= 0.0F) {
+					entity.die(damageSource);
 				}
 			}
 

@@ -22,8 +22,12 @@ public class TheTitansNeoConfigs {
 	public static ConfigValue<Integer> titanPartBoxBlue;
 	public static ConfigValue<Boolean> titanWeaponOldModel;
 
-	public static ConfigValue<Boolean> ultimaBladeShowParticles;
-	public static ConfigValue<Boolean> optimaAxeShowParticles;
+	public static ConfigValue<Boolean> ultimaBladeHiddenParticles;
+	public static ConfigValue<Boolean> optimaAxeHiddenParticles;
+	
+	public static ConfigValue<Boolean> damageIndicatorHiddenParticles;
+	
+	public static ConfigValue<Boolean> skipExperimentalWarnings;
 
 	public static ConfigValue<Boolean> voidArmorRadiation;
 	public static ConfigValue<Boolean> voidArmorRadiationPlayer;
@@ -247,7 +251,6 @@ public class TheTitansNeoConfigs {
 	public static void registerClientConfig() {
 		ModConfigSpec.Builder builder = new ModConfigSpec.Builder();
 		builder.comment("General settings").push("general");
-		builder.push("render");
 		builder.push("player");
 		playerHealthBar = builder.comment("PlayerHealthBar").define("playerHealthBar", true);
 		builder.pop();
@@ -263,13 +266,22 @@ public class TheTitansNeoConfigs {
 		builder.pop();
 		titanWeaponOldModel = builder.comment("TitanWeaponOldModel").define("titanWeaponOldModel", false);
 		builder.pop();
-		builder.pop();
 		builder.push("item");
 		builder.push("ultimaBlade");
-		ultimaBladeShowParticles = builder.comment("UltimaBladeShowParticles").define("ultimaBladeShowParticles", true);
+		ultimaBladeHiddenParticles = builder.comment("UltimaBladeHiddenParticles").define("ultimaBladeHiddenParticles", false);
 		builder.pop();
 		builder.push("optimaAxe");
-		optimaAxeShowParticles = builder.comment("OptimaAxeShowParticles").define("optimaAxeShowParticles", true);
+		optimaAxeHiddenParticles = builder.comment("OptimaAxeHiddenParticles").define("optimaAxeHiddenParticles", false);
+		builder.pop();
+		builder.pop();
+		builder.push("particle");
+		builder.push("damageIndicator");
+		damageIndicatorHiddenParticles = builder.comment("DamageIndicatorHiddenParticles").define("damageIndicatorHiddenParticles", false);
+		builder.pop();
+		builder.pop();
+		builder.push("gui");
+		builder.push("createWorldScreen");
+		skipExperimentalWarnings = builder.comment("SkipExperimentalWarnings").define("skipExperimentalWarnings", false);
 		builder.pop();
 		builder.pop();
 		builder.pop();
@@ -326,10 +338,8 @@ public class TheTitansNeoConfigs {
 		builder.push("spawnProtect");
 		playerSpawnPosProtect = builder.comment("PlayerSpawnPosProtect").define("playerSpawnPosProtect", true);
 		playerSpawnPosDistance = builder.comment("PlayerSpawnPosDistance").defineInRange("playerSpawnPosDistance", 1024.0D, 0.0D, 2048.0D);
-		builder.push("titan");
 		titanSpawnIntervalDistance = builder.comment("TitanSpawnIntervalDistance").defineInRange("titanSpawnIntervalDistance", 512.0D, 512.0D, 2048.0D);
 		titanSpawnNetherTop = builder.comment("TitanSpawnNetherTop").define("titanSpawnNetherTop", true);
-		builder.pop();
 		builder.pop();
 		builder.push("spawnRate");
 		builder.push("minion");

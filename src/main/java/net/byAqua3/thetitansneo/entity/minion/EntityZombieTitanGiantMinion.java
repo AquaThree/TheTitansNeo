@@ -50,7 +50,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.Vec3;
 
 public class EntityZombieTitanGiantMinion extends Giant implements IMinion {
 
@@ -120,9 +119,9 @@ public class EntityZombieTitanGiantMinion extends Giant implements IMinion {
 		tag.putInt("MinionType", this.getMinionTypeInt());
 	}
 
-	private LivingEntity doJumpDamage(double x, double y, double z, double dist, double damage, int knockback) {
-		AABB bb = AABB.ofSize(new Vec3(x - dist, y - 10.0D, z - dist), x + dist, y + 10.0D, z + dist);
-		List<LivingEntity> entities = this.level().getEntitiesOfClass(LivingEntity.class, bb, TheTitansNeoPredicateTargets.ZombieTitan);
+	private LivingEntity doJumpDamage(double x, double y, double z, double distance, double damage, int knockback) {
+		AABB aabb = new AABB(x - distance, y - 10.0D, z - distance, x + distance, y + 10.0D, z + distance);
+		List<LivingEntity> entities = this.level().getEntitiesOfClass(LivingEntity.class, aabb, TheTitansNeoPredicateTargets.ZombieTitan);
 		Collections.sort(entities, new TargetingSorter(this));
 
 		for (LivingEntity entity : entities) {

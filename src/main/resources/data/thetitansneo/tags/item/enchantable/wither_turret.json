@@ -1,5 +1,7 @@
 {
 	"values": [
-		"thetitansneo:wither_turret"
+		"thetitansneo:wither_turret",
+		"thetitansneo:wither_turret_ground",
+		"thetitansneo:wither_turret_mortar"
 	]
 }

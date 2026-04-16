@@ -28,7 +28,7 @@ public class ItemRngRelinquisher extends Item {
 		ItemStack stack = player.getItemInHand(hand);
 		if (!player.level().isClientSide()) {
 			if (player.level().dimension() == Level.END) {
-				List<EnderDragon> entities = player.level().getEntitiesOfClass(EnderDragon.class, player.getBoundingBox().inflate(20000.0D, 20000.0D, 20000.0D));
+				List<EnderDragon> entities = player.level().getEntitiesOfClass(EnderDragon.class, player.getBoundingBox().inflate(1024.0D, 1024.0D, 1024.0D));
 				if (!entities.isEmpty()) {
 					player.sendSystemMessage(Component.translatable("item.thetitansneo.rng_relinquisher.end.killdragon"));
 				} else if (player.getX() < 5.0D && player.getX() > -5.0D && player.getZ() < 5.0D && player.getZ() > -5.0D) {
