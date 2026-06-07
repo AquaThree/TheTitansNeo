@@ -261,7 +261,6 @@ public class ModelZombieTitan extends EntityModel<EntityZombieTitan> {
 		} else {
 			this.animateDeath();
 		}
-
 	}
 
 	private void animateKick() {

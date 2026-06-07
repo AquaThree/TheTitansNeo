@@ -23,7 +23,8 @@ public class Animator {
 	private HashMap<ModelPart, Transform> prevTransformMap;
 
 	public Animator(ModelPart rootModel) {
-		this.tempTick = this.prevTempTick = 0;
+		this.tempTick = 0;
+		this.prevTempTick = 0;
 		this.correctAnim = false;
 		this.rootModel = rootModel;
 		this.transformMap = new HashMap<ModelPart, Transform>();
@@ -35,13 +36,13 @@ public class Animator {
 	}
 
 	public void update(IAnimatedEntity entity) {
-		this.tempTick = this.prevTempTick = 0;
+		this.tempTick = 0;
+		this.prevTempTick = 0;
 		this.correctAnim = false;
 		this.animEntity = entity;
 		this.transformMap.clear();
 		this.prevTransformMap.clear();
-		for (int i = 0; i < this.rootModel.getAllParts().toList().size(); i++) {
-			ModelPart part = this.rootModel.getAllParts().toList().get(i);
+		for (ModelPart part : this.rootModel.getAllParts().toList()) {
 			part.xRot = 0.0F;
 			part.yRot = 0.0F;
 			part.zRot = 0.0F;
@@ -99,10 +100,11 @@ public class Animator {
 	}
 
 	private void endPhase(boolean stationary) {
-		if (!this.correctAnim)
+		if (!this.correctAnim) {
 			return;
+		}
 		int animTick = this.animEntity.getAnimationTick();
-		if (animTick >= this.prevTempTick && animTick < this.tempTick)
+		if (animTick >= this.prevTempTick && animTick < this.tempTick) {
 			if (stationary) {
 				for (ModelPart part : this.prevTransformMap.keySet()) {
 					Transform transform = this.prevTransformMap.get(part);
@@ -136,6 +138,7 @@ public class Animator {
 					part.z += inc * transform.offsetZ;
 				}
 			}
+		}
 		if (!stationary) {
 			this.prevTransformMap.clear();
 			this.prevTransformMap.putAll(this.transformMap);
