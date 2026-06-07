@@ -234,7 +234,7 @@ public class EntityOmegafish extends EntityTitan implements IEntityMultiPartTita
 
 	@Override
 	public boolean canAttack() {
-		return false;
+		return true;
 	}
 
 	@Override

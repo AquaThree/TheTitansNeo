@@ -233,7 +233,7 @@ public class EntitySpiderTitan extends EntityTitan implements IEntityMultiPartTi
 	
 	@Override
 	public boolean canAttack() {
-		return false;
+		return true;
 	}
 
 	@Override
@@ -251,7 +251,7 @@ public class EntitySpiderTitan extends EntityTitan implements IEntityMultiPartTi
 
 	@Override
 	public boolean shouldMove() {
-		return (this.getAnimationID() == 0 && !this.isStunned && this.getTarget() != null) ? (this.getTarget() != null && this.distanceToSqr(this.getTarget()) > this.getMeleeRange()) : false;
+		return (this.getAnimationID() == 0 && !this.isStunned && this.getTarget() != null) ? super.shouldMove() : false;
 	}
 
 	@Override

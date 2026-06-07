@@ -10,7 +10,7 @@
 	],
 	"key": {
 		"C": {
-			"item": "thetitansneo:copper_ingot"
+			"tag": "c:ingots/copper"
 		},
 		"S": {
 			"tag": "c:rods/wooden"

@@ -254,7 +254,7 @@ public class EntitySkeletonTitan extends EntityTitan implements IEntityMultiPart
 
 	@Override
 	public boolean canAttack() {
-		return false;
+		return true;
 	}
 
 	@Override
