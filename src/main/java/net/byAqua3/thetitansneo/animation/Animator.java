@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.util.Mth;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
@@ -50,7 +51,8 @@ public class Animator {
 	}
 
 	public boolean setAnimationID(int id) {
-		this.tempTick = this.prevTempTick = 0;
+		this.tempTick = 0;
+		this.prevTempTick = 0;
 		this.correctAnim = (this.animEntity.getAnimationID() == id);
 		return this.correctAnim;
 	}
@@ -118,7 +120,8 @@ public class Animator {
 			} else {
 				float partialTicks = Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(false);
 				float tick = ((animTick - this.prevTempTick) + partialTicks) / (this.tempTick - this.prevTempTick);
-				float inc = (float) Math.sin((float) (tick * Math.PI / 2.0F)), dec = 1.0F - inc;
+				float inc = Mth.sin(tick * Mth.PI / 2.0F);
+				float dec = 1.0F - inc;
 				for (ModelPart part : this.prevTransformMap.keySet()) {
 					Transform transform = this.prevTransformMap.get(part);
 					part.xRot += dec * transform.rotationX;
