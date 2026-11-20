@@ -1,0 +1,14 @@
+{
+	"replace": false,
+	"values": [
+		"thetitansneo:copper_ingot",
+		"thetitansneo:tin_ingot",
+		"thetitansneo:bronze_ingot",
+		"thetitansneo:steel_ingot",
+		"thetitansneo:chromium_ingot",
+		"thetitansneo:magnesium_ingot",
+		"thetitansneo:lead_ingot",
+		"thetitansneo:silver_ingot",
+		"thetitansneo:platinum_ingot"
+	]
+}

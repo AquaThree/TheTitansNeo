@@ -521,6 +521,21 @@ public class EntityTitan extends AmbientCreature implements IAnimatedEntity, IEn
 	}
 
 	@Override
+	public boolean fireImmune() {
+		return true;
+	}
+
+	@Override
+	public boolean canBeCollidedWith() {
+		return true;
+	}
+
+	@Override
+	public boolean isPushable() {
+		return false;
+	}
+
+	@Override
 	public boolean isMultipartEntity() {
 		return this.parts != null ? true : false;
 	}
@@ -528,11 +543,6 @@ public class EntityTitan extends AmbientCreature implements IAnimatedEntity, IEn
 	@Override
 	public net.neoforged.neoforge.entity.PartEntity<?>[] getParts() {
 		return this.parts != null ? this.parts : null;
-	}
-
-	@Override
-	public boolean fireImmune() {
-		return true;
 	}
 
 	@Override
@@ -1315,6 +1325,8 @@ public class EntityTitan extends AmbientCreature implements IAnimatedEntity, IEn
 	public void grow() {
 		if (this instanceof EntitySnowGolemTitan || this instanceof EntitySlimeTitan) {
 			this.setInvulTime(150);
+		} else if (this instanceof EntityCreeperTitan) {
+			this.setInvulTime(850);
 		} else {
 			this.setInvulTime(this.getThreashHold());
 		}
@@ -1754,11 +1766,11 @@ public class EntityTitan extends AmbientCreature implements IAnimatedEntity, IEn
 
 			if (this.canRegen()) {
 				float healAmount = 0.0F;
-				if (getTitanStatus() == EnumTitanStatus.AVERAGE) {
+				if (this.getTitanStatus() == EnumTitanStatus.AVERAGE) {
 					healAmount = 3.0F;
-				} else if (getTitanStatus() == EnumTitanStatus.GREATER) {
+				} else if (this.getTitanStatus() == EnumTitanStatus.GREATER) {
 					healAmount = 6.0F;
-				} else if (getTitanStatus() == EnumTitanStatus.GOD) {
+				} else if (this.getTitanStatus() == EnumTitanStatus.GOD) {
 					healAmount = 20.0F;
 				} else {
 					healAmount = 1.0F;

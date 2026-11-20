@@ -38,5 +38,4 @@ public class ItemUtils {
 	public static boolean isUltimateTool(Item item) {
 		return item instanceof ItemUltimaBlade || item instanceof ItemOptimaAxe;
 	}
-	
 }

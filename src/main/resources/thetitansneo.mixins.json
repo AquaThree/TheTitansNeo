@@ -6,6 +6,7 @@
 	"mixins": [
 		"MixinItemRenderer",
 		"MixinItemStack",
+		"MixinEntityRenderer",
 		"MixinEntityRenderDispatcher",
 		"MixinRangedAttribute",
 		"MixinChunkGenerator",
